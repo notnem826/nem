@@ -257,19 +257,29 @@ const quoteDatabase = [
     }
 ];
 
-// 2. TỪ ĐIỂN VÀ NỘI DUNG ĐA NGÔN NGỮ
+// 2. DỮ LIỆU ĐA NGÔN NGỮ ĐỒNG BỘ TOÀN DIỆN (Ảnh 2 & 3 Fix)
 const langData = {
     vi: {
         name: "NGUYỄN NEM",
         bio: "Chỉ là một chú mèo 🐾<br>Yêu thích đua ngựa Nhật Bản 🐎<br>Với nhạc hardstyle và Chill cùng vibe âm nhậc 🎧✨",
+        visitorsText: "Lượng người xem",
         quoteBoxTitle: "Mỗi ngày nhớ một câu",
         quoteBtn: '<i class="fas fa-rotate" style="margin-right: 4px;"></i> ĐỔI CÂU MỚI',
+        donateTitle: "Góc Hảo Tâm & Đầu Tư",
+        donateSubtitle: "Mọi sự ủng hộ và đồng hành của bạn đều là nguồn động lực quý báu giúp tôi hoàn thiện bản thân mỗi ngày.",
+        reviewTitle: "Mong bạn để lại đánh giá",
+        reviewSubtitle: "Mỗi 1 bài đánh giá đều giúp tôi tốt lên dù tốt hay xấu",
+        reviewSubmitBtn: "GỬI ĐÁNH GIÁ",
+        emptyReviewMsg: "Chưa có đánh giá nào. Hãy là người đầu tiên để lại góp ý nhé! ✨",
         socialHeader: "Kết Nối Mạng Xã Hội",
         skillsHeader: "Kỹ Năng & Hành Trình Nghệ Thuật",
+        skillPsTitle: '<i class="fas fa-wand-magic-sparkles" style="color: var(--gold-accent); margin-right:6px;"></i>Photoshop & Illustrator',
         skillPsLvl: "Trình Độ Cao",
         skillPsDesc: "Sử dụng thành thạo và chuyên sâu; tối ưu hóa hình ảnh, thiết kế đồ họa và sáng tạo visual thẩm mỹ.",
+        skillAeTitle: '<i class="fas fa-film" style="color: var(--gold-accent); margin-right:6px;"></i>After Effects & Premiere Pro',
         skillAeLvl: "Đang Trau Dồi",
         skillAeDesc: "Đang ở mức trung bình, nỗ lực học hỏi để hoàn thiện kỹ năng dựng video TikTok Edit, VFX và motion graphics.",
+        skillArtTitle: '<i class="fas fa-heart" style="color: var(--gold-accent); margin-right:6px;"></i>Hội Hoạ & Thẩm Mỹ Thị Giác',
         skillArtLvl: "Không Ngừng Cố Gắng",
         skillArtDesc: "Cảm quan hội họa & thẩm mỹ thị giác cao, chỉnh sửa ảnh hợp nhãn người xem; tuy chưa vẽ giỏi nhưng luôn học vẽ mỗi ngày như người mới bắt đầu!",
         playlistHeader: "Danh Sách Nhạc Yêu Thích"
@@ -277,14 +287,24 @@ const langData = {
     en: {
         name: "Nem Nguyen",
         bio: "Just A Cat 🐾<br>Love racing Horse in Japan 🐎<br>With hardstyle and chilling vibe music. 🎧✨",
-        quoteBoxTitle: "Daily Quote",
+        visitorsText: "Unique Visitors",
+        quoteBoxTitle: "Daily Motivation",
         quoteBtn: '<i class="fas fa-rotate" style="margin-right: 4px;"></i> NEXT QUOTE',
+        donateTitle: "Sponsorship & Support",
+        donateSubtitle: "Any contribution, big or small, is an immense motivation helping me improve every day.",
+        reviewTitle: "Leave a Feedback",
+        reviewSubtitle: "Every single feedback helps me grow better, whether good or bad.",
+        reviewSubmitBtn: "SUBMIT FEEDBACK",
+        emptyReviewMsg: "No reviews yet. Be the first to leave a feedback! ✨",
         socialHeader: "Social Connections",
         skillsHeader: "Skills & Artistic Journey",
+        skillPsTitle: '<i class="fas fa-wand-magic-sparkles" style="color: var(--gold-accent); margin-right:6px;"></i>Photoshop & Illustrator',
         skillPsLvl: "Advanced / Master",
         skillPsDesc: "Highly proficient in photo manipulation, graphic design, and crafting captivating aesthetic visuals.",
+        skillAeTitle: '<i class="fas fa-film" style="color: var(--gold-accent); margin-right:6px;"></i>After Effects & Premiere Pro',
         skillAeLvl: "Intermediate",
         skillAeDesc: "Actively mastering video editing, TikTok pacing, motion graphics, and visual effects in AE & Premiere.",
+        skillArtTitle: '<i class="fas fa-heart" style="color: var(--gold-accent); margin-right:6px;"></i>Artistic Sense & Drawing Journey',
         skillArtLvl: "Never Stop Learning",
         skillArtDesc: "Strong artistic sense and visual curation. While learning sketching from scratch, constantly pushing limits without giving up!",
         playlistHeader: "Favorite Playlists"
@@ -292,14 +312,24 @@ const langData = {
     ja: {
         name: "ネムチュア",
         bio: "ただの猫です 🐾<br>日本の競馬が大好き 🐎<br>ハードスタイルとChillな音楽のバイブスとともに 🎧✨",
+        visitorsText: "訪問者数",
         quoteBoxTitle: "今日の一言",
         quoteBtn: '<i class="fas fa-rotate" style="margin-right: 4px;"></i> 言葉を変える',
+        donateTitle: "ご支援・スポンサー",
+        donateSubtitle: "皆様からの温かいご支援は、日々成長し続けるための大きな励みとなります。",
+        reviewTitle: "フィードバックを残す",
+        reviewSubtitle: "良い評価も改善点も、すべての声が私を成長させてくれます。",
+        reviewSubmitBtn: "レビューを送信",
+        emptyReviewMsg: "まだレビューはありません。最初の感想をお待ちしています！ ✨",
         socialHeader: "ソーシャルリンク",
         skillsHeader: "スキル ＆ アートジャーニー",
+        skillPsTitle: '<i class="fas fa-wand-magic-sparkles" style="color: var(--gold-accent); margin-right:6px;"></i>Photoshop & Illustrator',
         skillPsLvl: "上級者 / プロ",
         skillPsDesc: "高度な画像編集、グラフィックデザイン、魅力的なビジュアル制作を得意としています。",
+        skillAeTitle: '<i class="fas fa-film" style="color: var(--gold-accent); margin-right:6px;"></i>After Effects & Premiere Pro',
         skillAeLvl: "中級 / 学習中",
         skillAeDesc: "After EffectsとPremiere Proで動画編集やエフェクト技術を日々磨いています。",
+        skillArtTitle: '<i class="fas fa-heart" style="color: var(--gold-accent); margin-right:6px;"></i>美的センス & アートジャーニー',
         skillArtLvl: "挑戦し続ける心",
         skillArtDesc: "高い美的センスを持ち、見る人に心地よい画像加工が得意。絵の初心者として毎日諦めずに練習を続けています！",
         playlistHeader: "お気に入りのプレイリスト"
@@ -341,7 +371,7 @@ function renderFloatingName(nameStr) {
     });
 }
 
-// 3. TYPING EFFECT CHO DYNAMIC BADGE
+// 3. TYPING EFFECT CHO DYNAMIC BADGE (Ảnh 3)
 const badgeTitles = ["Cat Profile", "Cafe Profile", "Nem Profile", "N?ne Profile"];
 let badgeIndex = 0;
 let charIdx = 0;
@@ -359,14 +389,14 @@ function updateDynamicBadge() {
         charIdx++;
     }
 
-    let speed = isDeleting ? 45 : 85;
+    let speed = isDeleting ? 40 : 80;
     if (!isDeleting && charIdx === currentTitle.length) {
-        speed = 2200;
+        speed = 2000;
         isDeleting = true;
     } else if (isDeleting && charIdx === 0) {
         isDeleting = false;
         badgeIndex = (badgeIndex + 1) % badgeTitles.length;
-        speed = 400;
+        speed = 350;
     }
     setTimeout(updateDynamicBadge, speed);
 }
@@ -398,19 +428,19 @@ function openProfile() {
     openingScreen.classList.add('opened');
     setTimeout(() => {
         openingScreen.style.display = 'none';
-    }, 1100);
+    }, 1200);
 
     // Mặc định âm lượng 50%
     audio.volume = 0.5;
     document.getElementById('volumeSlider').value = 0.5;
-    document.getElementById('musicStatusText').textContent = "50% Volume";
+    document.getElementById('volumePercent').textContent = "50%";
 
     audio.play().then(() => {
         isPlaying = true;
         playIcon.className = 'fas fa-pause';
         konataAvatar.classList.add('spinning');
     }).catch(e => {
-        console.log('Audio autoplay prevented:', e);
+        console.log('Autoplay prevented:', e);
     });
 }
 
@@ -429,13 +459,27 @@ function toggleMusic() {
 
 function changeVolume(val) {
     audio.volume = parseFloat(val);
-    document.getElementById('musicStatusText').textContent = `${Math.round(val * 100)}% Volume`;
+    document.getElementById('volumePercent').textContent = `${Math.round(val * 100)}%`;
 }
 
-// 6. REVIEW SYSTEM (FILTER TỪ XẤU, SẮP XẾP 5 SAO TRÊN ĐẦU, LOCALSTORAGE)
-let currentRating = 5;
+// 6. THUẬT TOÁN ĐẾM LƯỢNG NGƯỜI ĐÃ XEM (UNIQUE VISITORS) - Ảnh 6 Fix
+function initUniqueVisitorCounter() {
+    const visitorKey = 'nem_unique_user_token';
+    const countKey = 'nem_unique_visitors_total';
 
-// Bộ lọc từ ngữ xúc phạm nặng, phân biệt chủng tộc
+    if (!localStorage.getItem(visitorKey)) {
+        localStorage.setItem(visitorKey, 'v_' + Date.now());
+        let currentTotal = parseInt(localStorage.getItem(countKey) || '146');
+        currentTotal++;
+        localStorage.setItem(countKey, currentTotal);
+    }
+
+    const finalCount = localStorage.getItem(countKey) || '146';
+    document.getElementById('viewCount').textContent = finalCount;
+}
+
+// 7. REVIEW SYSTEM (ĐỂ TRỐNG BAN ĐẦU - ĐỢI ĐÁNH GIÁ THỰC TẾ) - Ảnh 4 Fix
+let currentRating = 5;
 const toxicBlacklist = [
     "đĩ", "cave", "súc sinh", "chó đẻ", "mẹ mày", "cha mày", "ông cố nội", 
     "bố mày", "con cặc", "lồn", "óc chó", "phò", "bắc kỳ", "nam kỳ", "mọi rợ", 
@@ -455,17 +499,17 @@ function setRating(stars) {
 }
 
 function loadReviews() {
-    const defaultReviews = [
-        { name: "Aesthetic Fan", rating: 5, comment: "Profile mang lại nhiều động lực và năng lượng tích cực lắm, nhạc và visual rất đỉnh! 🐎✨" },
-        { name: "Kuro", rating: 5, comment: "Cố gắng lên nhé bạn ơi, đừng bao giờ từ bỏ đam mê nghệ thuật!" }
-    ];
-    let stored = JSON.parse(localStorage.getItem('nem_reviews_db')) || defaultReviews;
-    
-    // Sắp xếp: Đánh giá 5 sao và cao điểm lên trên, thấp điểm xuống dưới
-    stored.sort((a, b) => b.rating - a.rating);
+    let stored = JSON.parse(localStorage.getItem('nem_real_reviews_db')) || [];
+    stored.sort((a, b) => b.rating - a.rating); // 5 sao xếp trên đầu
 
     const listEl = document.getElementById('reviewsList');
     listEl.innerHTML = '';
+
+    if (stored.length === 0) {
+        listEl.innerHTML = `<div class="empty-reviews-text">${langData[currentLang].emptyReviewMsg}</div>`;
+        return;
+    }
+
     stored.forEach(r => {
         const item = document.createElement('div');
         item.className = 'review-item';
@@ -487,18 +531,17 @@ function submitReview(e) {
 
     if (!name || !comment) return;
 
-    // Kiểm tra từ cấm
     const contentCheck = (name + " " + comment).toLowerCase();
     const isToxic = toxicBlacklist.some(word => contentCheck.includes(word));
 
     if (isToxic) {
-        showToast("⚠️ Bình luận chứa từ ngữ không phù hợp, vui lòng tôn trọng nhau nhé!");
+        showToast("⚠️ Đánh giá chứa từ ngữ chưa phù hợp, vui lòng tôn trọng nhau nhé!");
         return;
     }
 
-    let stored = JSON.parse(localStorage.getItem('nem_reviews_db')) || [];
+    let stored = JSON.parse(localStorage.getItem('nem_real_reviews_db')) || [];
     stored.push({ name, rating: currentRating, comment });
-    localStorage.setItem('nem_reviews_db', JSON.stringify(stored));
+    localStorage.setItem('nem_real_reviews_db', JSON.stringify(stored));
 
     document.getElementById('reviewerName').value = '';
     document.getElementById('reviewComment').value = '';
@@ -511,7 +554,7 @@ function escapeHtml(text) {
     return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
-// 7. TOAST THÔNG BÁO COPY & THÔNG BÁO HỆ THỐNG
+// 8. TOAST THÔNG BÁO COPY SANG TRỌNG
 function showToast(msg) {
     const toast = document.getElementById('customToast');
     const toastMsg = document.getElementById('toastMsg');
@@ -527,58 +570,26 @@ function copyContact(text, type) {
     showToast(`Đã sao chép ${type} (${text}) vào bộ nhớ tạm!`);
 }
 
-// 8. TỐI ƯU CON TRỎ CHUỘT (GPU 60FPS KHÔNG LAG & HOẠT ĐỘNG HOÀN HẢO TRÊN SPOTIFY)
-const cursor = document.getElementById('customCursor');
-let mouseX = window.innerWidth / 2;
-let mouseY = window.innerHeight / 2;
-let curX = mouseX;
-let curY = mouseY;
-
-window.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-}, { passive: true });
-
-function animateCursor() {
-    curX += (mouseX - curX) * 0.45;
-    curY += (mouseY - curY) * 0.45;
-    cursor.style.transform = `translate3d(${curX}px, ${curY}px, 0) translate(-50%, -50%)`;
-    requestAnimationFrame(animateCursor);
-}
-animateCursor();
-
-document.addEventListener('mouseover', (e) => {
-    if (e.target.closest('a, button, input, textarea, .contact-item, .avatar-wrap, .rating-stars i, .opening-screen')) {
-        cursor.classList.add('active');
-    } else {
-        cursor.classList.remove('active');
-    }
-});
-
-// 9. HIỆU ỨNG CHÂN TRANG ĐỘC QUYỀN (HIỆN LÊN KHI CUỘN ĐẾN CUỐI TRANG)
+// 9. HIỆU ỨNG CHÂN TRANG ĐỘC QUYỀN (HIỆN LÊN KHI CUỘN ĐẾN ĐÁY) - Ảnh 4 Fix
 const exclusiveFooter = document.getElementById('exclusiveFooter');
 window.addEventListener('scroll', () => {
     const scrollPosition = window.scrollY || document.documentElement.scrollTop;
     const windowHeight = window.innerHeight;
     const bodyHeight = document.body.offsetHeight;
 
-    if (scrollPosition + windowHeight >= bodyHeight - 20) {
+    if (scrollPosition + windowHeight >= bodyHeight - 30) {
         exclusiveFooter.classList.add('show-footer');
     } else {
         exclusiveFooter.classList.remove('show-footer');
     }
 }, { passive: true });
 
-// 10. KHỞI TẠO BAN ĐẦU
+// 10. KHỞI TẠO HỆ THỐNG
 document.addEventListener('DOMContentLoaded', () => {
     renderFloatingName(langData.vi.name);
     document.getElementById('bioText').innerHTML = langData.vi.bio;
     updateDynamicBadge();
     displayCurrentQuote();
+    initUniqueVisitorCounter();
     loadReviews();
-
-    let views = localStorage.getItem('nem_views_v3') || 145;
-    views++;
-    localStorage.setItem('nem_views_v3', views);
-    document.getElementById('viewCount').textContent = views;
 });
