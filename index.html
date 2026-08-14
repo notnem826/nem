@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nguyễn Nem | Creative Visual & Edit Portfolio</title>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-glow: #8a5cf6;
+            --secondary-glow: #00f2fe;
+            --accent-pink: #ff416c;
+            --card-bg: rgba(22, 20, 36, 0.45);
+            --card-border: rgba(138, 92, 246, 0.25);
+            --text-main: #f8fafc;
+            --text-sub: #94a3b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            user-select: none;
+            -webkit-user-select: none;
+            cursor: none;
+        }
+
+        body {
+            background-color: #090812;
+            color: var(--text-main);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px 15px 90px 15px;
+        }
+
+        /* Video Nền TikTok Vibe */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -2;
+            object-fit: cover;
+            opacity: 0.55;
+            filter: contrast(1.1) brightness(0.85);
+            transition: all 0.5s ease;
+        }
+
+        /* Lớp màu phủ Neon Gradient */
+        .ambient-glow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            background: radial-gradient(circle at 20% 30%, rgba(138, 92, 246, 0.25), transparent 60%),
+                        radial-gradient(circle at 80% 70%, rgba(0, 242, 254, 0.2), transparent 50%);
+            pointer-events: none;
+        }
+
+        /* Custom Cursor */
+        .custom-cursor {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #ffffff;
+            box-shadow: 0 0 12px var(--secondary-glow), 0 0 24px #fff;
+            pointer-events: none;
+            z-index: 99999;
+            transform: translate(-50%, -50%);
+            transition: transform 0.05s linear, width 0.2s, height 0.2s;
+            mix-blend-mode: screen;
+        }
+
+        .custom-cursor.active {
+            width: 28px;
+            height: 28px;
+            background: rgba(255, 255, 255, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 20px var(--primary-glow);
+        }
+
+        /* Nút chuyển đổi ngôn ngữ */
+        .lang-switch-box {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            gap: 6px;
+            background: rgba(18, 16, 28, 0.7);
+            padding: 5px 8px;
+            border-radius: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--card-border);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-sub);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+
+        .lang-btn.active, .lang-btn:hover {
+            background: linear-gradient(135deg, var(--primary-glow), var(--secondary-glow));
+            color: #fff;
+            box-shadow: 0 0 10px rgba(0, 242, 254, 0.4);
+        }
+
+        /* Lượt xem */
+        .global-view-counter {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: rgba(18, 16, 28, 0.7);
+            padding: 8px 16px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--card-border);
+            color: #cbd5e1;
+        }
+
+        /* Main Glass Container */
+        .container {
+            max-width: 950px;
+            width: 100%;
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 24px;
+            border: 1px solid var(--card-border);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(138, 92, 246, 0.15);
+            padding: 30px;
+            z-index: 10;
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .profile-grid {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 30px;
+        }
+
+        /* Left Column */
+        .profile-left {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .avatar-wrap {
+            position: relative;
+            width: 170px;
+            height: 170px;
+            margin-bottom: 20px;
+        }
+
+        .avatar-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 25px rgba(0, 242, 254, 0.35);
+            transition: all 0.4s ease;
+        }
+
+        .avatar-wrap:hover .avatar-img {
+            transform: scale(1.04) rotate(2deg);
+            box-shadow: 0 0 35px rgba(138, 92, 246, 0.6);
+        }
+
+        .status-badge {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: rgba(18, 16, 28, 0.85);
+            border: 1px solid var(--secondary-glow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffd60a;
+            font-size: 1.1rem;
+            box-shadow: 0 0 12px rgba(0, 242, 254, 0.4);
+            animation: pulseStatus 2.5s infinite;
+        }
+
+        @keyframes pulseStatus {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); box-shadow: 0 0 20px rgba(0, 242, 254, 0.8); }
+        }
+
+        .username {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            background: linear-gradient(135deg, #ffffff 30%, var(--secondary-glow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+
+        .bio-text {
+            font-size: 0.9rem;
+            color: var(--text-sub);
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .contact-box-wrap {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .contact-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 10px 14px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+        }
+
+        .contact-item:hover {
+            background: rgba(138, 92, 246, 0.15);
+            border-color: var(--primary-glow);
+            transform: translateX(4px);
+        }
+
+        .contact-item .val {
+            color: var(--secondary-glow);
+            font-weight: 600;
+        }
+
+        /* Right Column */
+        .profile-right {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .card {
+            background: rgba(18, 16, 28, 0.4);
+            border-radius: 18px;
+            padding: 20px;
+            border: 1px solid var(--card-border);
+            transition: all 0.3s;
+        }
+
+        .card:hover {
+            border-color: rgba(0, 242, 254, 0.4);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 15px;
+        }
+
+        .card-header i {
+            color: var(--secondary-glow);
+            text-shadow: 0 0 10px var(--secondary-glow);
+        }
+
+        /* Social Icons */
+        .social-bar {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .social-btn {
+            flex: 1;
+            min-width: 65px;
+            padding: 12px 6px;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            text-decoration: none;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .social-btn i { font-size: 1.3rem; transition: transform 0.3s; }
+        .social-btn:hover { transform: translateY(-6px); }
+        
+        .social-btn.yt:hover { background: rgba(255, 0, 0, 0.15); border-color: #ff0000; color: #ff4d4d; }
+        .social-btn.tt:hover { background: rgba(0, 242, 234, 0.15); border-color: #00f2fe; color: #00f2fe; }
+        .social-btn.sp:hover { background: rgba(29, 185, 84, 0.15); border-color: #1ed760; color: #1ed760; }
+        .social-btn.dc:hover { background: rgba(88, 101, 242, 0.15); border-color: #5865f2; color: #7289da; }
+        .social-btn.fb:hover { background: rgba(24, 119, 242, 0.15); border-color: #1877f2; color: #4facfe; }
+
+        /* Skills & Art Journey Section */
+        .skills-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .skill-item {
+            background: rgba(255, 255, 255, 0.02);
+            padding: 12px 16px;
+            border-radius: 12px;
+            border-left: 3px solid var(--secondary-glow);
+        }
+
+        .skill-title-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+
+        .skill-name {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #f1f5f9;
+        }
+
+        .skill-level-tag {
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .tag-expert { background: rgba(0, 242, 254, 0.15); color: #00f2fe; border: 1px solid rgba(0, 242, 254, 0.4); }
+        .tag-intermediate { background: rgba(138, 92, 246, 0.15); color: #c084fc; border: 1px solid rgba(138, 92, 246, 0.4); }
+        .tag-learning { background: rgba(255, 65, 108, 0.15); color: #ff6b8b; border: 1px solid rgba(255, 65, 108, 0.4); }
+
+        .skill-desc {
+            font-size: 0.82rem;
+            color: var(--text-sub);
+            line-height: 1.5;
+        }
+
+        /* Motivation Quote Booster */
+        .motivation-box {
+            text-align: center;
+            padding: 16px;
+            background: linear-gradient(135deg, rgba(138, 92, 246, 0.1), rgba(0, 242, 254, 0.05));
+            border-radius: 16px;
+            border: 1px dashed rgba(138, 92, 246, 0.4);
+        }
+
+        .quote-content {
+            font-size: 0.95rem;
+            font-style: italic;
+            color: #e2e8f0;
+            min-height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+        }
+
+        .boost-btn {
+            background: linear-gradient(135deg, var(--primary-glow), var(--secondary-glow));
+            border: none;
+            color: #fff;
+            padding: 8px 22px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            box-shadow: 0 4px 15px rgba(0, 242, 254, 0.3);
+            transition: all 0.3s;
+        }
+
+        .boost-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(138, 92, 246, 0.5);
+        }
+
+        /* Spotify Player Box */
+        .playlist-wrap {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .spotify-iframe-card {
+            border-radius: 12px;
+            overflow: hidden;
+            height: 152px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Audio Visualizer Floating Bar */
+        .music-bar-pill {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(18, 16, 28, 0.85);
+            padding: 10px 18px;
+            border-radius: 40px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            z-index: 1000;
+            border: 1px solid var(--card-border);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+        }
+
+        .visualizer-bars {
+            display: flex;
+            align-items: flex-end;
+            gap: 3px;
+            height: 18px;
+        }
+
+        .v-bar {
+            width: 3px;
+            height: 4px;
+            background: var(--secondary-glow);
+            border-radius: 2px;
+            transition: height 0.2s;
+        }
+
+        .playing .v-bar:nth-child(1) { animation: bounce 0.8s infinite alternate ease-in-out; }
+        .playing .v-bar:nth-child(2) { animation: bounce 0.5s infinite alternate ease-in-out 0.2s; }
+        .playing .v-bar:nth-child(3) { animation: bounce 1.1s infinite alternate ease-in-out 0.1s; }
+        .playing .v-bar:nth-child(4) { animation: bounce 0.7s infinite alternate ease-in-out 0.3s; }
+
+        @keyframes bounce {
+            0% { height: 4px; }
+            100% { height: 18px; background: var(--accent-pink); }
+        }
+
+        .play-toggle-btn {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.2rem;
+        }
+
+        /* Activation Overlay */
+        .activation-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(7, 6, 14, 0.88);
+            backdrop-filter: blur(18px);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            transition: opacity 0.5s ease;
+        }
+
+        .activation-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.4rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #00f2fe, #8a5cf6, #ff416c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            animation: textPulse 3s infinite alternate;
+        }
+
+        @keyframes textPulse {
+            from { filter: drop-shadow(0 0 10px rgba(0, 242, 254, 0.4)); }
+            to { filter: drop-shadow(0 0 25px rgba(255, 65, 108, 0.7)); }
+        }
+
+        .activation-tap-hint {
+            font-size: 0.95rem;
+            color: #94a3b8;
+            padding: 10px 24px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive Mobile */
+        @media (max-width: 820px) {
+            .profile-grid { grid-template-columns: 1fr; }
+            .playlist-wrap { grid-template-columns: 1fr; }
+            .container { padding: 20px; }
+            .activation-title { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Video Nền Lo-fi Chainsaw Man / Aesthetic Edit -->
+    <video class="video-background" id="bgVideo" autoplay loop muted playsinline>
+        <source src="video/videoplayback.webm" type="video/webm">
+    </video>
+    <div class="ambient-glow"></div>
+
+    <!-- Nhạc nền Lo-fi tự động Loop -->
+    <audio id="bgMusicAudio" loop preload="auto">
+        <source src="video/Heather x Eyes Blue.mp3" type="audio/mp3">
+    </audio>
+
+    <!-- Con trỏ phát sáng -->
+    <div class="custom-cursor" id="customCursor"></div>
+
+    <!-- Nút chọn ngôn ngữ VI / EN / JA -->
+    <div class="lang-switch-box">
+        <button class="lang-btn active" onclick="setLanguage('vi')">VI 🇻🇳</button>
+        <button class="lang-btn" onclick="setLanguage('en')">EN 🇬🇧</button>
+        <button class="lang-btn" onclick="setLanguage('ja')">JP 🇯🇵</button>
+    </div>
+
+    <!-- Bộ đếm lượt xem -->
+    <div class="global-view-counter">
+        <i class="fas fa-eye"></i> <span id="viewCountText">Views</span>: <strong id="viewCount">128</strong>
+    </div>
+
+    <!-- Overlay Kích Hoạt Âm Thanh & Trải Nghiệm -->
+    <div class="activation-overlay" id="activationOverlay" onclick="startExperience()">
+        <div class="activation-title" data-i18n="overlayTitle">WELCOME TO MY CREATIVE SPACE</div>
+        <div class="activation-tap-hint">
+            <i class="fas fa-headphones" style="margin-right: 6px; color: #00f2fe;"></i>
+            <span data-i18n="overlayHint">Nhấp bất kỳ đâu để bật nhạc & khám phá Profile</span>
+        </div>
+    </div>
+
+    <!-- Container Chính -->
+    <div class="container">
+        <div class="profile-grid">
+            
+            <!-- CỘT TRÁI: THÔNG TIN CÁ NHÂN -->
+            <div class="profile-left">
+                <div class="avatar-wrap">
+                    <img src="images/whitecat.png" alt="Nguyễn Nem Avatar" class="avatar-img" id="profilePic">
+                    <div class="status-badge" title="Focused Mode">
+                        <i class="fas fa-moon"></i>
+                    </div>
+                </div>
+
+                <h1 class="username">NGUYỄN NEM</h1>
+                <div class="bio-text" data-i18n="bio">
+                    Just a passionate Content Creator.<br>
+                    Lover of cats, BoyWithUke vibes & Marino aesthetics. 🐾🎧✨
+                </div>
+
+                <div class="contact-box-wrap">
+                    <div class="contact-item" onclick="copyText('0898165655', 'Phone')">
+                        <span style="color: var(--text-sub);"><i class="fas fa-phone-alt"></i> Phone</span>
+                        <span class="val">0898165655</span>
+                    </div>
+                    <div class="contact-item" onclick="copyText('nguyenvietnam2k6@gmail.com', 'Email')">
+                        <span style="color: var(--text-sub);"><i class="fas fa-envelope"></i> Email</span>
+                        <span class="val" style="font-size: 0.75rem;">nguyenvietnam2k6...</span>
+                    </div>
+                </div>
+
+                <!-- Motivation Mini-card -->
+                <div class="motivation-box" style="width: 100%;">
+                    <div class="quote-content" id="quoteDisplay">
+                        "Thất bại duy nhất là khi bạn quyết định dừng lại."
+                    </div>
+                    <button class="boost-btn" onclick="generateQuote()" data-i18n="boostBtn">
+                        <i class="fas fa-bolt"></i> TIẾP ĐỘNG LỰC
+                    </button>
+                </div>
+            </div>
+
+            <!-- CỘT PHẢI: SOCIAL & SKILLS & SPOTIFY -->
+            <div class="profile-right">
+
+                <!-- 1. Social Media Links -->
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-share-nodes"></i>
+                        <span data-i18n="socialHeader">Social Connections</span>
+                    </div>
+                    <div class="social-bar">
+                        <a href="https://discord.gg/k3ZN3Mj6tN" target="_blank" class="social-btn dc">
+                            <i class="fab fa-discord"></i>
+                            <span>Discord</span>
+                        </a>
+                        <a href="https://www.facebook.com/profile.php?id=61591543367306" target="_blank" class="social-btn fb">
+                            <i class="fab fa-facebook-f"></i>
+                            <span>Facebook</span>
+                        </a>
+                        <a href="https://www.youtube.com/@nemnuong" target="_blank" class="social-btn yt">
+                            <i class="fab fa-youtube"></i>
+                            <span>YouTube</span>
+                        </a>
+                        <a href="https://www.tiktok.com/@nguyennem2006?is_from_webapp=1&sender_device=pc" target="_blank" class="social-btn tt">
+                            <i class="fab fa-tiktok"></i>
+                            <span>TikTok</span>
+                        </a>
+                        <a href="https://open.spotify.com/user/31njaguxvody6xit6gajvngzhhe4?si=55bdc1bfb41c4cf0" target="_blank" class="social-btn sp">
+                            <i class="fab fa-spotify"></i>
+                            <span>Spotify</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 2. Skills & Artistic Journey (Đổi ngôn ngữ tự động) -->
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-palette"></i>
+                        <span data-i18n="skillsHeader">Creative Matrix & Journey</span>
+                    </div>
+                    <div class="skills-grid">
+                        
+                        <!-- Photoshop & Illustrator -->
+                        <div class="skill-item">
+                            <div class="skill-title-row">
+                                <span class="skill-name"><i class="fas fa-wand-magic-sparkles" style="color:#00f2fe; margin-right:6px;"></i>Photoshop & Illustrator</span>
+                                <span class="skill-level-tag tag-expert" data-i18n="skillPsLvl">Advanced / Master</span>
+                            </div>
+                            <div class="skill-desc" data-i18n="skillPsDesc">
+                                Sử dụng thành thạo và chuyên sâu; tối ưu hóa hình ảnh, thiết kế đồ họa và sáng tạo visual ấn tượng.
+                            </div>
+                        </div>
+
+                        <!-- After Effects & Premiere Pro -->
+                        <div class="skill-item" style="border-left-color: var(--primary-glow);">
+                            <div class="skill-title-row">
+                                <span class="skill-name"><i class="fas fa-film" style="color:#c084fc; margin-right:6px;"></i>After Effects & Premiere Pro</span>
+                                <span class="skill-level-tag tag-intermediate" data-i18n="skillAeLvl">Intermediate</span>
+                            </div>
+                            <div class="skill-desc" data-i18n="skillAeDesc">
+                                Đang học hỏi và hoàn thiện kỹ năng dựng video TikTok Edit, hiệu ứng chuyển cảnh và kỹ xảo chuyển động.
+                            </div>
+                        </div>
+
+                        <!-- Art & Drawing Mindset -->
+                        <div class="skill-item" style="border-left-color: var(--accent-pink);">
+                            <div class="skill-title-row">
+                                <span class="skill-name"><i class="fas fa-heart" style="color:#ff6b8b; margin-right:6px;"></i>Artistic Sense & Drawing Journey</span>
+                                <span class="skill-level-tag tag-learning" data-i18n="skillArtLvl">Never Stop Learning</span>
+                            </div>
+                            <div class="skill-desc" data-i18n="skillArtDesc">
+                                Có gu thẩm mỹ và cảm quan màu sắc tốt; chuyên blend và chỉnh sửa ảnh vừa mắt người xem. Dù chưa biết vẽ chuyên nghiệp nhưng đang kiên trì học vẽ từng ngày như một người mới bắt đầu!
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- 3. Favorite Playlists -->
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-music"></i>
+                        <span data-i18n="playlistHeader">Favorite Lo-Fi Playlists</span>
+                    </div>
+                    <div class="playlist-wrap">
+                        <div class="spotify-iframe-card">
+                            <iframe src="https://open.spotify.com/embed/playlist/3AFi6LIkP88acuvQDMytQx?utm_source=generator" width="100%" height="152" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                        </div>
+                        <div class="spotify-iframe-card">
+                            <iframe src="https://open.spotify.com/embed/playlist/3Mp1DOUa7Mfn4Hsq741ayo?utm_source=generator" width="100%" height="152" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Thanh Sóng Nhạc Nổi Điều Khiển (Visualizer Widget) -->
+    <div class="music-bar-pill" id="musicVisualizerPill">
+        <button class="play-toggle-btn" id="playBtn" onclick="toggleMusic()">
+            <i class="fas fa-play" id="playIcon"></i>
+        </button>
+        <div class="visualizer-bars">
+            <div class="v-bar"></div>
+            <div class="v-bar"></div>
+            <div class="v-bar"></div>
+            <div class="v-bar"></div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT XỬ LÝ ĐỘNG & ĐA NGÔN NGỮ -->
+    <script>
+        // 1. TỪ ĐIỂN ĐA NGÔN NGỮ (VI / EN / JA)
+        const i18nData = {
+            vi: {
+                overlayTitle: "CHÀO MỪNG ĐẾN VỚI PROFILE CỦA NEM",
+                overlayHint: "Nhấp bất kỳ đâu để bật nhạc & khám phá Profile",
+                bio: "Just a passionate Content Creator.<br>Yêu mèo, nhạc BoyWithUke & vibe thẩm mỹ của Marino. 🐾🎧✨",
+                boostBtn: "TIẾP ĐỘNG LỰC 💪",
+                socialHeader: "Kết Nối Với Tôi",
+                skillsHeader: "Kỹ Năng & Hành Trình Nghệ Thuật",
+                skillPsLvl: "Trình Độ Cao",
+                skillPsDesc: "Sử dụng thành thạo và chuyên sâu; tối ưu hóa hình ảnh, thiết kế đồ họa và sáng tạo visual cực nghệ.",
+                skillAeLvl: "Đang Trau Dồi",
+                skillAeDesc: "Đang ở mức trung bình, nỗ lực học hỏi để hoàn thiện kỹ năng dựng video TikTok Edit, VFX và motion graphics.",
+                skillArtLvl: "Không Ngừng Cố Gắng",
+                skillArtDesc: "Cảm quan hội họa & thẩm mỹ thị giác cao, chỉnh sửa ảnh hợp nhãn người xem; tuy chưa vẽ giỏi nhưng luôn học vẽ mỗi ngày như người mới bắt đầu!",
+                playlistHeader: "Danh Sách Nhạc Yêu Thích"
+            },
+            en: {
+                overlayTitle: "WELCOME TO NEM'S CREATIVE SPACE",
+                overlayHint: "Click anywhere to enable music & explore the profile",
+                bio: "Just a passionate Content Creator.<br>Lover of cats, BoyWithUke vibes & Marino aesthetics. 🐾🎧✨",
+                boostBtn: "BOOST ENERGY 💪",
+                socialHeader: "Connect With Me",
+                skillsHeader: "Skills & Artistic Journey",
+                skillPsLvl: "Advanced / Master",
+                skillPsDesc: "Highly proficient in photo manipulation, graphic design, and crafting captivating aesthetic visuals.",
+                skillAeLvl: "Intermediate",
+                skillAeDesc: "Actively mastering video editing, TikTok pacing, motion graphics, and visual effects in AE & Premiere.",
+                skillArtLvl: "Never Stop Learning",
+                skillArtDesc: "Strong artistic sense and visual curation. While learning sketching from scratch, constantly pushing limits without giving up!",
+                playlistHeader: "Favorite Playlists"
+            },
+            ja: {
+                overlayTitle: "私のクリエイティブ空間へようこそ",
+                overlayHint: "画面をクリックして音楽を再生し、探索してください",
+                bio: "情熱的なコンテンツクリエイター。<br>猫、BoyWithUkeの音楽、Marinoの美学が好きです。🐾🎧✨",
+                boostBtn: "モチベーションUP 💪",
+                socialHeader: "ソーシャルリンク",
+                skillsHeader: "スキル ＆ アートジャーニー",
+                skillPsLvl: "上級者 / プロ",
+                skillPsDesc: "高度な画像編集、グラフィックデザイン、魅力的なビジュアル制作を得意としています。",
+                skillAeLvl: "中級 / 学習中",
+                skillAeDesc: "After EffectsとPremiere Proで動画編集やエフェクト技術を日々磨いています。",
+                skillArtLvl: "挑戦し続ける心",
+                skillArtDesc: "高い美的センスを持ち、見る人に心地よい画像加工が得意。絵の初心者として毎日諦めずに練習を続けています！",
+                playlistHeader: "お気に入りのプレイリスト"
+            }
+        };
+
+        let currentLang = 'vi';
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            const data = i18nData[lang];
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (data[key]) {
+                    el.innerHTML = data[key];
+                }
+            });
+        }
+
+        // 2. CON TRỎ CHUỘT PHÁT SÁNG & HẠT BONG BÓNG
+        const cursor = document.getElementById('customCursor');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = `${e.clientX}px`;
+            cursor.style.top = `${e.clientY}px`;
+        });
+
+        document.querySelectorAll('a, button, .contact-item, .card, .avatar-wrap').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('active'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('active'));
+        });
+
+        function createSparkle(x, y) {
+            for (let i = 0; i < 8; i++) {
+                const p = document.createElement('div');
+                p.style.position = 'fixed';
+                p.style.left = `${x}px`;
+                p.style.top = `${y}px`;
+                p.style.width = '4px';
+                p.style.height = '4px';
+                p.style.borderRadius = '50%';
+                p.style.backgroundColor = Math.random() > 0.5 ? '#00f2fe' : '#8a5cf6';
+                p.style.boxShadow = '0 0 8px #00f2fe';
+                p.style.pointerEvents = 'none';
+                p.style.zIndex = '9999';
+                document.body.appendChild(p);
+
+                const angle = Math.random() * Math.PI * 2;
+                const speed = 1 + Math.random() * 3;
+                let opacity = 1;
+                let curX = x, curY = y;
+
+                const anim = setInterval(() => {
+                    curX += Math.cos(angle) * speed;
+                    curY += Math.sin(angle) * speed;
+                    opacity -= 0.05;
+                    p.style.left = `${curX}px`;
+                    p.style.top = `${curY}px`;
+                    p.style.opacity = opacity;
+                    if (opacity <= 0) {
+                        clearInterval(anim);
+                        p.remove();
+                    }
+                }, 20);
+            }
+        }
+
+        document.addEventListener('click', (e) => createSparkle(e.clientX, e.clientY));
+
+        // 3. ĐIỀU KHIỂN ÂM THANH & OVERLAY
+        const audio = document.getElementById('bgMusicAudio');
+        const overlay = document.getElementById('activationOverlay');
+        const pill = document.getElementById('musicVisualizerPill');
+        const playIcon = document.getElementById('playIcon');
+        let isPlaying = false;
+
+        function startExperience() {
+            overlay.style.opacity = '0';
+            setTimeout(() => overlay.style.display = 'none', 500);
+            audio.volume = 0.65;
+            audio.play().then(() => {
+                isPlaying = true;
+                pill.classList.add('playing');
+                playIcon.className = 'fas fa-pause';
+            }).catch(e => console.log('Auto play blocked:', e));
+        }
+
+        function toggleMusic() {
+            if (isPlaying) {
+                audio.pause();
+                pill.classList.remove('playing');
+                playIcon.className = 'fas fa-play';
+            } else {
+                audio.play();
+                pill.classList.add('playing');
+                playIcon.className = 'fas fa-pause';
+            }
+            isPlaying = !isPlaying;
+        }
+
+        // Đảm bảo audio luôn lặp lại không ngắt quãng
+        audio.addEventListener('ended', function() {
+            this.currentTime = 0;
+            this.play();
+        });
+
+        // 4. QUOTE GENERATOR TRUYỀN ĐỘNG LỰC
+        const motivationalQuotes = {
+            vi: [
+                "\"Thất bại duy nhất là khi bạn quyết định dừng lại.\"",
+                "\"Không quan trọng bạn đi chậm thế nào, miễn là không bao giờ dừng lại.\"",
+                "\"Mỗi vết thương của hôm nay là giáp sắt cho ngày mai.\"",
+                "\"Kim cương được tôi luyện dưới áp lực lớn nhất. Bạn cũng vậy!\""
+            ],
+            en: [
+                "\"The only real failure is the decision to stop trying.\"",
+                "\"It does not matter how slowly you go as long as you do not stop.\"",
+                "\"Diamonds are made under immense pressure. Keep going!\"",
+                "\"Fall seven times, stand up eight.\""
+            ],
+            ja: [
+                "「諦めない限り、失敗ではない。」",
+                "「七転び八起き。何度でも立ち上がろう。」",
+                "「プレッシャーこそがダイヤモンドを作る。」",
+                "「一歩ずつ進めば、必ず目標に届く。」"
+            ]
+        };
+
+        function generateQuote() {
+            const list = motivationalQuotes[currentLang] || motivationalQuotes.vi;
+            const quoteEl = document.getElementById('quoteDisplay');
+            quoteEl.style.opacity = 0;
+            setTimeout(() => {
+                quoteEl.textContent = list[Math.floor(Math.random() * list.length)];
+                quoteEl.style.opacity = 1;
+            }, 200);
+        }
+
+        // 5. SAO CHÉP LIÊN HỆ
+        function copyText(str, type) {
+            navigator.clipboard.writeText(str);
+            alert(`${type} (${str}) đã được sao chép vào bộ nhớ tạm!`);
+        }
+
+        // 6. LƯỢT XEM LOCAL STORAGE
+        let views = localStorage.getItem('nem_views') || 142;
+        views++;
+        localStorage.setItem('nem_views', views);
+        document.getElementById('viewCount').textContent = views;
+    </script>
+</body>
+</html>
