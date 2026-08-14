@@ -8,690 +8,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --bg-black: #08080c;
-            --card-bg: rgba(18, 18, 24, 0.75);
-            --card-border: rgba(255, 215, 0, 0.25);
-            --gold-accent: #ffd700;
-            --gold-glow: rgba(255, 215, 0, 0.4);
-            --text-white: #ffffff;
-            --text-grey: #94a3b8;
-            --text-dark-grey: #64748b;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            user-select: none;
-            -webkit-user-select: none;
-        }
-
-        body {
-            background-color: var(--bg-black);
-            color: var(--text-white);
-            min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 40px 15px 120px 15px;
-        }
-
-        /* Video Nền */
-        .video-background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: -2;
-            object-fit: cover;
-            opacity: 0.4;
-            filter: contrast(1.1) brightness(0.8);
-            pointer-events: none;
-        }
-
-        .ambient-glow {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: -1;
-            background: radial-gradient(circle at 50% 30%, rgba(255, 215, 0, 0.08), transparent 70%),
-                        radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.05), transparent 60%);
-            pointer-events: none;
-        }
-
-        /* Mượt mà con trỏ chuột GPU Accelerated */
-        .custom-cursor {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: var(--gold-accent);
-            box-shadow: 0 0 12px var(--gold-accent), 0 0 20px #fff;
-            pointer-events: none;
-            z-index: 999999;
-            transform: translate3d(-50%, -50%, 0);
-            transition: width 0.15s ease, height 0.15s ease, background 0.15s ease;
-            mix-blend-mode: screen;
-        }
-
-        .custom-cursor.active {
-            width: 28px;
-            height: 28px;
-            background: rgba(255, 215, 0, 0.2);
-            border: 1.5px solid var(--gold-accent);
-        }
-
-        /* TRIANGLE WIPE OPENING TRANSITION */
-        .opening-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: 99999;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            overflow: hidden;
-        }
-
-        .door-left, .door-right {
-            position: absolute;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background: #09090d;
-            transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1);
-            z-index: 2;
-        }
-
-        .door-left {
-            left: 0;
-            clip-path: polygon(0 0, 100% 0, 0 100%);
-            background: linear-gradient(135deg, #0d0d14, #050508);
-        }
-
-        .door-right {
-            right: 0;
-            clip-path: polygon(100% 0, 100% 100%, 0 100%);
-            background: linear-gradient(135deg, #13131c, #07070b);
-        }
-
-        .opening-content {
-            position: relative;
-            z-index: 3;
-            text-align: center;
-            transition: opacity 0.4s ease, transform 0.4s ease;
-        }
-
-        .click-to-open {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 2.2rem;
-            font-weight: 700;
-            letter-spacing: 3px;
-            color: #ffffff;
-            text-transform: uppercase;
-            text-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
-            border: 2px solid rgba(255, 215, 0, 0.5);
-            padding: 14px 36px;
-            border-radius: 40px;
-            background: rgba(18, 18, 24, 0.8);
-            backdrop-filter: blur(8px);
-            animation: pulseBtn 2s infinite alternate;
-        }
-
-        @keyframes pulseBtn {
-            0% { transform: scale(1); box-shadow: 0 0 15px rgba(255, 215, 0, 0.3); }
-            100% { transform: scale(1.05); box-shadow: 0 0 35px rgba(255, 215, 0, 0.7); }
-        }
-
-        .light-beam {
-            position: absolute;
-            width: 100vw;
-            height: 100vh;
-            background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,215,0,0.8) 40%, transparent 80%);
-            opacity: 0;
-            z-index: 4;
-            pointer-events: none;
-            transition: opacity 0.6s ease;
-        }
-
-        .opening-screen.opened .door-left {
-            transform: translate3d(-100%, -100%, 0);
-        }
-
-        .opening-screen.opened .door-right {
-            transform: translate3d(100%, 100%, 0);
-        }
-
-        .opening-screen.opened .opening-content {
-            opacity: 0;
-            transform: scale(0.8);
-        }
-
-        .opening-screen.opened .light-beam {
-            opacity: 1;
-        }
-
-        /* Nút Chuyển Đổi Ngôn Ngữ */
-        .lang-switch-box {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-            display: flex;
-            gap: 6px;
-            background: rgba(18, 18, 24, 0.85);
-            padding: 5px 8px;
-            border-radius: 30px;
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--card-border);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-        }
-
-        .lang-btn {
-            background: transparent;
-            border: none;
-            color: var(--text-grey);
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.25s ease;
-        }
-
-        .lang-btn.active, .lang-btn:hover {
-            background: linear-gradient(135deg, #ffd700, #d4af37);
-            color: #000;
-            box-shadow: 0 0 12px var(--gold-glow);
-        }
-
-        /* Lượt xem */
-        .global-view-counter {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 1000;
-            background: rgba(18, 18, 24, 0.85);
-            padding: 8px 16px;
-            border-radius: 30px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.85rem;
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--card-border);
-            color: #e2e8f0;
-        }
-
-        /* Container Profile */
-        .container {
-            max-width: 980px;
-            width: 100%;
-            background: var(--card-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-radius: 24px;
-            border: 1px solid var(--card-border);
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 215, 0, 0.1);
-            padding: 35px;
-            z-index: 10;
-        }
-
-        .profile-grid {
-            display: grid;
-            grid-template-columns: 300px 1fr;
-            gap: 30px;
-        }
-
-        /* Cột trái */
-        .profile-left {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-
-        /* Dynamic Badge Title (Ảnh 3) */
-        .dynamic-badge {
-            background: rgba(255, 215, 0, 0.1);
-            border: 1px solid rgba(255, 215, 0, 0.35);
-            color: var(--gold-accent);
-            padding: 6px 18px;
-            border-radius: 20px;
-            font-weight: 800;
-            font-size: 0.85rem;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            margin-bottom: 15px;
-            min-height: 32px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            transition: opacity 0.3s ease;
-        }
-
-        .avatar-wrap {
-            position: relative;
-            width: 170px;
-            height: 170px;
-            margin-bottom: 18px;
-        }
-
-        .avatar-img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid var(--gold-accent);
-            box-shadow: 0 0 20px var(--gold-glow);
-            transition: transform 0.3s ease;
-        }
-
-        .avatar-wrap:hover .avatar-img {
-            transform: scale(1.05);
-            box-shadow: 0 0 30px var(--gold-accent);
-        }
-
-        .status-badge {
-            position: absolute;
-            bottom: 8px;
-            right: 8px;
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            background: #121218;
-            border: 1.5px solid var(--gold-accent);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--gold-accent);
-            font-size: 1.1rem;
-            box-shadow: 0 0 15px var(--gold-glow);
-        }
-
-        /* Floating Animated Name (Ảnh 4) */
-        .username-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-            margin-bottom: 10px;
-            min-height: 40px;
-        }
-
-        .username-letter {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.65rem;
-            font-weight: 800;
-            letter-spacing: 1.5px;
-            color: #ffffff;
-            display: inline-block;
-            animation: floatWave 3s ease-in-out infinite alternate;
-        }
-
-        .username-letter:nth-child(even) {
-            color: var(--gold-accent);
-            text-shadow: 0 0 12px var(--gold-glow);
-        }
-
-        @keyframes floatWave {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-7px); }
-            100% { transform: translateY(0px); }
-        }
-
-        .bio-text {
-            font-size: 0.86rem;
-            color: var(--text-grey);
-            line-height: 1.65;
-            margin-bottom: 20px;
-            font-style: italic;
-        }
-
-        .contact-box-wrap {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-bottom: 16px;
-        }
-
-        .contact-item {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 10px 14px;
-            border-radius: 12px;
-            font-size: 0.85rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-            transition: all 0.25s ease;
-        }
-
-        .contact-item:hover {
-            background: rgba(255, 215, 0, 0.1);
-            border-color: var(--gold-accent);
-            transform: translateX(4px);
-        }
-
-        .contact-item .val {
-            color: var(--gold-accent);
-            font-weight: 600;
-        }
-
-        /* Hộp Mỗi Ngày Nhớ Một Câu */
-        .motivation-box {
-            text-align: center;
-            padding: 18px;
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 16px;
-            border: 1px dashed rgba(255, 215, 0, 0.35);
-            width: 100%;
-        }
-
-        .quote-title {
-            font-size: 0.85rem;
-            font-weight: 800;
-            color: var(--gold-accent);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
-        }
-
-        .quote-content {
-            font-size: 0.85rem;
-            font-style: italic;
-            color: #f1f5f9;
-            min-height: 65px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 12px;
-            line-height: 1.5;
-            transition: opacity 0.3s ease;
-        }
-
-        .boost-btn {
-            background: linear-gradient(135deg, #ffd700, #b8860b);
-            border: none;
-            color: #000;
-            padding: 8px 20px;
-            border-radius: 30px;
-            font-weight: 800;
-            font-size: 0.78rem;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .boost-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.5);
-        }
-
-        /* Cột phải */
-        .profile-right {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .card {
-            background: rgba(14, 14, 20, 0.6);
-            border-radius: 18px;
-            padding: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            transition: border-color 0.3s ease;
-        }
-
-        .card:hover {
-            border-color: rgba(255, 215, 0, 0.4);
-        }
-
-        .card-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.05rem;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 15px;
-        }
-
-        .card-header i {
-            color: var(--gold-accent);
-        }
-
-        /* Social Icons */
-        .social-bar {
-            display: flex;
-            justify-content: space-between;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .social-btn {
-            flex: 1;
-            min-width: 65px;
-            padding: 12px 6px;
-            border-radius: 14px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            text-decoration: none;
-            color: #fff;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 6px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            transition: all 0.25s ease;
-        }
-
-        .social-btn i { font-size: 1.3rem; }
-        .social-btn:hover {
-            transform: translateY(-4px);
-            border-color: var(--gold-accent);
-            color: var(--gold-accent);
-            background: rgba(255, 215, 0, 0.08);
-            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.2);
-        }
-
-        /* Skills */
-        .skills-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .skill-item {
-            background: rgba(255, 255, 255, 0.02);
-            padding: 12px 16px;
-            border-radius: 12px;
-            border-left: 3.5px solid var(--gold-accent);
-        }
-
-        .skill-title-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 5px;
-        }
-
-        .skill-name {
-            font-size: 0.92rem;
-            font-weight: 700;
-            color: #f1f5f9;
-        }
-
-        .skill-level-tag {
-            font-size: 0.7rem;
-            font-weight: 800;
-            padding: 3px 10px;
-            border-radius: 20px;
-            text-transform: uppercase;
-            background: rgba(255, 215, 0, 0.15);
-            color: var(--gold-accent);
-            border: 1px solid rgba(255, 215, 0, 0.3);
-        }
-
-        .skill-desc {
-            font-size: 0.82rem;
-            color: var(--text-grey);
-            line-height: 1.5;
-        }
-
-        /* Playlists (6 Spotify Embeds) */
-        .playlist-wrap {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            max-height: 480px;
-            overflow-y: auto;
-            padding-right: 4px;
-        }
-
-        .playlist-wrap::-webkit-scrollbar {
-            width: 5px;
-        }
-        .playlist-wrap::-webkit-scrollbar-thumb {
-            background: var(--gold-accent);
-            border-radius: 10px;
-        }
-
-        .spotify-iframe-card {
-            border-radius: 12px;
-            overflow: hidden;
-            height: 152px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        /* Music Controller Widget with Konata GIF & Volume Slider */
-        .music-bar-pill {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: rgba(14, 14, 20, 0.9);
-            padding: 8px 16px;
-            border-radius: 40px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            z-index: 1000;
-            border: 1px solid var(--card-border);
-            backdrop-filter: blur(14px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.7);
-        }
-
-        .konata-avatar {
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 1.5px solid var(--gold-accent);
-        }
-
-        .play-toggle-btn {
-            background: none;
-            border: none;
-            color: var(--gold-accent);
-            font-size: 1.2rem;
-            cursor: pointer;
-        }
-
-        .volume-slider-wrap {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .volume-slider {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 65px;
-            height: 4px;
-            border-radius: 2px;
-            background: #334155;
-            outline: none;
-            cursor: pointer;
-        }
-
-        .volume-slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: var(--gold-accent);
-            cursor: pointer;
-        }
-
-        /* Toast thông báo sao chép sang trọng (Ảnh 5 thay thế) */
-        .custom-toast {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translate3d(-50%, 100px, 0);
-            background: rgba(18, 18, 24, 0.95);
-            border: 1px solid var(--gold-accent);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 15px var(--gold-glow);
-            color: #ffffff;
-            padding: 12px 24px;
-            border-radius: 30px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            z-index: 999999;
-            opacity: 0;
-            pointer-events: none;
-            transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .custom-toast.show {
-            transform: translate3d(-50%, 0, 0);
-            opacity: 1;
-        }
-
-        /* Chân Trang Độc Quyền (Ảnh 2) */
-        .exclusive-footer {
-            margin-top: 30px;
-            display: inline-block;
-            background: rgba(18, 18, 24, 0.8);
-            padding: 10px 24px;
-            border-radius: 30px;
-            color: #cbd5e1;
-            font-size: 0.85rem;
-            border: 1px solid rgba(255, 215, 0, 0.3);
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-            text-align: center;
-            backdrop-filter: blur(10px);
-        }
-
-        @media (max-width: 820px) {
-            .profile-grid { grid-template-columns: 1fr; }
-            .playlist-wrap { grid-template-columns: 1fr; max-height: 400px; }
-            .container { padding: 20px; }
-            .click-to-open { font-size: 1.5rem; padding: 10px 24px; }
-        }
-    </style>
+    <!-- File CSS riêng -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -707,14 +25,14 @@
         <source src="video/Blue.mp3" type="audio/mp3">
     </audio>
 
-    <!-- Con Trỏ Chuột Phát Sáng -->
+    <!-- Con Trỏ Chuột Tối Ưu GPU -->
     <div class="custom-cursor" id="customCursor"></div>
 
-    <!-- TRIANGLE WIPE OPENING TRANSITION -->
+    <!-- MÀN HÌNH CLICK TO OPEN VỚI HIỆU ỨNG CHIẾU SÁNG TOÀN MÀN HÌNH -->
     <div class="opening-screen" id="openingScreen" onclick="openProfile()">
         <div class="door-left"></div>
         <div class="door-right"></div>
-        <div class="light-beam"></div>
+        <div class="flash-overlay" id="flashOverlay"></div>
         <div class="opening-content">
             <div class="click-to-open">CLICK TO OPEN</div>
         </div>
@@ -729,17 +47,17 @@
 
     <!-- Lượt Xem -->
     <div class="global-view-counter">
-        <i class="fas fa-eye" style="color: var(--gold-accent);"></i> <span id="viewCountText">Views</span>: <strong id="viewCount" style="color: var(--gold-accent);">143</strong>
+        <i class="fas fa-eye" style="color: var(--gold-accent);"></i> <span id="viewCountText">Views</span>: <strong id="viewCount" style="color: var(--gold-accent);">145</strong>
     </div>
 
-    <!-- Khung Profile Chính -->
+    <!-- Khung Profile Chính (Tone Trắng - Đen - Vàng Gold - Xám) -->
     <div class="container">
         <div class="profile-grid">
             
-            <!-- CỘT TRÁI: AVATAR & THÔNG TIN CÁ NHÂN -->
+            <!-- CỘT TRÁI: AVATAR, BIO, QUOTE, REVIEW -->
             <div class="profile-left">
                 
-                <!-- Dynamic Badge Title (Ảnh 3) -->
+                <!-- Dynamic Badge Title (Cat Profile / Cafe Profile / Nem Profile / N?ne Profile) -->
                 <div class="dynamic-badge" id="dynamicBadge">Cat Profile</div>
 
                 <div class="avatar-wrap">
@@ -749,15 +67,11 @@
                     </div>
                 </div>
 
-                <!-- Floating Bouncy Name (Ảnh 4) -->
-                <div class="username-container" id="usernameContainer">
-                    <!-- Spans inserted via JS -->
-                </div>
+                <!-- Tên Bồng Bềnh Từng Ký Tự -->
+                <div class="username-container" id="usernameContainer"></div>
 
                 <!-- Tiểu Sử Theo Ngôn Ngữ -->
-                <div class="bio-text" id="bioText">
-                    <!-- Text updated by JS -->
-                </div>
+                <div class="bio-text" id="bioText"></div>
 
                 <div class="contact-box-wrap">
                     <div class="contact-item" onclick="copyContact('0898165655', 'Phone')">
@@ -770,7 +84,7 @@
                     </div>
                 </div>
 
-                <!-- Hộp Mỗi Ngày Nhớ Một Câu (51 Quotes) -->
+                <!-- Hộp Mỗi Ngày Nhớ Một Câu (51 Câu Nói Có Tác Giả) -->
                 <div class="motivation-box">
                     <div class="quote-title" data-i18n="quoteBoxTitle">Mỗi ngày nhớ một câu</div>
                     <div class="quote-content" id="quoteDisplay">
@@ -780,9 +94,32 @@
                         <i class="fas fa-rotate" style="margin-right: 4px;"></i> ĐỔI CÂU MỚI
                     </button>
                 </div>
+
+                <!-- KHU VỰC ĐÁNH GIÁ (REVIEW & FEEDBACK) -->
+                <div class="review-box">
+                    <div class="review-title">Mong bạn để lại đánh giá</div>
+                    <div class="review-subtitle">Mỗi 1 bài đánh giá đều giúp tôi tốt lên dù tốt hay xấu</div>
+                    
+                    <form class="review-form" onsubmit="submitReview(event)">
+                        <div class="rating-stars" id="ratingStars">
+                            <i class="fas fa-star active" onclick="setRating(1)"></i>
+                            <i class="fas fa-star active" onclick="setRating(2)"></i>
+                            <i class="fas fa-star active" onclick="setRating(3)"></i>
+                            <i class="fas fa-star active" onclick="setRating(4)"></i>
+                            <i class="fas fa-star active" onclick="setRating(5)"></i>
+                        </div>
+                        <input type="text" id="reviewerName" class="review-input" placeholder="Tên hoặc biệt danh..." required maxlength="25">
+                        <textarea id="reviewComment" class="review-textarea" placeholder="Cảm nghĩ / góp ý của bạn..." required maxlength="250"></textarea>
+                        <button type="submit" class="submit-review-btn">GỬI ĐÁNH GIÁ</button>
+                    </form>
+
+                    <!-- Danh sách hiển thị đánh giá đã được sắp xếp -->
+                    <div class="reviews-list" id="reviewsList"></div>
+                </div>
+
             </div>
 
-            <!-- CỘT PHẢI: SOCIAL & SKILLS & SPOTIFY -->
+            <!-- CỘT PHẢI: SOCIAL & SKILLS & 6 SPOTIFY EMBEDS -->
             <div class="profile-right">
 
                 <!-- 1. Kết Nối Mạng Xã Hội -->
@@ -815,7 +152,7 @@
                     </div>
                 </div>
 
-                <!-- 2. Kỹ Năng & Hành Trình Nghệ Thuật -->
+                <!-- 2. Kỹ Năng & Nghệ Thuật -->
                 <div class="card">
                     <div class="card-header">
                         <i class="fas fa-palette"></i>
@@ -856,7 +193,7 @@
                     </div>
                 </div>
 
-                <!-- 3. Playlist Spotify (4 Mới trên đầu, 2 Cũ phía dưới) -->
+                <!-- 3. Playlist Spotify (4 Mới Trên Đầu, 2 Cũ Phía Dưới) -->
                 <div class="card">
                     <div class="card-header">
                         <i class="fas fa-music"></i>
@@ -890,513 +227,34 @@
         </div>
     </div>
 
-    <!-- Chân Trang Độc Quyền (Ảnh 2) -->
+    <!-- Chân Trang Độc Quyền (Tự nhô lên khi cuộn cuối & phát sáng khi hover) -->
     <div class="exclusive-footer" id="exclusiveFooter">
         © 2025 by Nem. Created with GitHub.
     </div>
 
-    <!-- Toast Thông Báo Sao Chép Sang Trọng (Ảnh 5 thay thế) -->
+    <!-- Toast Thông Báo Sao Chép Sang Trọng -->
     <div class="custom-toast" id="customToast">
         <i class="fas fa-check-circle" style="color: var(--gold-accent);"></i>
         <span id="toastMsg">Đã sao chép thành công</span>
     </div>
 
-    <!-- Music Controller Pill With Konata Gif & Volume -->
+    <!-- Widget Điều Khiển Nhạc Lớn (Konata Xoay 360 + Tên Bài Hát + Âm Lượng) -->
     <div class="music-bar-pill" id="musicVisualizerPill">
-        <img src="konata-konata-happy.gif" onerror="this.src='images/konata-konata-happy.gif'" alt="Konata" class="konata-avatar">
+        <img src="konata-konata-happy.gif" onerror="this.src='images/konata-konata-happy.gif'" alt="Konata" class="konata-avatar spinning">
+        <div class="music-info-text">
+            <span class="music-track-name">Imposter Syndrome</span>
+            <span class="music-status-text" id="musicStatusText">50% Volume</span>
+        </div>
         <button class="play-toggle-btn" id="playBtn" onclick="toggleMusic()">
             <i class="fas fa-play" id="playIcon"></i>
         </button>
         <div class="volume-slider-wrap">
-            <i class="fas fa-volume-high" style="font-size: 0.8rem; color: var(--gold-accent);"></i>
-            <input type="range" min="0" max="1" step="0.01" value="0.7" class="volume-slider" id="volumeSlider" oninput="changeVolume(this.value)">
+            <i class="fas fa-volume-high" style="font-size: 0.85rem; color: var(--gold-accent);"></i>
+            <input type="range" min="0" max="1" step="0.01" value="0.5" class="volume-slider" id="volumeSlider" oninput="changeVolume(this.value)">
         </div>
     </div>
 
-    <!-- LOGIC JAVASCRIPT -->
-    <script>
-        // 1. DANH SÁCH 51 CÂU NÓI TRUYỀN CẢM HỨNG (VI / EN / JA)
-        const quoteDatabase = [
-            {
-                en: "“Don’t count the days, make the days count.” -Muhammad Ali",
-                vi: "“Đừng đếm ngày tháng, hãy để ngày tháng có ý nghĩa.” -Muhammad Ali",
-                ja: "「日数を数えるのではなく、日々を価値あるものにしなさい。」 -Muhammad Ali"
-            },
-            {
-                en: "“Persistence can change failure into extraordinary achievement.” -Matt Biondi",
-                vi: "“Sự kiên trì có thể biến thất bại thành thành tựu phi thường.” -Matt Biondi",
-                ja: "「粘り強さは失敗を並外れた成果に変えることができる。」 -Matt Biondi"
-            },
-            {
-                en: "“The real purpose of running isn’t to win a race. It’s to test the limits of the human heart.” -Bill Bowerman",
-                vi: "“Mục đích thực sự của việc chạy không phải là chiến thắng cuộc đua, mà là thử thách giới hạn của trái tim con người.” -Bill Bowerman",
-                ja: "「走る本当の目的はレースに勝つことではない。人間の心の限界を試すことだ。」 -Bill Bowerman"
-            },
-            {
-                en: "“Shoot for the moon. Even if you miss it you will land among the stars.” -Les Brown",
-                vi: "“Hãy nhắm tới mặt trăng. Dù có trượt, bạn cũng sẽ hạ cánh giữa những vì sao.” -Les Brown",
-                ja: "「月を目指して撃て。たとえ外れても、星々の間に着地できる。」 -Les Brown"
-            },
-            {
-                en: "“The man who moves a mountain begins by carrying away small stones.” -Confucius",
-                vi: "“Người dời được núi non bắt đầu bằng việc mang đi những hòn đá nhỏ.” -Confucius",
-                ja: "「山を動かす者は、まず小さな石を運び去ることから始める。」 -Confucius"
-            },
-            {
-                en: "“All our dreams can come true if we have the courage to pursue them.” -Walt Disney",
-                vi: "“Mọi ước mơ đều có thể trở thành hiện thực nếu chúng ta có đủ can đảm để theo đuổi chúng.” -Walt Disney",
-                ja: "「すべての夢は叶う。それを追い求める勇気さえあれば。」 -Walt Disney"
-            },
-            {
-                en: "“Some people want it to happen, some wish it would happen, others make it happen.” -Michael Jordan",
-                vi: "“Có người muốn điều đó xảy ra, có người ước điều đó xảy ra, người khác biến nó thành hiện thực.” -Michael Jordan",
-                ja: "「それが起こることを望む人もいれば、願う人もいる。そしてそれを実現させる人もいる。」 -Michael Jordan"
-            },
-            {
-                en: "“It always seems impossible until it’s done.” -Nelson Mandela",
-                vi: "“Mọi thứ dường như luôn là bất khả thi cho đến khi nó được hoàn thành.” -Nelson Mandela",
-                ja: "「何事も成し遂げられるまでは不可能に見えるものだ。」 -Nelson Mandela"
-            },
-            {
-                en: "“The only limit to the height of your achievements is the reach of your dreams and your willingness to work for them.” -Michelle Obama",
-                vi: "“Giới hạn duy nhất cho tầm cao thành tựu của bạn là tầm với của ước mơ và sự sẵn lòng nỗ lực vì chúng.” -Michelle Obama",
-                ja: "「あなたの功績の限界は、夢の広さとそのために働く意欲だけだ。」 -Michelle Obama"
-            },
-            {
-                en: "“You can’t put a limit on anything. The more you dream, the farther you get.” -Michael Phelps",
-                vi: "“Bạn không thể đặt giới hạn cho bất cứ điều gì. Càng ước mơ nhiều, bạn càng tiến xa.” -Michael Phelps",
-                ja: "「何事にも限界を設けてはならない。夢見れば見るほど、遠くまで行ける。」 -Michael Phelps"
-            },
-            {
-                en: "“Discipline is the bridge between goals and accomplishment.” -Jim Rohn",
-                vi: "“Kỷ luật là chiếc cầu nối giữa mục tiêu và thành tựu.” -Jim Rohn",
-                ja: "「規律こそが目標と達成を結ぶ架け橋である。」 -Jim Rohn"
-            },
-            {
-                en: "“We all have dreams. But in order to make dreams come into reality, it takes an awful lot of determination, dedication, self-discipline, and effort.” -Mark Spitz",
-                vi: "“Tất cả chúng ta đều có ước mơ. Nhưng để biến ước mơ thành hiện thực cần rất nhiều quyết tâm, cống hiến, kỷ luật tự giác và nỗ lực.” -Mark Spitz",
-                ja: "「誰にでも夢はある。しかし夢を現実にするには、途方もない決意、献身、自制心、そして努力が必要だ。」 -Mark Spitz"
-            },
-            {
-                en: "“Do a little more each day than you think you possibly can.” -Lowell Thomas",
-                vi: "“Mỗi ngày hãy làm nhiều hơn một chút so với những gì bạn nghĩ mình có thể.” -Lowell Thomas",
-                ja: "「自分ができると思うことより、毎日少しだけ多くやりなさい。」 -Lowell Thomas"
-            },
-            {
-                en: "“Do not let what you can not do interfere with what you can do.” -John Wooden",
-                vi: "“Đừng để những gì bạn không thể làm cản trở những gì bạn có thể làm.” -John Wooden",
-                ja: "「できないことに、できることを邪魔させてはならない。」 -John Wooden"
-            },
-            {
-                en: "“Strength does not come from physical capacity. It comes from an indomitable will.” -Mahatma Gandhi",
-                vi: "“Sức mạnh không đến từ năng lực thể chất. Nó đến từ ý chí bất khuất.” -Mahatma Gandhi",
-                ja: "「強さは身体的な能力から生まれるのではない。不屈の意志から生まれるのだ。」 -Mahatma Gandhi"
-            },
-            {
-                en: "“If something stands between you and your success, move it. Never be denied.” -Dwayne ‘The Rock’ Johnson",
-                vi: "“Nếu có điều gì cản trở bạn và thành công, hãy dẹp nó đi. Đừng bao giờ chịu khuất phục.” -Dwayne ‘The Rock’ Johnson",
-                ja: "「あなたと成功の間に何かが立ち塞がるなら、それをどかせ。決して拒まれるな。」 -Dwayne ‘The Rock’ Johnson"
-            },
-            {
-                en: "“In training, you listen to your body. In competition, you tell your body to shut up.” -Rich Froning Jr.",
-                vi: "“Khi luyện tập, hãy lắng nghe cơ thể. Trong thi đấu, hãy bảo cơ thể bạn im lặng.” -Rich Froning Jr.",
-                ja: "「練習では自分の体に耳を傾けよ。勝負では体に黙れと言い聞かせよ。」 -Rich Froning Jr."
-            },
-            {
-                en: "“Motivation is what gets you started. Habit is what keeps you going.” -Jim Ryun",
-                vi: "“Động lực là thứ giúp bạn bắt đầu. Thói quen là thứ giúp bạn tiếp tục.” -Jim Ryun",
-                ja: "「動機が始まりを与え、習慣が継続を生む。」 -Jim Ryun"
-            },
-            {
-                en: "“The last three or four reps is what makes the muscle grow. This area of pain divides the champion from someone else who is not a champion.” -Arnold Schwarzenegger",
-                vi: "“Ba hoặc bốn hiệp cuối cùng là thứ giúp cơ bắp phát triển. Vùng đau đớn này phân định nhà vô địch với những người bình thường.” -Arnold Schwarzenegger",
-                ja: "「最後の3〜4回の反復こそが筋肉を成長させる。この痛みの領域が、王者とそうでない者を分けるのだ。」 -Arnold Schwarzenegger"
-            },
-            {
-                en: "“Every champion was once a contender that refused to give up.” -Sylvester Stallone",
-                vi: "“Mỗi nhà vô địch đều từng là một kẻ thách đấu không chịu bỏ cuộc.” -Sylvester Stallone",
-                ja: "「すべてのチャンピオンは、かつて諦めることを拒んだ挑戦者だった。」 -Sylvester Stallone"
-            },
-            {
-                en: "“Our greatest glory is not in never failing, but in rising every time we fall.” -Confucius",
-                vi: "“Vinh quang lớn nhất không phải là không bao giờ vấp ngã, mà là đứng dậy sau mỗi lần ngã.” -Confucius",
-                ja: "「最大の栄光とは一度も失敗しないことではなく、倒れるたびに起き上がることにある。」 -Confucius"
-            },
-            {
-                en: "“Don’t dream of winning, train for it!” -Mo Farah",
-                vi: "“Đừng mơ về chiến thắng, hãy rèn luyện vì nó!” -Mo Farah",
-                ja: "「勝利を夢見るな、そのために練習せよ！」 -Mo Farah"
-            },
-            {
-                en: "“You have a choice. You can throw in the towel, or you can use it to wipe the sweat off of your face.” -Gatorade",
-                vi: "“Bạn có quyền lựa chọn: hoặc là ném khăn đầu hàng, hoặc dùng nó lau mồ hôi trên mặt.” -Gatorade",
-                ja: "「選択肢はある。タオルを投げ入れるか、それで顔の汗を拭くかだ。」 -Gatorade"
-            },
-            {
-                en: "“You miss 100 percent of the shots you don’t take.” -Wayne Gretzky",
-                vi: "“Bạn sẽ bỏ lỡ 100% cú sút mà bạn không thực hiện.” -Wayne Gretzky",
-                ja: "「打たないシュートは100パーセント外れる。」 -Wayne Gretzky"
-            },
-            {
-                en: "“The difference between the impossible and the possible lies in a person’s determination.” -Tommy Lasorda",
-                vi: "“Sự khác biệt giữa điều bất khả thi và khả thi nằm ở sự quyết tâm của mỗi người.” -Tommy Lasorda",
-                ja: "「不可能と可能の違いは、その人の決意にある。」 -Tommy Lasorda"
-            },
-            {
-                en: "“Obstacles don’t have to stop you. If you run into a wall, don’t turn around and give up. Figure out how to climb it, go through it, or work around it.” -Michael Jordan",
-                vi: "“Chướng ngại vật không thể cản bước bạn. Nếu đâm vào tường, đừng quay đầu bỏ cuộc. Hãy tìm cách trèo qua, đi xuyên qua hoặc vòng qua nó.” -Michael Jordan",
-                ja: "「障害に足を止められる必要はない。壁にぶつかっても諦めて引き返すな。登るか、突き破るか、回り込む方法を見つけろ。」 -Michael Jordan"
-            },
-            {
-                en: "“It’s not whether you get knocked down; it’s whether you get up.” -Vince Lombardi",
-                vi: "“Vấn đề không phải là bạn bị đánh ngã hay không; mà là bạn có đứng dậy hay không.” -Vince Lombardi",
-                ja: "「打ち倒されたかどうかではない。立ち上がったかどうかが問題なのだ。」 -Vince Lombardi"
-            },
-            {
-                en: "“Work hard in silence. Let success be your noise.” -Frank Ocean",
-                vi: "“Hãy làm việc chăm chỉ trong im lặng. Hãy để thành công tạo nên tiếng vang cho bạn.” -Frank Ocean",
-                ja: "「静寂の中で懸命に働け。成功を自らの音にせよ。」 -Frank Ocean"
-            },
-            {
-                en: "“Today I will do what others won’t, so tomorrow I can accomplish what others can’t.” -Jerry Rice",
-                vi: "“Hôm nay tôi sẽ làm những điều người khác không làm, để ngày mai tôi đạt được những điều người khác không thể.” -Jerry Rice",
-                ja: "「今日、他人がやらないことをする。だから明日、他人ができないことを成し遂げられる。」 -Jerry Rice"
-            },
-            {
-                en: "“I may win and I may lose, but I will never be defeated.” -Emmitt Smith",
-                vi: "“Tôi có thể thắng hoặc thua, nhưng tôi sẽ không bao giờ bị đánh bại.” -Emmitt Smith",
-                ja: "「勝つこともあれば負けることもある。だが決して屈服はしない。」 -Emmitt Smith"
-            },
-            {
-                en: "“It hurts up to a point and then it doesn’t get any worse.” -Ann Trason",
-                vi: "“Nỗi đau chỉ đến một mức độ nào đó rồi sẽ không thể tồi tệ hơn nữa.” -Ann Trason",
-                ja: "「ある地点までは痛むが、それ以上悪化することはない。」 -Ann Trason"
-            },
-            {
-                en: "“I will sacrifice whatever is necessary to be the best.” -J.J. Watt",
-                vi: "“Tôi sẽ hy sinh bất cứ điều gì cần thiết để trở thành người giỏi nhất.” -J.J. Watt",
-                ja: "「最高になるためなら、必要なことは何でも犠牲にする。」 -J.J. Watt"
-            },
-            {
-                en: "“If you don’t practice, you don’t deserve to win.” -Andre Agassi",
-                vi: "“Nếu bạn không khổ luyện, bạn không xứng đáng có được chiến thắng.” -Andre Agassi",
-                ja: "「練習しない者に、勝利を手にする資格はない。」 -Andre Agassi"
-            },
-            {
-                en: "“Pain is temporary. Quitting lasts forever.” -Lance Armstrong",
-                vi: "“Nỗi đau là tạm thời. Sự bỏ cuộc sẽ kéo dài mãi mãi.” -Lance Armstrong",
-                ja: "「痛みは一過性、諦めの後悔は永遠。」 -Lance Armstrong"
-            },
-            {
-                en: "“Success is what comes after your stop making excuses.” -Luis Galarza",
-                vi: "“Thành công là những gì đến sau khi bạn ngừng tìm kiếm lý do viện cớ.” -Luis Galarza",
-                ja: "「言い訳をやめた後に訪れるもの、それが成功だ。」 -Luis Galarza"
-            },
-            {
-                en: "“When I was younger, I was always taught not to make excuses.” -Derek Jeter",
-                vi: "“Khi còn trẻ, tôi luôn được dạy rằng không bao giờ được viện lý do.” -Derek Jeter",
-                ja: "「若い頃、言い訳をするなと常に教えられてきた。」 -Derek Jeter"
-            },
-            {
-                en: "“If you do the work you get rewarded. There are no shortcuts in life.” -Michael Jordan",
-                vi: "“Nếu bạn chịu bỏ công sức, bạn sẽ nhận được phần thưởng. Không có đường tắt trong cuộc sống.” -Michael Jordan",
-                ja: "「努力すれば報われる。人生に近道など存在しない。」 -Michael Jordan"
-            },
-            {
-                en: "“Most people fail, not because of lack of desire, but, because of lack of commitment.” -Vince Lombardi",
-                vi: "“Hầu hết mọi người thất bại không phải vì thiếu khát khao, mà vì thiếu sự cam kết.” -Vince Lombardi",
-                ja: "「多くの人が失敗するのは、欲望が足りないからではなく、覚悟が足りないからだ。」 -Vince Lombardi"
-            },
-            {
-                en: "“Unless you puke, faint, or die, keep going!” -Jillian Michaels",
-                vi: "“Trừ khi bạn nôn, ngất xỉu, hoặc gục ngã, hãy tiếp tục tiến lên!” -Jillian Michaels",
-                ja: "「吐くか、気絶するか、倒れるまで、前進し続けろ！」 -Jillian Michaels"
-            },
-            {
-                en: "“Someone who is busier than you is running right now.” -Nike",
-                vi: "“Ai đó bận rộn hơn bạn lúc này cũng đang chạy đấy.” -Nike",
-                ja: "「あなたより忙しい誰かが、今まさに走っている。」 -Nike"
-            },
-            {
-                en: "“Even if you’re on the right track, you’ll get run over if you just sit there.” -Will Rogers",
-                vi: "“Ngay cả khi bạn đang đi đúng đường, bạn vẫn sẽ bị cán qua nếu chỉ ngồi yên một chỗ.” -Will Rogers",
-                ja: "「正しい道にいても、ただ座っているだけなら轢かれてしまう。」 -Will Rogers"
-            },
-            {
-                en: "“You shall gain, but you shall pay with sweat, blood, and vomit.” -Pavel Tsatsouline",
-                vi: "“Bạn sẽ đạt được, nhưng phải trả giá bằng mồ hôi, máu và sự kiệt sức.” -Pavel Tsatsouline",
-                ja: "「手に入れることはできる、だが汗と血と苦痛で代償を払わねばならない。」 -Pavel Tsatsouline"
-            },
-            {
-                en: "“The miracle isn’t that I finished. The miracle is that I had the courage to start.” -John Bingham",
-                vi: "“Phép màu không phải là tôi đã về đích. Phép màu là tôi đã có đủ can đảm để bắt đầu.” -John Bingham",
-                ja: "「奇跡は完走したことではない。始める勇気があったことだ。」 -John Bingham"
-            },
-            {
-                en: "“If you run, you are a runner. It doesn’t matter how fast or how far. It doesn’t matter if today is your first day or if you’ve been running for twenty years. There is no test to pass, no license to earn, no membership card to get. You just run.” -John Bingham",
-                vi: "“Nếu bạn chạy, bạn là một người chạy bộ. Không quan trọng nhanh hay xa bao nhiêu. Không quan trọng hôm nay là ngày đầu hay bạn đã chạy hai mươi năm. Không cần vượt qua kỳ thi nào, không cần bằng cấp, không cần thẻ thành viên. Bạn chỉ cần chạy.” -John Bingham",
-                ja: "「走るなら、あなたはランナーだ。速さや距離は関係ない。今日が初日でも20年走っていても関係ない。合格すべきテストも免許も会員証もいらない。ただ走るだけだ。」 -John Bingham"
-            },
-            {
-                en: "“Go fast enough to get there, but slow enough to see.” -Jimmy Buffett",
-                vi: "“Hãy đi đủ nhanh để đến đích, nhưng hãy đi đủ chậm để ngắm nhìn xung quanh.” -Jimmy Buffett",
-                ja: "「たどり着くのに十分な速さで進み、見渡すのに十分な遅さで行け。」 -Jimmy Buffett"
-            },
-            {
-                en: "“Runners don’t quit. We fade; we “hit the wall”; we’re sometimes reduced to a walk. But we keep on.” -Amby Burfoot",
-                vi: "“Người chạy bộ không bỏ cuộc. Chúng ta có thể mệt lử; chúng ta có thể 'chạm đáy kiệt sức'; đôi khi phải đi bộ. Nhưng chúng ta vẫn tiếp tục.” -Amby Burfoot",
-                ja: "「ランナーは諦めない。失速し、壁にぶつかり、時には歩いてしまうこともある。それでも前へ進み続ける。」 -Amby Burfoot"
-            },
-            {
-                en: "“It never gets easier, you just get better.” -Jordan Burroughs",
-                vi: "“Mọi thứ không bao giờ dễ dàng hơn, chỉ là bạn đã trở nên giỏi hơn.” -Jordan Burroughs",
-                ja: "「決して楽にはならない、ただ自分が強くなるだけだ。」 -Jordan Burroughs"
-            },
-            {
-                en: "“The road to success runs uphill.” -Willie Davis",
-                vi: "“Con đường dẫn đến thành công luôn là đường dốc ngược.” -Willie Davis",
-                ja: "「成功への道は常に上り坂である。」 -Willie Davis"
-            },
-            {
-                en: "“I’m either completely committed to what I am doing or have a few screws loose, who knows.” -Courtney Dauwalter",
-                vi: "“Hoặc là tôi hoàn toàn tận hiến cho những gì mình đang làm, hoặc là đầu óc tôi có chút điên rồ, ai mà biết được.” -Courtney Dauwalter",
-                ja: "「自分がやっていることに全力を尽くしているか、ネジが数本外れているか、誰にも分からない。」 -Courtney Dauwalter"
-            },
-            {
-                en: "“Running allows me to set my mind free. Nothing seems impossible. Nothing unattainable.” -Kara Goucher",
-                vi: "“Chạy bộ cho phép tâm trí tôi được tự do. Không có gì dường như là bất khả thi. Không có gì là không thể với tới.” -Kara Goucher",
-                ja: "「走ることは私の心を解放してくれる。不可能なことなどなく、手の届かないものなどない。」 -Kara Goucher"
-            },
-            {
-                en: "“Run often. Run long. But never outrun your joy of running.” -Julie Isphording",
-                vi: "“Hãy chạy thường xuyên. Hãy chạy đường dài. Nhưng đừng bao giờ chạy nhanh hơn niềm vui chạy bộ của bạn.” -Julie Isphording",
-                ja: "「頻繁に走れ。長く走れ。だが走る喜びを追い越してしまうな。」 -Julie Isphording"
-            }
-        ];
-
-        // 2. TỪ ĐIỂN VÀ NỘI DUNG ĐA NGÔN NGỮ
-        const langData = {
-            vi: {
-                name: "NGUYỄN NEM",
-                bio: "Chỉ là một chú mèo 🐾<br>Yêu thích đua ngựa Nhật Bản 🐎<br>Với nhạc hardstyle và Chill cùng vibe âm nhậc 🎧✨",
-                quoteBoxTitle: "Mỗi ngày nhớ một câu",
-                quoteBtn: '<i class="fas fa-rotate" style="margin-right: 4px;"></i> ĐỔI CÂU MỚI',
-                socialHeader: "Kết Nối Mạng Xã Hội",
-                skillsHeader: "Kỹ Năng & Hành Trình Nghệ Thuật",
-                skillPsLvl: "Trình Độ Cao",
-                skillPsDesc: "Sử dụng thành thạo và chuyên sâu; tối ưu hóa hình ảnh, thiết kế đồ họa và sáng tạo visual thẩm mỹ.",
-                skillAeLvl: "Đang Trau Dồi",
-                skillAeDesc: "Đang ở mức trung bình, nỗ lực học hỏi để hoàn thiện kỹ năng dựng video TikTok Edit, VFX và motion graphics.",
-                skillArtLvl: "Không Ngừng Cố Gắng",
-                skillArtDesc: "Cảm quan hội họa & thẩm mỹ thị giác cao, chỉnh sửa ảnh hợp nhãn người xem; tuy chưa vẽ giỏi nhưng luôn học vẽ mỗi ngày như người mới bắt đầu!",
-                playlistHeader: "Danh Sách Nhạc Yêu Thích"
-            },
-            en: {
-                name: "Nem Nguyen",
-                bio: "Just A Cat 🐾<br>Love racing Horse in Japan 🐎<br>With hardstyle and chilling vibe music. 🎧✨",
-                quoteBoxTitle: "Daily Quote",
-                quoteBtn: '<i class="fas fa-rotate" style="margin-right: 4px;"></i> NEXT QUOTE',
-                socialHeader: "Social Connections",
-                skillsHeader: "Skills & Artistic Journey",
-                skillPsLvl: "Advanced / Master",
-                skillPsDesc: "Highly proficient in photo manipulation, graphic design, and crafting captivating aesthetic visuals.",
-                skillAeLvl: "Intermediate",
-                skillAeDesc: "Actively mastering video editing, TikTok pacing, motion graphics, and visual effects in AE & Premiere.",
-                skillArtLvl: "Never Stop Learning",
-                skillArtDesc: "Strong artistic sense and visual curation. While learning sketching from scratch, constantly pushing limits without giving up!",
-                playlistHeader: "Favorite Playlists"
-            },
-            ja: {
-                name: "ネムチュア",
-                bio: "ただの猫です 🐾<br>日本の競馬が大好き 🐎<br>ハードスタイルとChillな音楽のバイブスとともに 🎧✨",
-                quoteBoxTitle: "今日の一言",
-                quoteBtn: '<i class="fas fa-rotate" style="margin-right: 4px;"></i> 言葉を変える',
-                socialHeader: "ソーシャルリンク",
-                skillsHeader: "スキル ＆ アートジャーニー",
-                skillPsLvl: "上級者 / プロ",
-                skillPsDesc: "高度な画像編集、グラフィックデザイン、魅力的なビジュアル制作を得意としています。",
-                skillAeLvl: "中級 / 学習中",
-                skillAeDesc: "After EffectsとPremiere Proで動画編集やエフェクト技術を日々磨いています。",
-                skillArtLvl: "挑戦し続ける心",
-                skillArtDesc: "高い美的センスを持ち、見る人に心地よい画像加工が得意。絵の初心者として毎日諦めずに練習を続けています！",
-                playlistHeader: "お気に入りのプレイリスト"
-            }
-        };
-
-        let currentLang = 'vi';
-        let currentQuoteIndex = 0;
-
-        function setLanguage(lang) {
-            currentLang = lang;
-            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-
-            const data = langData[lang];
-            
-            // Cập nhật tên với hiệu ứng bồng bềnh
-            renderFloatingName(data.name);
-
-            // Cập nhật Bio
-            document.getElementById('bioText').innerHTML = data.bio;
-
-            // Cập nhật các trường giao diện
-            document.querySelectorAll('[data-i18n]').forEach(el => {
-                const key = el.getAttribute('data-i18n');
-                if (data[key]) {
-                    el.innerHTML = data[key];
-                }
-            });
-
-            // Cập nhật câu nói hiện tại theo ngôn ngữ mới
-            displayCurrentQuote();
-        }
-
-        // Render Tên Bồng Bềnh Từng Ký Tự (Ảnh 4)
-        function renderFloatingName(nameStr) {
-            const container = document.getElementById('usernameContainer');
-            container.innerHTML = '';
-            nameStr.split('').forEach((char, index) => {
-                const span = document.createElement('span');
-                span.className = 'username-letter';
-                span.textContent = char === ' ' ? '\u00A0' : char;
-                span.style.animationDelay = `${index * 0.1}s`;
-                container.appendChild(span);
-            });
-        }
-
-        // 3. TYPING/DISAPPEARING EFFECT CHO DYNAMIC BADGE (Ảnh 3)
-        const badgeTitles = ["Cat Profile", "Cafe Profile", "Nem Profile", "N?ne Profile"];
-        let badgeIndex = 0;
-        let charIdx = 0;
-        let isDeleting = false;
-
-        function updateDynamicBadge() {
-            const currentTitle = badgeTitles[badgeIndex];
-            const badgeEl = document.getElementById('dynamicBadge');
-            
-            if (isDeleting) {
-                badgeEl.textContent = currentTitle.substring(0, charIdx - 1);
-                charIdx--;
-            } else {
-                badgeEl.textContent = currentTitle.substring(0, charIdx + 1);
-                charIdx++;
-            }
-
-            let speed = isDeleting ? 45 : 85;
-            if (!isDeleting && charIdx === currentTitle.length) {
-                speed = 2200; // Dừng lại để người xem đọc
-                isDeleting = true;
-            } else if (isDeleting && charIdx === 0) {
-                isDeleting = false;
-                badgeIndex = (badgeIndex + 1) % badgeTitles.length;
-                speed = 400;
-            }
-            setTimeout(updateDynamicBadge, speed);
-        }
-
-        // 4. HIỂN THỊ CÂU NÓI TRUYỀN ĐỘNG LỰC
-        function displayCurrentQuote() {
-            const quoteEl = document.getElementById('quoteDisplay');
-            const item = quoteDatabase[currentQuoteIndex];
-            quoteEl.style.opacity = 0;
-            setTimeout(() => {
-                quoteEl.textContent = item[currentLang] || item.vi;
-                quoteEl.style.opacity = 1;
-            }, 200);
-        }
-
-        function nextQuote() {
-            currentQuoteIndex = Math.floor(Math.random() * quoteDatabase.length);
-            displayCurrentQuote();
-        }
-
-        // 5. MỞ PROFILE VỚI HIỆU ỨNG TRIANGLE WIPE
-        const audio = document.getElementById('bgMusicAudio');
-        const openingScreen = document.getElementById('openingScreen');
-        const playIcon = document.getElementById('playIcon');
-        let isPlaying = false;
-
-        function openProfile() {
-            openingScreen.classList.add('opened');
-            setTimeout(() => {
-                openingScreen.style.display = 'none';
-            }, 1000);
-
-            // Bật nhạc
-            audio.volume = parseFloat(document.getElementById('volumeSlider').value);
-            audio.play().then(() => {
-                isPlaying = true;
-                playIcon.className = 'fas fa-pause';
-            }).catch(e => {
-                console.log('Audio autoplay prevented:', e);
-            });
-        }
-
-        function toggleMusic() {
-            if (isPlaying) {
-                audio.pause();
-                playIcon.className = 'fas fa-play';
-            } else {
-                audio.play();
-                playIcon.className = 'fas fa-pause';
-            }
-            isPlaying = !isPlaying;
-        }
-
-        function changeVolume(val) {
-            audio.volume = parseFloat(val);
-        }
-
-        // 6. CUSTOM TOAST COPY NOTIFICATION (Thay thế Ảnh 5)
-        function copyContact(text, type) {
-            navigator.clipboard.writeText(text);
-            const toast = document.getElementById('customToast');
-            const toastMsg = document.getElementById('toastMsg');
-            toastMsg.textContent = `Đã sao chép ${type} (${text}) vào bộ nhớ tạm!`;
-            toast.classList.add('show');
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 2500);
-        }
-
-        // 7. CON TRỎ CHUỘT TỐI ƯU HIỆU NĂNG (GPU Accelerated, Zero-Lag)
-        const cursor = document.getElementById('customCursor');
-        let mouseX = window.innerWidth / 2;
-        let mouseY = window.innerHeight / 2;
-        let curX = mouseX;
-        let curY = mouseY;
-
-        document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-        }, { passive: true });
-
-        function animateCursor() {
-            curX += (mouseX - curX) * 0.35;
-            curY += (mouseY - curY) * 0.35;
-            cursor.style.transform = `translate3d(${curX}px, ${curY}px, 0) translate(-50%, -50%)`;
-            requestAnimationFrame(animateCursor);
-        }
-        animateCursor();
-
-        document.querySelectorAll('a, button, .contact-item, .card, .avatar-wrap, input, .opening-screen').forEach(el => {
-            el.addEventListener('mouseenter', () => cursor.classList.add('active'));
-            el.addEventListener('mouseleave', () => cursor.classList.remove('active'));
-        });
-
-        // 8. KHỞI TẠO BAN ĐẦU
-        document.addEventListener('DOMContentLoaded', () => {
-            renderFloatingName(langData.vi.name);
-            document.getElementById('bioText').innerHTML = langData.vi.bio;
-            updateDynamicBadge();
-            displayCurrentQuote();
-
-            // Cập nhật lượt xem
-            let views = localStorage.getItem('nem_views_v2') || 143;
-            views++;
-            localStorage.setItem('nem_views_v2', views);
-            document.getElementById('viewCount').textContent = views;
-        });
-    </script>
+    <!-- File Script Riêng -->
+    <script src="script.js"></script>
 </body>
 </html>
