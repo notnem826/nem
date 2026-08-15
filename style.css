@@ -15,6 +15,7 @@
     font-family: 'Plus Jakarta Sans', sans-serif;
     user-select: none;
     -webkit-user-select: none;
+    cursor: default;
 }
 
 body {
@@ -39,9 +40,10 @@ body {
     height: 100vh;
     z-index: -2;
     object-fit: cover;
-    opacity: 0.32;
+    opacity: 0.35;
     filter: contrast(1.1) brightness(0.8);
     pointer-events: none;
+    will-change: transform;
 }
 
 .ambient-glow {
@@ -56,7 +58,7 @@ body {
     pointer-events: none;
 }
 
-/* Con trỏ chuột ảo mượt mà */
+/* Con trỏ chuột ảo mượt mà (Tắt trên Spotify & Mobile để không bị kẹt) */
 .custom-cursor {
     position: fixed;
     top: 0;
@@ -80,7 +82,7 @@ body {
     border: 1.5px solid var(--gold-accent);
 }
 
-/* MÀN HÌNH CLICK TO OPEN: CHIẾU SÁNG TOÀN MÀN HÌNH RỒI MỞ PROFILE */
+/* MÀN HÌNH CLICK TO OPEN: HIỆU ỨNG CHIẾU SÁNG TOÀN DIỆN */
 .opening-screen {
     position: fixed;
     top: 0;
@@ -91,7 +93,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    cursor: pointer;
+    cursor: pointer !important;
     overflow: hidden;
 }
 
@@ -978,7 +980,7 @@ body {
     font-weight: 700;
 }
 
-/* Chân Trang Độc Quyền (Thon Gọn & Nháy Sáng Vàng Mờ) */
+/* Chân Trang Độc Quyền (Thon Gọn Ngang & Nháy Sáng Vàng Mờ) */
 .exclusive-footer {
     position: fixed;
     bottom: 20px;
@@ -1053,6 +1055,6 @@ body {
     .playlist-wrap { grid-template-columns: 1fr; max-height: 400px; }
     .container { padding: 18px; }
     .click-to-open { font-size: 1.4rem; padding: 12px 24px; }
-    .custom-cursor { display: none !important; } /* Tắt chuột ảo trên mobile tránh lag */
+    .custom-cursor { display: none !important; }
     * { cursor: auto !important; }
 }
