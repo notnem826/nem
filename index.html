@@ -24,20 +24,22 @@
         <source src="video/Blue.mp3" type="audio/mp3">
     </audio>
 
-    <!-- Con Trỏ Chuột Tối Ưu GPU (Tự Ẩn Trên Mobile) -->
+    <!-- Con Trỏ Chuột Tối Ưu GPU -->
     <div class="custom-cursor" id="customCursor"></div>
 
-    <!-- MÀN HÌNH MỞ CỬA CLICK TO OPEN: CHIẾU SÁNG TOÀN MÀN HÌNH RỒI MỞ PROFILE -->
+    <!-- MÀN HÌNH MỞ CỬA CLICK TO OPEN: HIỆU ỨNG APERTURE WIPE & CHIẾU SÁNG TOÀN MÀN HÌNH -->
     <div class="opening-screen" id="openingScreen" onclick="openProfile()">
         <div class="door-left"></div>
         <div class="door-right"></div>
         <div class="screen-flash" id="screenFlash"></div>
         <div class="opening-content">
-            <div class="click-to-open">CLICK TO OPEN</div>
+            <div class="click-to-open">
+                <i class="fas fa-sparkles" style="margin-right: 8px;"></i>CLICK TO OPEN
+            </div>
         </div>
     </div>
 
-    <!-- THANH HEADER TOP BAR (KHÔNG BỊ ĐÈ NHAU TRÊN MOBILE) -->
+    <!-- THANH HEADER TOP BAR (KHÔNG BỊ TRÀN CHỮ / ĐÈ NHAU TRÊN MOBILE) -->
     <div class="top-nav-bar">
         <!-- Khách Truy Cập (Unique Visitors) -->
         <div class="global-view-counter">
@@ -61,7 +63,7 @@
             <!-- CỘT TRÁI: AVATAR, BIO, QUOTES, DONATE, REVIEW -->
             <div class="profile-left">
                 
-                <!-- Dynamic Badge Title -->
+                <!-- Dynamic Badge Title (Cat Profile / Cafe Profile / Nem Profile / N?ne Profile) -->
                 <div class="dynamic-badge" id="dynamicBadge">Cat Profile</div>
 
                 <div class="avatar-wrap">
@@ -77,7 +79,7 @@
                 <!-- Tiểu Sử Theo Ngôn Ngữ -->
                 <div class="bio-text" id="bioText"></div>
 
-                <!-- Hộp Liên Hệ (Đầy Đủ, Không Bị Co Giật/Cắt Chữ) -->
+                <!-- Hộp Liên Hệ (Đầy Đủ, Vừa Vặn Không Bị Cắt Chữ) -->
                 <div class="contact-box-wrap">
                     <div class="contact-item" onclick="copyContact('0898165655', 'Phone')">
                         <span class="lbl"><i class="fas fa-phone-alt"></i> Phone</span>
@@ -111,7 +113,7 @@
                     </div>
                     <div class="qr-wrap" onclick="openQrModal()" title="Nhấp để phóng to mã QR">
                         <img src="images/qrdonate.png" onerror="this.src='images/DenManHinh.jpg'" alt="QR Donate" class="qr-img">
-                        <div class="qr-zoom-hint"><i class="fas fa-search-plus"></i> Phóng to</div>
+                        <div class="qr-zoom-hint"><i class="fas fa-search-plus"></i> <span data-i18n="qrZoomHint">Nhấp để phóng to</span></div>
                     </div>
                     <div class="bank-info-box">
                         <div class="bank-row">
@@ -129,7 +131,7 @@
                     </div>
                 </div>
 
-                <!-- KHU VỰC ĐÁNH GIÁ VỚI 2 TAB (ĐÁNH GIÁ 5 SAO & GÓP Ý 1-4 SAO) -->
+                <!-- KHU VỰC ĐÁNH GIÁ (2 TAB: 5 SAO & GÓP Ý 1-4 SAO) -->
                 <div class="review-box">
                     <div class="review-title" data-i18n="reviewTitle">Mong bạn để lại đánh giá</div>
                     <div class="review-subtitle" data-i18n="reviewSubtitle">Mỗi 1 bài đánh giá đều giúp tôi tốt lên dù tốt hay xấu</div>
@@ -147,13 +149,13 @@
                         <button type="submit" class="submit-review-btn" data-i18n="reviewSubmitBtn">GỬI ĐÁNH GIÁ</button>
                     </form>
 
-                    <!-- Tabs chuyển đổi giữa 5 sao và Góp ý 1-4 sao -->
+                    <!-- Tabs Lọc Đánh Giá 5 Sao / Góp Ý -->
                     <div class="review-tabs">
-                        <button class="review-tab-btn active" id="tab5StarBtn" onclick="switchReviewTab('5star')" data-i18n="tab5Star">Đánh giá 5 sao (5-10)</button>
-                        <button class="review-tab-btn" id="tabFeedbackBtn" onclick="switchReviewTab('feedback')" data-i18n="tabFeedback">Góp ý (1-4 sao)</button>
+                        <button class="review-tab-btn active" id="tab5StarBtn" onclick="switchReviewTab('5star')" data-i18n="tab5Star">5 Sao (5-10)</button>
+                        <button class="review-tab-btn" id="tabFeedbackBtn" onclick="switchReviewTab('feedback')" data-i18n="tabFeedback">Góp ý (1-4 Sao)</button>
                     </div>
 
-                    <!-- Danh sách hiển thị đánh giá thực tế -->
+                    <!-- Danh Sách Đánh Giá Đã Lọc -->
                     <div class="reviews-list" id="reviewsList"></div>
                 </div>
 
@@ -192,7 +194,7 @@
                     </div>
                 </div>
 
-                <!-- 2. Kỹ Năng & Nghệ Thuật -->
+                <!-- 2. Kỹ Năng & Nghệ Thuật (Đồng Bộ 100% 3 Thứ Tiếng) -->
                 <div class="card">
                     <div class="card-header">
                         <i class="fas fa-palette"></i>
@@ -265,7 +267,7 @@
         </div>
     </div>
 
-    <!-- MODAL PHÓNG TO MÃ QR DONATE -->
+    <!-- POPUP MODAL PHÓNG TO MÃ QR DONATE (KÈM NỀN MỜ CHE TOÀN BỘ PHÍA SAU) -->
     <div class="qr-modal-overlay" id="qrModalOverlay" onclick="closeQrModal()">
         <div class="qr-modal-content" onclick="event.stopPropagation()">
             <button class="qr-modal-close" onclick="closeQrModal()">&times;</button>
@@ -278,7 +280,7 @@
         </div>
     </div>
 
-    <!-- WIDGET NHẠC THU GỌN / TRƯỢT KÉO RA (SLIDE-OUT DRAWER) -->
+    <!-- NGĂN KÉO NHẠC TRƯỢT TỰ ĐỘNG (KÉO KHI HOVER / CLICK, TỰ ĐỔI BÀI) -->
     <div class="music-slide-drawer" id="musicSlideDrawer">
         <!-- Nút Tab Kéo Ra/Vào -->
         <button class="music-drawer-toggle" id="drawerToggleBtn" onclick="toggleMusicDrawer()">
@@ -286,13 +288,13 @@
             <img src="konata-konata-happy.gif" onerror="this.src='images/konata-konata-happy.gif'" alt="Konata" class="konata-mini-avatar spinning">
         </button>
 
-        <!-- Bảng điều khiển khi mở rộng -->
+        <!-- Bảng điều khiển khi trượt ra -->
         <div class="music-drawer-body">
             <img src="konata-konata-happy.gif" onerror="this.src='images/konata-konata-happy.gif'" alt="Konata" class="konata-main-avatar spinning">
             <div class="track-select-wrap">
                 <select class="track-select" id="trackSelect" onchange="changeTrack(this.value)">
-                    <option value="video/Imposter-Syndrome.mp4">🎵 Imposter Syndrome (Mặc định)</option>
-                    <option value="video/Blue.mp3">🎵 Heather x Eyes Blue (Lo-Fi)</option>
+                    <option value="video/Imposter-Syndrome.mp4">🎵 Imposter Syndrome</option>
+                    <option value="video/Blue.mp3">🎵 Heather x Eyes Blue</option>
                 </select>
             </div>
             <div class="music-action-row">
@@ -308,8 +310,8 @@
         </div>
     </div>
 
-    <!-- Chân Trang Độc Quyền (Nhô Lên Khi Cuộn Cuối & Nháy Sáng Vàng Mờ) -->
-    <div class="exclusive-footer" id="exclusiveFooter">
+    <!-- Chân Trang Độc Quyền (Thon Gọn Ngang & Tự Nhô Lên Kèm Nhấp Nháy Vàng Mờ) -->
+    <div class="exclusive-footer" id="exclusiveFooter" data-i18n="footerText">
         © 2025 by Nem. Created with GitHub.
     </div>
 
