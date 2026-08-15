@@ -2,13 +2,12 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Not Nem</title>
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
-    <!-- File CSS riêng biệt tối ưu bộ nhớ -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -19,16 +18,16 @@
     </video>
     <div class="ambient-glow"></div>
 
-    <!-- Nhạc Nền Imposter Syndrome Loop Vô Tận -->
+    <!-- Nhạc Nền Loop Vô Tận -->
     <audio id="bgMusicAudio" loop preload="auto">
         <source src="video/Imposter-Syndrome.mp4" type="audio/mp4">
         <source src="video/Blue.mp3" type="audio/mp3">
     </audio>
 
-    <!-- Con Trỏ Chuột Tối Ưu GPU -->
+    <!-- Con Trỏ Chuột Tối Ưu GPU (Tự Ẩn Trên Mobile) -->
     <div class="custom-cursor" id="customCursor"></div>
 
-    <!-- MÀN HÌNH CLICK TO OPEN: CHIẾU SÁNG TOÀN MÀN HÌNH RỒI MỞ PROFILE -->
+    <!-- MÀN HÌNH MỞ CỬA CLICK TO OPEN: CHIẾU SÁNG TOÀN MÀN HÌNH RỒI MỞ PROFILE -->
     <div class="opening-screen" id="openingScreen" onclick="openProfile()">
         <div class="door-left"></div>
         <div class="door-right"></div>
@@ -38,28 +37,31 @@
         </div>
     </div>
 
-    <!-- Nút Đổi Ngôn Ngữ -->
-    <div class="lang-switch-box">
-        <button class="lang-btn active" onclick="setLanguage('vi')">VI 🇻🇳</button>
-        <button class="lang-btn" onclick="setLanguage('en')">EN 🇬🇧</button>
-        <button class="lang-btn" onclick="setLanguage('ja')">JP 🇯🇵</button>
+    <!-- THANH HEADER TOP BAR (KHÔNG BỊ ĐÈ NHAU TRÊN MOBILE) -->
+    <div class="top-nav-bar">
+        <!-- Khách Truy Cập (Unique Visitors) -->
+        <div class="global-view-counter">
+            <i class="fas fa-user-check" style="color: var(--gold-accent);"></i> 
+            <span id="viewCountLabel">Khách truy cập</span>: 
+            <strong id="viewCount" style="color: var(--gold-accent);">147</strong>
+        </div>
+
+        <!-- Nút Đổi Ngôn Ngữ -->
+        <div class="lang-switch-box">
+            <button class="lang-btn active" onclick="setLanguage('vi')">VI 🇻🇳</button>
+            <button class="lang-btn" onclick="setLanguage('en')">EN 🇬🇧</button>
+            <button class="lang-btn" onclick="setLanguage('ja')">JP 🇯🇵</button>
+        </div>
     </div>
 
-    <!-- Lượng Người Đã Xem (Unique Visitors) -->
-    <div class="global-view-counter">
-        <i class="fas fa-user-check" style="color: var(--gold-accent);"></i> 
-        <span id="viewCountText" data-i18n="visitorsText">Visitors</span>: 
-        <strong id="viewCount" style="color: var(--gold-accent);">146</strong>
-    </div>
-
-    <!-- Khung Profile Chính -->
+    <!-- KHUNG PROFILE CHÍNH (TONE ĐEN - TRẮNG - VÀNG GOLD - XÁM) -->
     <div class="container">
         <div class="profile-grid">
             
             <!-- CỘT TRÁI: AVATAR, BIO, QUOTES, DONATE, REVIEW -->
             <div class="profile-left">
                 
-                <!-- Dynamic Badge Title (Ảnh 3) -->
+                <!-- Dynamic Badge Title -->
                 <div class="dynamic-badge" id="dynamicBadge">Cat Profile</div>
 
                 <div class="avatar-wrap">
@@ -69,13 +71,13 @@
                     </div>
                 </div>
 
-                <!-- Tên Bồng Bềnh Từng Ký Tự (Ảnh 4) -->
+                <!-- Tên Bồng Bềnh Từng Ký Tự -->
                 <div class="username-container" id="usernameContainer"></div>
 
                 <!-- Tiểu Sử Theo Ngôn Ngữ -->
                 <div class="bio-text" id="bioText"></div>
 
-                <!-- Phone & Email Đầy Đủ (Không Bị Cắt Chữ) -->
+                <!-- Hộp Liên Hệ (Đầy Đủ, Không Bị Co Giật/Cắt Chữ) -->
                 <div class="contact-box-wrap">
                     <div class="contact-item" onclick="copyContact('0898165655', 'Phone')">
                         <span class="lbl"><i class="fas fa-phone-alt"></i> Phone</span>
@@ -98,7 +100,7 @@
                     </button>
                 </div>
 
-                <!-- GÓC HẢO TÂM & ĐẦU TƯ / DONATE (Ảnh 8) -->
+                <!-- GÓC HẢO TÂM & ĐẦU TƯ / DONATE (Kèm Popup Phóng To Mã QR) -->
                 <div class="donate-card">
                     <div class="donate-header">
                         <i class="fas fa-hand-holding-heart"></i>
@@ -107,26 +109,27 @@
                     <div class="donate-subtitle" data-i18n="donateSubtitle">
                         Mọi sự ủng hộ và đồng hành của bạn đều là nguồn động lực quý báu giúp tôi hoàn thiện bản thân mỗi ngày.
                     </div>
-                    <div class="qr-wrap">
+                    <div class="qr-wrap" onclick="openQrModal()" title="Nhấp để phóng to mã QR">
                         <img src="images/qrdonate.png" onerror="this.src='images/DenManHinh.jpg'" alt="QR Donate" class="qr-img">
+                        <div class="qr-zoom-hint"><i class="fas fa-search-plus"></i> Phóng to</div>
                     </div>
                     <div class="bank-info-box">
                         <div class="bank-row">
-                            <span class="bank-lbl">Chủ TK:</span>
+                            <span class="bank-lbl" data-i18n="bankHolderLbl">Chủ TK:</span>
                             <strong class="bank-val">NGUYEN VIET NAM</strong>
                         </div>
-                        <div class="bank-row" onclick="copyContact('5801753378', 'Số tài khoản')">
-                            <span class="bank-lbl">STK (Click copy):</span>
+                        <div class="bank-row" onclick="copyContact('5801753378', 'STK')">
+                            <span class="bank-lbl" data-i18n="bankNumLbl">STK (Click copy):</span>
                             <strong class="bank-val highlight">5801753378</strong>
                         </div>
                         <div class="bank-row">
-                            <span class="bank-lbl">Ngân hàng:</span>
+                            <span class="bank-lbl" data-i18n="bankNameLbl">Ngân hàng:</span>
                             <strong class="bank-val">BIDV - CN Bình Định</strong>
                         </div>
                     </div>
                 </div>
 
-                <!-- KHU VỰC ĐÁNH GIÁ (CHƯA CÓ ĐÁNH GIÁ MẪU - ĐỂ TRỐNG ĐỢI ĐÁNH GIÁ THỰC) -->
+                <!-- KHU VỰC ĐÁNH GIÁ VỚI 2 TAB (ĐÁNH GIÁ 5 SAO & GÓP Ý 1-4 SAO) -->
                 <div class="review-box">
                     <div class="review-title" data-i18n="reviewTitle">Mong bạn để lại đánh giá</div>
                     <div class="review-subtitle" data-i18n="reviewSubtitle">Mỗi 1 bài đánh giá đều giúp tôi tốt lên dù tốt hay xấu</div>
@@ -144,10 +147,14 @@
                         <button type="submit" class="submit-review-btn" data-i18n="reviewSubmitBtn">GỬI ĐÁNH GIÁ</button>
                     </form>
 
-                    <!-- Danh sách hiển thị đánh giá thực tế (Để trống ban đầu) -->
-                    <div class="reviews-list" id="reviewsList">
-                        <div class="empty-reviews-text" id="emptyReviewsText" data-i18n="emptyReviewMsg">Chưa có đánh giá nào. Hãy là người đầu tiên để lại góp ý nhé! ✨</div>
+                    <!-- Tabs chuyển đổi giữa 5 sao và Góp ý 1-4 sao -->
+                    <div class="review-tabs">
+                        <button class="review-tab-btn active" id="tab5StarBtn" onclick="switchReviewTab('5star')" data-i18n="tab5Star">Đánh giá 5 sao (5-10)</button>
+                        <button class="review-tab-btn" id="tabFeedbackBtn" onclick="switchReviewTab('feedback')" data-i18n="tabFeedback">Góp ý (1-4 sao)</button>
                     </div>
+
+                    <!-- Danh sách hiển thị đánh giá thực tế -->
+                    <div class="reviews-list" id="reviewsList"></div>
                 </div>
 
             </div>
@@ -185,7 +192,7 @@
                     </div>
                 </div>
 
-                <!-- 2. Kỹ Năng & Nghệ Thuật (Đồng bộ đổi 3 ngôn ngữ) -->
+                <!-- 2. Kỹ Năng & Nghệ Thuật -->
                 <div class="card">
                     <div class="card-header">
                         <i class="fas fa-palette"></i>
@@ -258,32 +265,60 @@
         </div>
     </div>
 
-    <!-- Chân Trang Độc Quyền (Tự Nhô Lên & Nháy Sáng Mờ Màu Vàng) -->
+    <!-- MODAL PHÓNG TO MÃ QR DONATE -->
+    <div class="qr-modal-overlay" id="qrModalOverlay" onclick="closeQrModal()">
+        <div class="qr-modal-content" onclick="event.stopPropagation()">
+            <button class="qr-modal-close" onclick="closeQrModal()">&times;</button>
+            <div class="qr-modal-header" data-i18n="qrModalTitle">Quét Mã QR Ủng Hộ</div>
+            <img src="images/qrdonate.png" onerror="this.src='images/DenManHinh.jpg'" alt="QR Donate Big" class="qr-modal-img">
+            <div class="qr-modal-info">
+                <strong>NGUYEN VIET NAM</strong><br>
+                STK: <span class="highlight" onclick="copyContact('5801753378', 'STK')">5801753378</span> (BIDV - CN Bình Định)
+            </div>
+        </div>
+    </div>
+
+    <!-- WIDGET NHẠC THU GỌN / TRƯỢT KÉO RA (SLIDE-OUT DRAWER) -->
+    <div class="music-slide-drawer" id="musicSlideDrawer">
+        <!-- Nút Tab Kéo Ra/Vào -->
+        <button class="music-drawer-toggle" id="drawerToggleBtn" onclick="toggleMusicDrawer()">
+            <i class="fas fa-chevron-left" id="drawerArrowIcon"></i>
+            <img src="konata-konata-happy.gif" onerror="this.src='images/konata-konata-happy.gif'" alt="Konata" class="konata-mini-avatar spinning">
+        </button>
+
+        <!-- Bảng điều khiển khi mở rộng -->
+        <div class="music-drawer-body">
+            <img src="konata-konata-happy.gif" onerror="this.src='images/konata-konata-happy.gif'" alt="Konata" class="konata-main-avatar spinning">
+            <div class="track-select-wrap">
+                <select class="track-select" id="trackSelect" onchange="changeTrack(this.value)">
+                    <option value="video/Imposter-Syndrome.mp4">🎵 Imposter Syndrome (Mặc định)</option>
+                    <option value="video/Blue.mp3">🎵 Heather x Eyes Blue (Lo-Fi)</option>
+                </select>
+            </div>
+            <div class="music-action-row">
+                <button class="play-toggle-btn" id="playBtn" onclick="toggleMusic()">
+                    <i class="fas fa-play" id="playIcon"></i>
+                </button>
+                <div class="volume-box">
+                    <i class="fas fa-volume-high volume-icon"></i>
+                    <input type="range" min="0" max="1" step="0.01" value="0.5" class="volume-slider" id="volumeSlider" oninput="changeVolume(this.value)">
+                </div>
+                <span class="volume-percent" id="volumePercent">50%</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chân Trang Độc Quyền (Nhô Lên Khi Cuộn Cuối & Nháy Sáng Vàng Mờ) -->
     <div class="exclusive-footer" id="exclusiveFooter">
         © 2025 by Nem. Created with GitHub.
     </div>
 
-    <!-- Toast Thông Báo Sao Chép Sang Trọng -->
+    <!-- Toast Thông Báo Sao Chép -->
     <div class="custom-toast" id="customToast">
         <i class="fas fa-check-circle" style="color: var(--gold-accent);"></i>
         <span id="toastMsg">Đã sao chép thành công</span>
     </div>
 
-    <!-- WIDGET NHẠC THEO CHIỀU DỌC (GỌN GÀNG, KONATA XOAY 360, ÂM LƯỢNG 50%) -->
-    <div class="music-vertical-pill" id="musicVerticalPill">
-        <img src="konata-konata-happy.gif" onerror="this.src='images/konata-konata-happy.gif'" alt="Konata" class="konata-avatar spinning">
-        <div class="music-track-title">Imposter Syndrome</div>
-        <button class="play-toggle-btn" id="playBtn" onclick="toggleMusic()">
-            <i class="fas fa-play" id="playIcon"></i>
-        </button>
-        <div class="volume-box">
-            <i class="fas fa-volume-high volume-icon"></i>
-            <input type="range" min="0" max="1" step="0.01" value="0.5" class="volume-slider" id="volumeSlider" oninput="changeVolume(this.value)">
-        </div>
-        <span class="volume-percent" id="volumePercent">50%</span>
-    </div>
-
-    <!-- File Javascript riêng biệt -->
     <script src="script.js"></script>
 </body>
 </html>
