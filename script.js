@@ -257,20 +257,28 @@ const quoteDatabase = [
     }
 ];
 
-// 2. DỮ LIỆU ĐA NGÔN NGỮ ĐỒNG BỘ TOÀN DIỆN (Ảnh 2 & 3 Fix)
+// 2. DỮ LIỆU ĐA NGÔN NGỮ ĐỒNG BỘ 100% (VI / EN / JA)
 const langData = {
     vi: {
         name: "NGUYỄN NEM",
         bio: "Chỉ là một chú mèo 🐾<br>Yêu thích đua ngựa Nhật Bản 🐎<br>Với nhạc hardstyle và Chill cùng vibe âm nhậc 🎧✨",
-        visitorsText: "Lượng người xem",
+        visitorsText: "Khách truy cập",
         quoteBoxTitle: "Mỗi ngày nhớ một câu",
         quoteBtn: '<i class="fas fa-rotate" style="margin-right: 4px;"></i> ĐỔI CÂU MỚI',
         donateTitle: "Góc Hảo Tâm & Đầu Tư",
         donateSubtitle: "Mọi sự ủng hộ và đồng hành của bạn đều là nguồn động lực quý báu giúp tôi hoàn thiện bản thân mỗi ngày.",
+        bankHolderLbl: "Chủ TK:",
+        bankNumLbl: "STK (Click copy):",
+        bankNameLbl: "Ngân hàng:",
+        qrModalTitle: "Quét Mã QR Ủng Hộ",
         reviewTitle: "Mong bạn để lại đánh giá",
         reviewSubtitle: "Mỗi 1 bài đánh giá đều giúp tôi tốt lên dù tốt hay xấu",
         reviewSubmitBtn: "GỬI ĐÁNH GIÁ",
+        tab5Star: "Đánh giá 5 sao (5-10)",
+        tabFeedback: "Góp ý (1-4 sao)",
         emptyReviewMsg: "Chưa có đánh giá nào. Hãy là người đầu tiên để lại góp ý nhé! ✨",
+        reviewerPlaceholder: "Tên hoặc biệt danh...",
+        commentPlaceholder: "Cảm nghĩ / đóng góp ý kiến của bạn...",
         socialHeader: "Kết Nối Mạng Xã Hội",
         skillsHeader: "Kỹ Năng & Hành Trình Nghệ Thuật",
         skillPsTitle: '<i class="fas fa-wand-magic-sparkles" style="color: var(--gold-accent); margin-right:6px;"></i>Photoshop & Illustrator',
@@ -287,15 +295,23 @@ const langData = {
     en: {
         name: "Nem Nguyen",
         bio: "Just A Cat 🐾<br>Love racing Horse in Japan 🐎<br>With hardstyle and chilling vibe music. 🎧✨",
-        visitorsText: "Unique Visitors",
+        visitorsText: "Visitors",
         quoteBoxTitle: "Daily Motivation",
         quoteBtn: '<i class="fas fa-rotate" style="margin-right: 4px;"></i> NEXT QUOTE',
         donateTitle: "Sponsorship & Support",
         donateSubtitle: "Any contribution, big or small, is an immense motivation helping me improve every day.",
+        bankHolderLbl: "Account Holder:",
+        bankNumLbl: "Account No. (Click copy):",
+        bankNameLbl: "Bank:",
+        qrModalTitle: "Scan QR To Support",
         reviewTitle: "Leave a Feedback",
         reviewSubtitle: "Every single feedback helps me grow better, whether good or bad.",
         reviewSubmitBtn: "SUBMIT FEEDBACK",
+        tab5Star: "5-Star Reviews (5-10)",
+        tabFeedback: "Feedback (1-4 Stars)",
         emptyReviewMsg: "No reviews yet. Be the first to leave a feedback! ✨",
+        reviewerPlaceholder: "Your name or nickname...",
+        commentPlaceholder: "Your thoughts / suggestions...",
         socialHeader: "Social Connections",
         skillsHeader: "Skills & Artistic Journey",
         skillPsTitle: '<i class="fas fa-wand-magic-sparkles" style="color: var(--gold-accent); margin-right:6px;"></i>Photoshop & Illustrator',
@@ -317,10 +333,18 @@ const langData = {
         quoteBtn: '<i class="fas fa-rotate" style="margin-right: 4px;"></i> 言葉を変える',
         donateTitle: "ご支援・スポンサー",
         donateSubtitle: "皆様からの温かいご支援は、日々成長し続けるための大きな励みとなります。",
+        bankHolderLbl: "口座名義:",
+        bankNumLbl: "口座番号 (クリックしてコピー):",
+        bankNameLbl: "銀行名:",
+        qrModalTitle: "応援QRコードをスキャン",
         reviewTitle: "フィードバックを残す",
         reviewSubtitle: "良い評価も改善点も、すべての声が私を成長させてくれます。",
         reviewSubmitBtn: "レビューを送信",
+        tab5Star: "5つ星評価 (5-10)",
+        tabFeedback: "ご意見 (1-4星)",
         emptyReviewMsg: "まだレビューはありません。最初の感想をお待ちしています！ ✨",
+        reviewerPlaceholder: "お名前またはニックネーム...",
+        commentPlaceholder: "ご感想やご提案をお聞かせください...",
         socialHeader: "ソーシャルリンク",
         skillsHeader: "スキル ＆ アートジャーニー",
         skillPsTitle: '<i class="fas fa-wand-magic-sparkles" style="color: var(--gold-accent); margin-right:6px;"></i>Photoshop & Illustrator',
@@ -347,6 +371,11 @@ function setLanguage(lang) {
     const data = langData[lang];
     renderFloatingName(data.name);
     document.getElementById('bioText').innerHTML = data.bio;
+    document.getElementById('viewCountLabel').textContent = data.visitorsText;
+
+    // Cập nhật placeholders
+    document.getElementById('reviewerName').placeholder = data.reviewerPlaceholder;
+    document.getElementById('reviewComment').placeholder = data.commentPlaceholder;
 
     document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
@@ -356,6 +385,7 @@ function setLanguage(lang) {
     });
 
     displayCurrentQuote();
+    loadReviews();
 }
 
 // Bouncy Floating Name
@@ -371,7 +401,7 @@ function renderFloatingName(nameStr) {
     });
 }
 
-// 3. TYPING EFFECT CHO DYNAMIC BADGE (Ảnh 3)
+// 3. TYPING EFFECT CHO DYNAMIC BADGE
 const badgeTitles = ["Cat Profile", "Cafe Profile", "Nem Profile", "N?ne Profile"];
 let badgeIndex = 0;
 let charIdx = 0;
@@ -421,7 +451,6 @@ function nextQuote() {
 const audio = document.getElementById('bgMusicAudio');
 const openingScreen = document.getElementById('openingScreen');
 const playIcon = document.getElementById('playIcon');
-const konataAvatar = document.querySelector('.konata-avatar');
 let isPlaying = false;
 
 function openProfile() {
@@ -438,7 +467,7 @@ function openProfile() {
     audio.play().then(() => {
         isPlaying = true;
         playIcon.className = 'fas fa-pause';
-        konataAvatar.classList.add('spinning');
+        toggleSpinning(true);
     }).catch(e => {
         console.log('Autoplay prevented:', e);
     });
@@ -448,13 +477,21 @@ function toggleMusic() {
     if (isPlaying) {
         audio.pause();
         playIcon.className = 'fas fa-play';
-        konataAvatar.classList.remove('spinning');
+        toggleSpinning(false);
     } else {
         audio.play();
         playIcon.className = 'fas fa-pause';
-        konataAvatar.classList.add('spinning');
+        toggleSpinning(true);
     }
     isPlaying = !isPlaying;
+}
+
+function toggleSpinning(spin) {
+    const avatars = document.querySelectorAll('.konata-main-avatar, .konata-mini-avatar');
+    avatars.forEach(av => {
+        if (spin) av.classList.add('spinning');
+        else av.classList.remove('spinning');
+    });
 }
 
 function changeVolume(val) {
@@ -462,24 +499,63 @@ function changeVolume(val) {
     document.getElementById('volumePercent').textContent = `${Math.round(val * 100)}%`;
 }
 
-// 6. THUẬT TOÁN ĐẾM LƯỢNG NGƯỜI ĐÃ XEM (UNIQUE VISITORS) - Ảnh 6 Fix
+// Chuyển bài hát trực tiếp không cần nút xác nhận
+function changeTrack(src) {
+    const currentVol = audio.volume;
+    audio.src = src;
+    audio.volume = currentVol;
+    audio.currentTime = 0;
+    audio.play().then(() => {
+        isPlaying = true;
+        playIcon.className = 'fas fa-pause';
+        toggleSpinning(true);
+        showToast("🎵 Đang phát: " + (src.includes("Imposter") ? "Imposter Syndrome" : "Heather x Eyes Blue"));
+    }).catch(e => console.log(e));
+}
+
+// Trượt kéo Drawer Nhạc ra / vào
+let isDrawerOpen = false;
+function toggleMusicDrawer() {
+    const drawer = document.getElementById('musicSlideDrawer');
+    const arrow = document.getElementById('drawerArrowIcon');
+    isDrawerOpen = !isDrawerOpen;
+    if (isDrawerOpen) {
+        drawer.classList.add('open');
+        arrow.className = 'fas fa-chevron-right';
+    } else {
+        drawer.classList.remove('open');
+        arrow.className = 'fas fa-chevron-left';
+    }
+}
+
+// 6. THUẬT TOÁN ĐẾM LƯỢNG NGƯỜI ĐÃ XEM (UNIQUE VISITORS)
 function initUniqueVisitorCounter() {
-    const visitorKey = 'nem_unique_user_token';
-    const countKey = 'nem_unique_visitors_total';
+    const visitorKey = 'nem_unique_user_token_v4';
+    const countKey = 'nem_unique_visitors_total_v4';
 
     if (!localStorage.getItem(visitorKey)) {
-        localStorage.setItem(visitorKey, 'v_' + Date.now());
-        let currentTotal = parseInt(localStorage.getItem(countKey) || '146');
+        localStorage.setItem(visitorKey, 'visitor_' + Date.now());
+        let currentTotal = parseInt(localStorage.getItem(countKey) || '147');
         currentTotal++;
         localStorage.setItem(countKey, currentTotal);
     }
 
-    const finalCount = localStorage.getItem(countKey) || '146';
+    const finalCount = localStorage.getItem(countKey) || '147';
     document.getElementById('viewCount').textContent = finalCount;
 }
 
-// 7. REVIEW SYSTEM (ĐỂ TRỐNG BAN ĐẦU - ĐỢI ĐÁNH GIÁ THỰC TẾ) - Ảnh 4 Fix
+// 7. QR DONATE MODAL PHÓNG TO
+function openQrModal() {
+    document.getElementById('qrModalOverlay').classList.add('show');
+}
+function closeQrModal() {
+    document.getElementById('qrModalOverlay').classList.remove('show');
+}
+
+// 8. REVIEW SYSTEM (2 TABS: 5 SAO & GÓP Ý 1-4 SAO)
 let currentRating = 5;
+let currentTab = '5star';
+
 const toxicBlacklist = [
     "đĩ", "cave", "súc sinh", "chó đẻ", "mẹ mày", "cha mày", "ông cố nội", 
     "bố mày", "con cặc", "lồn", "óc chó", "phò", "bắc kỳ", "nam kỳ", "mọi rợ", 
@@ -490,27 +566,37 @@ function setRating(stars) {
     currentRating = stars;
     const starIcons = document.querySelectorAll('#ratingStars i');
     starIcons.forEach((star, index) => {
-        if (index < stars) {
-            star.classList.add('active');
-        } else {
-            star.classList.remove('active');
-        }
+        if (index < stars) star.classList.add('active');
+        else star.classList.remove('active');
     });
 }
 
-function loadReviews() {
-    let stored = JSON.parse(localStorage.getItem('nem_real_reviews_db')) || [];
-    stored.sort((a, b) => b.rating - a.rating); // 5 sao xếp trên đầu
+function switchReviewTab(tab) {
+    currentTab = tab;
+    document.getElementById('tab5StarBtn').classList.toggle('active', tab === '5star');
+    document.getElementById('tabFeedbackBtn').classList.toggle('active', tab === 'feedback');
+    loadReviews();
+}
 
+function loadReviews() {
+    let stored = JSON.parse(localStorage.getItem('nem_real_reviews_db_v2')) || [];
     const listEl = document.getElementById('reviewsList');
     listEl.innerHTML = '';
 
-    if (stored.length === 0) {
+    // Lọc theo Tab
+    let filtered = stored.filter(r => currentTab === '5star' ? r.rating === 5 : r.rating < 5);
+
+    if (currentTab === '5star' && filtered.length > 10) {
+        // Giới hạn 5-10 đánh giá 5 sao ngẫu nhiên
+        filtered = filtered.sort(() => 0.5 - Math.random()).slice(0, 10);
+    }
+
+    if (filtered.length === 0) {
         listEl.innerHTML = `<div class="empty-reviews-text">${langData[currentLang].emptyReviewMsg}</div>`;
         return;
     }
 
-    stored.forEach(r => {
+    filtered.forEach(r => {
         const item = document.createElement('div');
         item.className = 'review-item';
         item.innerHTML = `
@@ -539,13 +625,19 @@ function submitReview(e) {
         return;
     }
 
-    let stored = JSON.parse(localStorage.getItem('nem_real_reviews_db')) || [];
+    let stored = JSON.parse(localStorage.getItem('nem_real_reviews_db_v2')) || [];
     stored.push({ name, rating: currentRating, comment });
-    localStorage.setItem('nem_real_reviews_db', JSON.stringify(stored));
+    localStorage.setItem('nem_real_reviews_db_v2', JSON.stringify(stored));
 
     document.getElementById('reviewerName').value = '';
     document.getElementById('reviewComment').value = '';
     setRating(5);
+    
+    // Tự động chuyển tab phù hợp để xem review vừa tạo
+    currentTab = currentRating === 5 ? '5star' : 'feedback';
+    document.getElementById('tab5StarBtn').classList.toggle('active', currentTab === '5star');
+    document.getElementById('tabFeedbackBtn').classList.toggle('active', currentTab === 'feedback');
+    
     loadReviews();
     showToast("✨ Cảm ơn bạn rất nhiều vì đã để lại đánh giá!");
 }
@@ -554,7 +646,7 @@ function escapeHtml(text) {
     return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
-// 8. TOAST THÔNG BÁO COPY SANG TRỌNG
+// 9. TOAST THÔNG BÁO COPY SANG TRỌNG
 function showToast(msg) {
     const toast = document.getElementById('customToast');
     const toastMsg = document.getElementById('toastMsg');
@@ -570,21 +662,52 @@ function copyContact(text, type) {
     showToast(`Đã sao chép ${type} (${text}) vào bộ nhớ tạm!`);
 }
 
-// 9. HIỆU ỨNG CHÂN TRANG ĐỘC QUYỀN (HIỆN LÊN KHI CUỘN ĐẾN ĐÁY) - Ảnh 4 Fix
+// 10. TỐI ƯU CON TRỎ CHUỘT (60FPS, TỰ ẨN TRÊN SPOTIFY & MOBILE TRÁNH LAG)
+const cursor = document.getElementById('customCursor');
+let mouseX = window.innerWidth / 2;
+let mouseY = window.innerHeight / 2;
+let curX = mouseX;
+let curY = mouseY;
+
+window.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+}, { passive: true });
+
+function animateCursor() {
+    curX += (mouseX - curX) * 0.45;
+    curY += (mouseY - curY) * 0.45;
+    cursor.style.transform = `translate3d(${curX}px, ${curY}px, 0) translate(-50%, -50%)`;
+    requestAnimationFrame(animateCursor);
+}
+if (window.innerWidth > 820) {
+    cursor.style.display = 'block';
+    animateCursor();
+}
+
+document.addEventListener('mouseover', (e) => {
+    if (e.target.closest('a, button, input, textarea, .contact-item, .avatar-wrap, .rating-stars i, .opening-screen, .qr-wrap')) {
+        cursor.classList.add('active');
+    } else {
+        cursor.classList.remove('active');
+    }
+});
+
+// 11. HIỆU ỨNG CHÂN TRANG ĐỘC QUYỀN (HIỆN KHI CUỘN ĐÁY)
 const exclusiveFooter = document.getElementById('exclusiveFooter');
 window.addEventListener('scroll', () => {
     const scrollPosition = window.scrollY || document.documentElement.scrollTop;
     const windowHeight = window.innerHeight;
     const bodyHeight = document.body.offsetHeight;
 
-    if (scrollPosition + windowHeight >= bodyHeight - 30) {
+    if (scrollPosition + windowHeight >= bodyHeight - 40) {
         exclusiveFooter.classList.add('show-footer');
     } else {
         exclusiveFooter.classList.remove('show-footer');
     }
 }, { passive: true });
 
-// 10. KHỞI TẠO HỆ THỐNG
+// 12. KHỞI TẠO BAN ĐẦU
 document.addEventListener('DOMContentLoaded', () => {
     renderFloatingName(langData.vi.name);
     document.getElementById('bioText').innerHTML = langData.vi.bio;
