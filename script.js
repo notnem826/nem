@@ -271,12 +271,14 @@ const langData = {
         bankNumLbl: "STK (Click copy):",
         bankNameLbl: "Ngân hàng:",
         qrModalTitle: "Quét Mã QR Ủng Hộ",
+        qrZoomHint: "Nhấp để phóng to",
         reviewTitle: "Mong bạn để lại đánh giá",
         reviewSubtitle: "Mỗi 1 bài đánh giá đều giúp tôi tốt lên dù tốt hay xấu",
         reviewSubmitBtn: "GỬI ĐÁNH GIÁ",
-        tab5Star: "Đánh giá 5 sao (5-10)",
-        tabFeedback: "Góp ý (1-4 sao)",
-        emptyReviewMsg: "Chưa có đánh giá nào. Hãy là người đầu tiên để lại góp ý nhé! ✨",
+        tab5Star: "5 Sao (5-10)",
+        tabFeedback: "Góp ý (1-4 Sao)",
+        emptyReview5Star: "Chưa có đánh giá 5 sao nào.",
+        emptyFeedback: "Chưa có góp ý nào từ 1-4 sao.",
         reviewerPlaceholder: "Tên hoặc biệt danh...",
         commentPlaceholder: "Cảm nghĩ / đóng góp ý kiến của bạn...",
         socialHeader: "Kết Nối Mạng Xã Hội",
@@ -290,7 +292,8 @@ const langData = {
         skillArtTitle: '<i class="fas fa-heart" style="color: var(--gold-accent); margin-right:6px;"></i>Hội Hoạ & Thẩm Mỹ Thị Giác',
         skillArtLvl: "Không Ngừng Cố Gắng",
         skillArtDesc: "Cảm quan hội họa & thẩm mỹ thị giác cao, chỉnh sửa ảnh hợp nhãn người xem; tuy chưa vẽ giỏi nhưng luôn học vẽ mỗi ngày như người mới bắt đầu!",
-        playlistHeader: "Danh Sách Nhạc Yêu Thích"
+        playlistHeader: "Danh Sách Nhạc Yêu Thích",
+        footerText: "© 2025 by Nem. Created with GitHub."
     },
     en: {
         name: "Nem Nguyen",
@@ -304,12 +307,14 @@ const langData = {
         bankNumLbl: "Account No. (Click copy):",
         bankNameLbl: "Bank:",
         qrModalTitle: "Scan QR To Support",
+        qrZoomHint: "Click to zoom in",
         reviewTitle: "Leave a Feedback",
         reviewSubtitle: "Every single feedback helps me grow better, whether good or bad.",
         reviewSubmitBtn: "SUBMIT FEEDBACK",
-        tab5Star: "5-Star Reviews (5-10)",
+        tab5Star: "5-Star (5-10)",
         tabFeedback: "Feedback (1-4 Stars)",
-        emptyReviewMsg: "No reviews yet. Be the first to leave a feedback! ✨",
+        emptyReview5Star: "No 5-star reviews yet.",
+        emptyFeedback: "No feedback (1-4 stars) yet.",
         reviewerPlaceholder: "Your name or nickname...",
         commentPlaceholder: "Your thoughts / suggestions...",
         socialHeader: "Social Connections",
@@ -323,7 +328,8 @@ const langData = {
         skillArtTitle: '<i class="fas fa-heart" style="color: var(--gold-accent); margin-right:6px;"></i>Artistic Sense & Drawing Journey',
         skillArtLvl: "Never Stop Learning",
         skillArtDesc: "Strong artistic sense and visual curation. While learning sketching from scratch, constantly pushing limits without giving up!",
-        playlistHeader: "Favorite Playlists"
+        playlistHeader: "Favorite Playlists",
+        footerText: "© 2025 by Nem. Created with GitHub."
     },
     ja: {
         name: "ネムチュア",
@@ -337,12 +343,14 @@ const langData = {
         bankNumLbl: "口座番号 (クリックしてコピー):",
         bankNameLbl: "銀行名:",
         qrModalTitle: "応援QRコードをスキャン",
+        qrZoomHint: "拡大表示",
         reviewTitle: "フィードバックを残す",
         reviewSubtitle: "良い評価も改善点も、すべての声が私を成長させてくれます。",
         reviewSubmitBtn: "レビューを送信",
         tab5Star: "5つ星評価 (5-10)",
         tabFeedback: "ご意見 (1-4星)",
-        emptyReviewMsg: "まだレビューはありません。最初の感想をお待ちしています！ ✨",
+        emptyReview5Star: "まだ5つ星評価はありません。",
+        emptyFeedback: "まだご意見はありません。",
         reviewerPlaceholder: "お名前またはニックネーム...",
         commentPlaceholder: "ご感想やご提案をお聞かせください...",
         socialHeader: "ソーシャルリンク",
@@ -356,7 +364,8 @@ const langData = {
         skillArtTitle: '<i class="fas fa-heart" style="color: var(--gold-accent); margin-right:6px;"></i>美的センス & アートジャーニー',
         skillArtLvl: "挑戦し続ける心",
         skillArtDesc: "高い美的センスを持ち、見る人に心地よい画像加工が得意。絵の初心者として毎日諦めずに練習を続けています！",
-        playlistHeader: "お気に入りのプレイリスト"
+        playlistHeader: "お気に入りのプレイリスト",
+        footerText: "© 2025 by Nem. GitHubで作成。"
     }
 };
 
@@ -373,7 +382,7 @@ function setLanguage(lang) {
     document.getElementById('bioText').innerHTML = data.bio;
     document.getElementById('viewCountLabel').textContent = data.visitorsText;
 
-    // Cập nhật placeholders
+    // Cập nhật Placeholders
     document.getElementById('reviewerName').placeholder = data.reviewerPlaceholder;
     document.getElementById('reviewComment').placeholder = data.commentPlaceholder;
 
@@ -499,7 +508,7 @@ function changeVolume(val) {
     document.getElementById('volumePercent').textContent = `${Math.round(val * 100)}%`;
 }
 
-// Chuyển bài hát trực tiếp không cần nút xác nhận
+// Chuyển bài hát ngay lập tức không cần nút xác nhận
 function changeTrack(src) {
     const currentVol = audio.volume;
     audio.src = src;
@@ -530,8 +539,8 @@ function toggleMusicDrawer() {
 
 // 6. THUẬT TOÁN ĐẾM LƯỢNG NGƯỜI ĐÃ XEM (UNIQUE VISITORS)
 function initUniqueVisitorCounter() {
-    const visitorKey = 'nem_unique_user_token_v4';
-    const countKey = 'nem_unique_visitors_total_v4';
+    const visitorKey = 'nem_unique_user_token_v5';
+    const countKey = 'nem_unique_visitors_total_v5';
 
     if (!localStorage.getItem(visitorKey)) {
         localStorage.setItem(visitorKey, 'visitor_' + Date.now());
@@ -552,7 +561,7 @@ function closeQrModal() {
     document.getElementById('qrModalOverlay').classList.remove('show');
 }
 
-// 8. REVIEW SYSTEM (2 TABS: 5 SAO & GÓP Ý 1-4 SAO)
+// 8. REVIEW SYSTEM (2 TAB: 5 SAO & GÓP Ý 1-4 SAO)
 let currentRating = 5;
 let currentTab = '5star';
 
@@ -566,8 +575,11 @@ function setRating(stars) {
     currentRating = stars;
     const starIcons = document.querySelectorAll('#ratingStars i');
     starIcons.forEach((star, index) => {
-        if (index < stars) star.classList.add('active');
-        else star.classList.remove('active');
+        if (index < stars) {
+            star.classList.add('active');
+        } else {
+            star.classList.remove('active');
+        }
     });
 }
 
@@ -579,21 +591,22 @@ function switchReviewTab(tab) {
 }
 
 function loadReviews() {
-    let stored = JSON.parse(localStorage.getItem('nem_real_reviews_db_v2')) || [];
+    let stored = JSON.parse(localStorage.getItem('nem_reviews_store_v5')) || [];
     const listEl = document.getElementById('reviewsList');
     listEl.innerHTML = '';
 
-    // Lọc theo Tab
+    // Lọc theo Tab 5 sao hoặc góp ý (1-4 sao)
     let filtered = stored.filter(r => currentTab === '5star' ? r.rating === 5 : r.rating < 5);
 
-    if (currentTab === '5star' && filtered.length > 10) {
-        // Giới hạn 5-10 đánh giá 5 sao ngẫu nhiên
-        filtered = filtered.sort(() => 0.5 - Math.random()).slice(0, 10);
+    if (filtered.length === 0) {
+        const emptyMsg = currentTab === '5star' ? langData[currentLang].emptyReview5Star : langData[currentLang].emptyFeedback;
+        listEl.innerHTML = `<div class="empty-reviews-text">${emptyMsg}</div>`;
+        return;
     }
 
-    if (filtered.length === 0) {
-        listEl.innerHTML = `<div class="empty-reviews-text">${langData[currentLang].emptyReviewMsg}</div>`;
-        return;
+    // Nếu là tab 5 sao và có hơn 10 bài, lấy ngẫu nhiên 5-10 bài
+    if (currentTab === '5star' && filtered.length > 10) {
+        filtered = filtered.sort(() => 0.5 - Math.random()).slice(0, 10);
     }
 
     filtered.forEach(r => {
@@ -625,15 +638,14 @@ function submitReview(e) {
         return;
     }
 
-    let stored = JSON.parse(localStorage.getItem('nem_real_reviews_db_v2')) || [];
+    let stored = JSON.parse(localStorage.getItem('nem_reviews_store_v5')) || [];
     stored.push({ name, rating: currentRating, comment });
-    localStorage.setItem('nem_real_reviews_db_v2', JSON.stringify(stored));
+    localStorage.setItem('nem_reviews_store_v5', JSON.stringify(stored));
 
     document.getElementById('reviewerName').value = '';
     document.getElementById('reviewComment').value = '';
     setRating(5);
     
-    // Tự động chuyển tab phù hợp để xem review vừa tạo
     currentTab = currentRating === 5 ? '5star' : 'feedback';
     document.getElementById('tab5StarBtn').classList.toggle('active', currentTab === '5star');
     document.getElementById('tabFeedbackBtn').classList.toggle('active', currentTab === 'feedback');
@@ -662,7 +674,7 @@ function copyContact(text, type) {
     showToast(`Đã sao chép ${type} (${text}) vào bộ nhớ tạm!`);
 }
 
-// 10. TỐI ƯU CON TRỎ CHUỘT (60FPS, TỰ ẨN TRÊN SPOTIFY & MOBILE TRÁNH LAG)
+// 10. TỐI ƯU CON TRỎ CHUỘT (60FPS KHÔNG LAG & HOẠT ĐỘNG HOÀN HẢO)
 const cursor = document.getElementById('customCursor');
 let mouseX = window.innerWidth / 2;
 let mouseY = window.innerHeight / 2;
@@ -680,8 +692,8 @@ function animateCursor() {
     cursor.style.transform = `translate3d(${curX}px, ${curY}px, 0) translate(-50%, -50%)`;
     requestAnimationFrame(animateCursor);
 }
+
 if (window.innerWidth > 820) {
-    cursor.style.display = 'block';
     animateCursor();
 }
 
@@ -707,7 +719,7 @@ window.addEventListener('scroll', () => {
     }
 }, { passive: true });
 
-// 12. KHỞI TẠO BAN ĐẦU
+// 12. KHỞI TẠO HỆ THỐNG
 document.addEventListener('DOMContentLoaded', () => {
     renderFloatingName(langData.vi.name);
     document.getElementById('bioText').innerHTML = langData.vi.bio;
