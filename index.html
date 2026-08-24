@@ -15,7 +15,7 @@
     <!-- Hiệu ứng Hào Quang Aura Trắng Màn Hình -->
     <div class="aura-flash-overlay" id="auraFlash"></div>
 
-    <!-- Video Nền Mờ Ảo -->
+    <!-- Video Nền Mờ Ảo CHUẨN BACKGROUND PROFILE -->
     <video class="video-background" id="bgVideo" autoplay loop muted playsinline>
         <source src="video/videoplayback.webm" type="video/webm">
     </video>
@@ -41,8 +41,8 @@
 
     <!-- WIDGET CPU & RAM -->
     <div class="system-monitor-box">
-        <div class="sys-item"><i class="fas fa-microchip"></i> CPU: <span id="cpuVal">15%</span></div>
-        <div class="sys-item"><i class="fas fa-memory"></i> RAM: <span id="ramVal">42%</span></div>
+        <div class="sys-item"><i class="fas fa-microchip"></i> CPU: <span id="cpuVal">12%</span></div>
+        <div class="sys-item"><i class="fas fa-memory"></i> RAM: <span id="ramVal">38%</span></div>
     </div>
 
     <!-- TOP NAV BAR -->
@@ -184,7 +184,7 @@
             </div>
 
             <div class="card spotify-card-container">
-                <div class="card-header">
+                <div class="card-header playlist-card-header">
                     <i class="fas fa-music"></i>
                     <span data-i18n="playlistHeader">Danh Sách Nhạc Yêu Thích</span>
                 </div>
@@ -232,7 +232,7 @@
 
     </div>
 
-    <!-- MODAL PHÓNG TO QR -->
+    <!-- MODAL PHÓNG TO QR TO GẦN HẾT MÀN HÌNH -->
     <div class="qr-modal-overlay" id="qrModalOverlay" onclick="closeQrModal()">
         <div class="qr-modal-content" onclick="event.stopPropagation()">
             <button class="qr-modal-close" onclick="closeQrModal()">&times;</button>
@@ -245,15 +245,16 @@
         </div>
     </div>
 
-    <!-- DRAWER NHẠC TRƯỢT HÌNH VUÔNG BO GÓC -->
+    <!-- DRAWER NHẠC TRƯỢT HÌNH VUÔNG BO GÓC SANG TRỌNG -->
     <div class="music-slide-drawer" id="musicSlideDrawer">
         <button class="music-drawer-toggle" id="drawerToggleBtn" onclick="toggleMusicDrawer()">
             <i class="fas fa-chevron-left" id="drawerArrowIcon"></i>
         </button>
 
         <div class="music-drawer-body">
+            <!-- KHUNG VUÔNG BO GÓC BÊN NGOÀI, KHUNG TRÒN XOAY BÊN TRONG -->
             <div class="avatar-spin-frame">
-                <img id="musicRandomAvatar" src="images/CafededauTachyon.gif" onerror="this.src='images/konata-konata-happy.gif'" alt="Random Anime GIF" class="konata-main-avatar continuous-spinning">
+                <img id="musicRandomAvatar" src="images/CafededauTachyon.gif" onerror="this.src='images/anime-blob.gif'" alt="Random Anime GIF" class="konata-main-avatar continuous-spinning">
             </div>
 
             <div class="track-select-wrap">
@@ -270,18 +271,16 @@
                         <option value="video/Helltaker - 헬테이커 브금 OST [Mittsies - Vitality].mp4">🎵 Helltaker</option>
                     </optgroup>
 
-                    <optgroup label="⚡ Nhạc Hardstyle (Mở Thủ Công)">
-                        <option value="video/MEANT-TO-BE-HARDSTYLE.mp4">🔥 MEANT TO BE (Hardstyle)</option>
-                        <option value="video/Outside-Hardstyle.mp4">🔥 Outside (Hardstyle)</option>
-                        <option value="video/Safe-and-Sound-Hardstyle.mp4">🔥 Safe and Sound (Hardstyle)</option>
-                        <option value="video/PART-OF-ME-HARDSTYLE.mp4">🔥 PART OF ME (Hardstyle)</option>
-                        <option value="video/Misery-Pupsies-Hardstyle.mp4">🔥 Misery Pupsies (Hardstyle)</option>
-                        <option value="video/HOT-GIRL-BUMMER-X-HARDTEKK-Super-Slowed.mp4">🔥 HOT GIRL BUMMER (Hardtekk Slowed)</option>
-                        <option value="video/BEAUTY-AND-THE-BEAT-HARDTEKK-SLOWED.mp4">🔥 BEAUTY AND THE BEAT (Hardtekk Slowed)</option>
-                        <option value="video/DARK-HORSE-HARDSTYLE-ULTRA-SLOWED.mp4">🔥 DARK HORSE (Hardstyle Ultra Slowed)</option>
-                        <option value="video/Dark Horse (Hoodtrap Mylancore).mp4">🔥 Dark Horse (Hoodtrap Mylancore)</option>
-                        <option value="video/Cool-for-the-Summer-Hardstyle-Sped-Up.mp4">🔥 Cool for the Summer (Hardstyle Sped Up)</option>
-                        <option value="video/Montagem-Umbrella.mp4">🔥 Montagem Umbrella</option>
+                    <optgroup label="⚡ Nhạc Hardstyle">
+                        <option value="video/Cool-for-the-Summer-Hardstyle-Sped-Up.mp4">🔥 Cool for the Summer</option>
+                        <option value="video/DARK-HORSE-HARDSTYLE-ULTRA-SLOWED.mp4">🔥 DARK HORSE</option>
+                        <option value="video/Dark Horse (Hoodtrap Mylancore).mp4">🔥 Dark Horse Hoodtrap</option>
+                        <option value="video/HOT-GIRL-BUMMER-X-HARDTEKK-Super-Slowed.mp4">🔥 HOT GIRL BUMMER</option>
+                        <option value="video/MEANT-TO-BE-HARDSTYLE.mp4">🔥 MEANT TO BE</option>
+                        <option value="video/Misery-Pupsies-Hardstyle.mp4">🔥 Misery Pupsies</option>
+                        <option value="video/Outside-Hardstyle.mp4">🔥 Outside</option>
+                        <option value="video/PART-OF-ME-HARDSTYLE.mp4">🔥 PART OF ME</option>
+                        <option value="video/Safe-and-Sound-Hardstyle.mp4">🔥 Safe and Sound</option>
                     </optgroup>
                 </select>
             </div>
