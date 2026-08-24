@@ -514,12 +514,17 @@ function changeTrack(src) {
     audio.src = src;
     audio.volume = currentVol;
     audio.currentTime = 0;
+
+    // Lấy tên bài hát từ menu chọn
+    const selectEl = document.getElementById('trackSelect');
+    const selectedText = selectEl.options[selectEl.selectedIndex].text.replace('🎵 ', '');
+
     audio.play().then(() => {
         isPlaying = true;
         playIcon.className = 'fas fa-pause';
         toggleSpinning(true);
-        showToast("🎵 Đang phát: " + (src.includes("Imposter") ? "Imposter Syndrome" : "Heather x Eyes Blue"));
-    }).catch(e => console.log(e));
+        showToast("🎵 Đang phát: " + selectedText);
+    }).catch(e => console.log('Lỗi phát nhạc:', e));
 }
 
 // Trượt kéo Drawer Nhạc ra / vào
