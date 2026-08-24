@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="opening-active">
 
     <!-- Video Nền -->
     <video class="video-background" id="bgVideo" autoplay loop muted playsinline>
@@ -24,31 +24,32 @@
         <source src="video/Blue.mp3" type="audio/mp3">
     </audio>
 
-    <!-- Con Trỏ Chuột Tối Ưu GPU -->
-    <div class="custom-cursor" id="customCursor"></div>
-
-    <!-- MÀN HÌNH MỞ CỬA CLICK TO OPEN: HIỆU ỨNG APERTURE WIPE & CHIẾU SÁNG TOÀN MÀN HÌNH -->
+    <!-- MÀN HÌNH MỞ CỬA CLICK TO OPEN (KHÓA SCROLL HOÀN TOÀN KHI CHƯA MỞ) -->
     <div class="opening-screen" id="openingScreen" onclick="openProfile()">
         <div class="door-left"></div>
         <div class="door-right"></div>
-        <div class="screen-flash" id="screenFlash"></div>
         <div class="opening-content">
+            <div class="cyber-circle"></div>
             <div class="click-to-open">
-                <i class="fas fa-sparkles" style="margin-right: 8px;"></i>CLICK TO OPEN
+                <i class="fas fa-bolt" style="color: var(--gold-accent); margin-right: 8px;"></i>CLICK TO OPEN
             </div>
         </div>
     </div>
 
-    <!-- THANH HEADER TOP BAR (KHÔNG BỊ TRÀN CHỮ / ĐÈ NHAU TRÊN MOBILE) -->
+    <!-- WIDGET ĐO HIỆU NĂNG CPU & RAM (GÓC DƯỚI BÊN TRÁI) -->
+    <div class="system-monitor-box">
+        <div class="sys-item"><i class="fas fa-microchip"></i> CPU: <span id="cpuVal">--%</span></div>
+        <div class="sys-item"><i class="fas fa-memory"></i> RAM: <span id="ramVal">--%</span></div>
+    </div>
+
+    <!-- THANH HEADER TOP BAR -->
     <div class="top-nav-bar">
-        <!-- Khách Truy Cập (Unique Visitors) -->
         <div class="global-view-counter">
             <i class="fas fa-user-check" style="color: var(--gold-accent);"></i> 
             <span id="viewCountLabel">Khách truy cập</span>: 
             <strong id="viewCount" style="color: var(--gold-accent);">147</strong>
         </div>
 
-        <!-- Nút Đổi Ngôn Ngữ -->
         <div class="lang-switch-box">
             <button class="lang-btn active" onclick="setLanguage('vi')">VI 🇻🇳</button>
             <button class="lang-btn" onclick="setLanguage('en')">EN 🇬🇧</button>
@@ -56,14 +57,12 @@
         </div>
     </div>
 
-    <!-- KHUNG PROFILE CHÍNH (TONE ĐEN - TRẮNG - VÀNG GOLD - XÁM) -->
+    <!-- KHUNG PROFILE CHÍNH -->
     <div class="container">
         <div class="profile-grid">
             
-            <!-- CỘT TRÁI: AVATAR, BIO, QUOTES, DONATE, REVIEW -->
+            <!-- CỘT TRÁI -->
             <div class="profile-left">
-                
-                <!-- Dynamic Badge Title (Cat Profile / Cafe Profile / Nem Profile / N?ne Profile) -->
                 <div class="dynamic-badge" id="dynamicBadge">Cat Profile</div>
 
                 <div class="avatar-wrap">
@@ -73,13 +72,10 @@
                     </div>
                 </div>
 
-                <!-- Tên Bồng Bềnh Từng Ký Tự -->
                 <div class="username-container" id="usernameContainer"></div>
-
-                <!-- Tiểu Sử Theo Ngôn Ngữ -->
                 <div class="bio-text" id="bioText"></div>
 
-                <!-- Hộp Liên Hệ (Đầy Đủ, Vừa Vặn Không Bị Cắt Chữ) -->
+                <!-- Hộp Liên Hệ (Đã ép 1 hàng ngang chuẩn mobile) -->
                 <div class="contact-box-wrap">
                     <div class="contact-item" onclick="copyContact('0898165655', 'Phone')">
                         <span class="lbl"><i class="fas fa-phone-alt"></i> Phone</span>
@@ -91,7 +87,7 @@
                     </div>
                 </div>
 
-                <!-- Hộp Mỗi Ngày Nhớ Một Câu (51 Câu Nói Có Tác Giả) -->
+                <!-- Hộp Mỗi Ngày Nhớ Một Câu -->
                 <div class="motivation-box">
                     <div class="quote-title" data-i18n="quoteBoxTitle">Mỗi ngày nhớ một câu</div>
                     <div class="quote-content" id="quoteDisplay">
@@ -102,7 +98,7 @@
                     </button>
                 </div>
 
-                <!-- GÓC HẢO TÂM & ĐẦU TƯ / DONATE (Kèm Popup Phóng To Mã QR) -->
+                <!-- GÓC HẢO TÂM & ĐẦU TƯ / DONATE -->
                 <div class="donate-card">
                     <div class="donate-header">
                         <i class="fas fa-hand-holding-heart"></i>
@@ -131,7 +127,7 @@
                     </div>
                 </div>
 
-                <!-- KHU VỰC ĐÁNH GIÁ (2 TAB: 5 SAO & GÓP Ý 1-4 SAO) -->
+                <!-- KHU VỰC ĐÁNH GIÁ -->
                 <div class="review-box">
                     <div class="review-title" data-i18n="reviewTitle">Mong bạn để lại đánh giá</div>
                     <div class="review-subtitle" data-i18n="reviewSubtitle">Mỗi 1 bài đánh giá đều giúp tôi tốt lên dù tốt hay xấu</div>
@@ -149,67 +145,48 @@
                         <button type="submit" class="submit-review-btn" data-i18n="reviewSubmitBtn">GỬI ĐÁNH GIÁ</button>
                     </form>
 
-                    <!-- Tabs Lọc Đánh Giá 5 Sao / Góp Ý -->
+                    <!-- Tabs Đánh Giá (Chỉ giữ chữ Đánh giá & Góp ý) -->
                     <div class="review-tabs">
-                        <button class="review-tab-btn active" id="tab5StarBtn" onclick="switchReviewTab('5star')" data-i18n="tab5Star">5 Sao (5-10)</button>
-                        <button class="review-tab-btn" id="tabFeedbackBtn" onclick="switchReviewTab('feedback')" data-i18n="tabFeedback">Góp ý (1-4 Sao)</button>
+                        <button class="review-tab-btn active" id="tab5StarBtn" onclick="switchReviewTab('5star')" data-i18n="tab5Star">Đánh giá</button>
+                        <button class="review-tab-btn" id="tabFeedbackBtn" onclick="switchReviewTab('feedback')" data-i18n="tabFeedback">Góp ý</button>
                     </div>
 
-                    <!-- Danh Sách Đánh Giá Đã Lọc -->
                     <div class="reviews-list" id="reviewsList"></div>
                 </div>
 
             </div>
 
-            <!-- CỘT PHẢI: SOCIAL & SKILLS & 6 SPOTIFY EMBEDS -->
+            <!-- CỘT PHẢI -->
             <div class="profile-right">
 
-                <!-- 1. Kết Nối Mạng Xã Hội -->
+                <!-- Socials -->
                 <div class="card">
                     <div class="card-header">
                         <i class="fas fa-share-nodes"></i>
                         <span data-i18n="socialHeader">Kết Nối Mạng Xã Hội</span>
                     </div>
                     <div class="social-bar">
-                        <a href="https://discord.gg/k3ZN3Mj6tN" target="_blank" class="social-btn dc">
-                            <i class="fab fa-discord"></i>
-                            <span>Discord</span>
-                        </a>
-                        <a href="https://www.facebook.com/profile.php?id=61591543367306" target="_blank" class="social-btn fb">
-                            <i class="fab fa-facebook-f"></i>
-                            <span>Facebook</span>
-                        </a>
-                        <a href="https://www.youtube.com/@nemnuong" target="_blank" class="social-btn yt">
-                            <i class="fab fa-youtube"></i>
-                            <span>YouTube</span>
-                        </a>
-                        <a href="https://www.tiktok.com/@nguyennem2006?is_from_webapp=1&sender_device=pc" target="_blank" class="social-btn tt">
-                            <i class="fab fa-tiktok"></i>
-                            <span>TikTok</span>
-                        </a>
-                        <a href="https://open.spotify.com/user/31njaguxvody6xit6gajvngzhhe4?si=55bdc1bfb41c4cf0" target="_blank" class="social-btn sp">
-                            <i class="fab fa-spotify"></i>
-                            <span>Spotify</span>
-                        </a>
+                        <a href="https://discord.gg/k3ZN3Mj6tN" target="_blank" class="social-btn dc"><i class="fab fa-discord"></i><span>Discord</span></a>
+                        <a href="https://www.facebook.com/profile.php?id=61591543367306" target="_blank" class="social-btn fb"><i class="fab fa-facebook-f"></i><span>Facebook</span></a>
+                        <a href="https://www.youtube.com/@nemnuong" target="_blank" class="social-btn yt"><i class="fab fa-youtube"></i><span>YouTube</span></a>
+                        <a href="https://www.tiktok.com/@nguyennem2006?is_from_webapp=1&sender_device=pc" target="_blank" class="social-btn tt"><i class="fab fa-tiktok"></i><span>TikTok</span></a>
+                        <a href="https://open.spotify.com/user/31njaguxvody6xit6gajvngzhhe4?si=55bdc1bfb41c4cf0" target="_blank" class="social-btn sp"><i class="fab fa-spotify"></i><span>Spotify</span></a>
                     </div>
                 </div>
 
-                <!-- 2. Kỹ Năng & Nghệ Thuật (Đồng Bộ 100% 3 Thứ Tiếng) -->
+                <!-- Skills -->
                 <div class="card">
                     <div class="card-header">
                         <i class="fas fa-palette"></i>
                         <span data-i18n="skillsHeader">Kỹ Năng & Hành Trình Nghệ Thuật</span>
                     </div>
                     <div class="skills-grid">
-                        
                         <div class="skill-item">
                             <div class="skill-title-row">
                                 <span class="skill-name" data-i18n="skillPsTitle"><i class="fas fa-wand-magic-sparkles" style="color: var(--gold-accent); margin-right:6px;"></i>Photoshop & Illustrator</span>
                                 <span class="skill-level-tag" data-i18n="skillPsLvl">Trình Độ Cao</span>
                             </div>
-                            <div class="skill-desc" data-i18n="skillPsDesc">
-                                Sử dụng thành thạo và chuyên sâu; tối ưu hóa hình ảnh, thiết kế đồ họa và sáng tạo visual thẩm mỹ.
-                            </div>
+                            <div class="skill-desc" data-i18n="skillPsDesc">Sử dụng thành thạo và chuyên sâu; tối ưu hóa hình ảnh, thiết kế đồ họa và sáng tạo visual thẩm mỹ.</div>
                         </div>
 
                         <div class="skill-item">
@@ -217,9 +194,7 @@
                                 <span class="skill-name" data-i18n="skillAeTitle"><i class="fas fa-film" style="color: var(--gold-accent); margin-right:6px;"></i>After Effects & Premiere Pro</span>
                                 <span class="skill-level-tag" data-i18n="skillAeLvl">Đang Trau Dồi</span>
                             </div>
-                            <div class="skill-desc" data-i18n="skillAeDesc">
-                                Đang ở mức trung bình, nỗ lực học hỏi để hoàn thiện kỹ năng dựng video TikTok Edit, VFX và motion graphics.
-                            </div>
+                            <div class="skill-desc" data-i18n="skillAeDesc">Đang ở mức trung bình, nỗ lực học hỏi để hoàn thiện kỹ năng dựng video TikTok Edit, VFX và motion graphics.</div>
                         </div>
 
                         <div class="skill-item">
@@ -227,39 +202,24 @@
                                 <span class="skill-name" data-i18n="skillArtTitle"><i class="fas fa-heart" style="color: var(--gold-accent); margin-right:6px;"></i>Hội Hoạ & Thẩm Mỹ Thị Giác</span>
                                 <span class="skill-level-tag" data-i18n="skillArtLvl">Không Ngừng Cố Gắng</span>
                             </div>
-                            <div class="skill-desc" data-i18n="skillArtDesc">
-                                Cảm quan hội họa & thẩm mỹ thị giác cao, chỉnh sửa ảnh hợp nhãn người xem; tuy chưa vẽ giỏi nhưng luôn học vẽ mỗi ngày như người mới bắt đầu!
-                            </div>
+                            <div class="skill-desc" data-i18n="skillArtDesc">Cảm quan hội họa & thẩm mỹ thị giác cao, chỉnh sửa ảnh hợp nhãn người xem; tuy chưa vẽ giỏi nhưng luôn học vẽ mỗi ngày như người mới bắt đầu!</div>
                         </div>
-
                     </div>
                 </div>
 
-                <!-- 3. Playlist Spotify (4 Mới Trên Đầu, 2 Cũ Phía Dưới) -->
+                <!-- Spotify Playlists -->
                 <div class="card">
                     <div class="card-header">
                         <i class="fas fa-music"></i>
                         <span data-i18n="playlistHeader">Danh Sách Nhạc Yêu Thích</span>
                     </div>
                     <div class="playlist-wrap">
-                        <div class="spotify-iframe-card">
-                            <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/3fl0B5dx35u5LgBXikwhGj?utm_source=generator&si=5ad4597652b44461" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                        </div>
-                        <div class="spotify-iframe-card">
-                            <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/7rebqGMp5dyg9Jz8FAsmhx?utm_source=generator&si=831283d2d9314eca" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                        </div>
-                        <div class="spotify-iframe-card">
-                            <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/243B8LOk8UWMoU31i1BzDo?utm_source=generator&theme=0&si=a61ffb8e43f048e6" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                        </div>
-                        <div class="spotify-iframe-card">
-                            <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/1CojTy05XgLx2ihFRT9txK?utm_source=generator&theme=0&si=976eaffa95fa41d2" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                        </div>
-                        <div class="spotify-iframe-card">
-                            <iframe src="https://open.spotify.com/embed/playlist/3AFi6LIkP88acuvQDMytQx?utm_source=generator" width="100%" height="152" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                        </div>
-                        <div class="spotify-iframe-card">
-                            <iframe src="https://open.spotify.com/embed/playlist/3Mp1DOUa7Mfn4Hsq741ayo?utm_source=generator" width="100%" height="152" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                        </div>
+                        <div class="spotify-iframe-card"><iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/3fl0B5dx35u5LgBXikwhGj?utm_source=generator&si=5ad4597652b44461" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>
+                        <div class="spotify-iframe-card"><iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/7rebqGMp5dyg9Jz8FAsmhx?utm_source=generator&si=831283d2d9314eca" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>
+                        <div class="spotify-iframe-card"><iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/243B8LOk8UWMoU31i1BzDo?utm_source=generator&theme=0&si=a61ffb8e43f048e6" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>
+                        <div class="spotify-iframe-card"><iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/1CojTy05XgLx2ihFRT9txK?utm_source=generator&theme=0&si=976eaffa95fa41d2" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>
+                        <div class="spotify-iframe-card"><iframe src="https://open.spotify.com/embed/playlist/3AFi6LIkP88acuvQDMytQx?utm_source=generator" width="100%" height="152" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>
+                        <div class="spotify-iframe-card"><iframe src="https://open.spotify.com/embed/playlist/3Mp1DOUa7Mfn4Hsq741ayo?utm_source=generator" width="100%" height="152" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>
                     </div>
                 </div>
 
@@ -267,7 +227,7 @@
         </div>
     </div>
 
-    <!-- POPUP MODAL PHÓNG TO MÃ QR DONATE (KÈM NỀN MỜ CHE TOÀN BỘ PHÍA SAU) -->
+    <!-- MODAL PHÓNG TO QR DONATE (CĂN GIỮA TUYỆT ĐỐI) -->
     <div class="qr-modal-overlay" id="qrModalOverlay" onclick="closeQrModal()">
         <div class="qr-modal-content" onclick="event.stopPropagation()">
             <button class="qr-modal-close" onclick="closeQrModal()">&times;</button>
@@ -280,29 +240,27 @@
         </div>
     </div>
 
-    <!-- NGĂN KÉO NHẠC TRƯỢT TỰ ĐỘNG (KÉO KHI HOVER / CLICK, TỰ ĐỔI BÀI) -->
+    <!-- NGĂN KÉO NHẠC TRƯỢT KÉO RA/VÀO -->
     <div class="music-slide-drawer" id="musicSlideDrawer">
-        <!-- Nút Tab Kéo Ra/Vào -->
         <button class="music-drawer-toggle" id="drawerToggleBtn" onclick="toggleMusicDrawer()">
             <i class="fas fa-chevron-left" id="drawerArrowIcon"></i>
             <img src="konata-konata-happy.gif" onerror="this.src='images/konata-konata-happy.gif'" alt="Konata" class="konata-mini-avatar spinning">
         </button>
 
-        <!-- Bảng điều khiển khi trượt ra -->
         <div class="music-drawer-body">
             <img src="konata-konata-happy.gif" onerror="this.src='images/konata-konata-happy.gif'" alt="Konata" class="konata-main-avatar spinning">
             <div class="track-select-wrap">
                 <select class="track-select" id="trackSelect" onchange="changeTrack(this.value)">
                     <option value="video/Imposter-Syndrome.mp4">🎵 Imposter Syndrome</option>
-                    <option value="video/Blue.mp3">🎵 Heather x Eyes Blue</option>
-                    <option value="video/cant go.mp4">🎵 Cant Go</option>
-                    <option value="video/doodle normal.mp4">🎵 Doodle Normal</option>
-                    <option value="video/doodle (Slowed).mp4">🎵 Doodle (Slowed)</option>
-                    <option value="video/doodle makeup.mp4">🎵 Doodle Makeup</option>
-                    <option value="video/mathaihondai song.mp4">🎵 Dan Dan Dan</option>
-                    <option value="video/I am in love with you.mp4">🎵 In Love</option>
-                    <option value="video/HOSHI.mp4">🎵 HOSHI</option> 
-                    <option value="video/Helltaker - 헬테이커 브금 OST [Mittsies - Vitality].mp4">🎵 Helltaker</option>
+                    <option value="video/Blue.mp3">🎵 Heather x Eyes Blue</option>
+                    <option value="video/cant go.mp4">🎵 Cant Go</option>
+                    <option value="video/doodle normal.mp4">🎵 Doodle Normal</option>
+                    <option value="video/doodle (Slowed).mp4">🎵 Doodle (Slowed)</option>
+                    <option value="video/doodle makeup.mp4">🎵 Doodle Makeup</option>
+                    <option value="video/mathaihondai song.mp4">🎵 Dan Dan Dan</option>
+                    <option value="video/I am in love with you.mp4">🎵 In Love</option>
+                    <option value="video/HOSHI.mp4">🎵 HOSHI</option> 
+                    <option value="video/Helltaker - 헬테이커 브금 OST [Mittsies - Vitality].mp4">🎵 Helltaker</option>
                 </select>
             </div>
             <div class="music-action-row">
@@ -318,14 +276,14 @@
         </div>
     </div>
 
-    <!-- Chân Trang Độc Quyền (Thon Gọn Ngang & Tự Nhô Lên Kèm Nhấp Nháy Vàng Mờ) -->
+    <!-- CHÂN TRANG ĐỘC QUYỀN -->
     <div class="exclusive-footer" id="exclusiveFooter" data-i18n="footerText">
         © 2025 by Nem. Created with GitHub.
     </div>
 
-    <!-- Toast Thông Báo Sao Chép -->
+    <!-- TOAST THÔNG BÁO (MỜ TRONG SUỐT, CHỮ VỪA VẶN 1 HÀNG) -->
     <div class="custom-toast" id="customToast">
-        <i class="fas fa-check-circle" style="color: var(--gold-accent);"></i>
+        <i class="fas fa-circle-check" style="color: var(--gold-accent);"></i>
         <span id="toastMsg">Đã sao chép thành công</span>
     </div>
 
