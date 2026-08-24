@@ -12,19 +12,22 @@
 </head>
 <body class="opening-active">
 
-    <!-- Video Nền -->
+    <!-- Hiệu ứng Hào Quang Aura Trắng Màn Hình -->
+    <div class="aura-flash-overlay" id="auraFlash"></div>
+
+    <!-- Video Nền Mờ Ảo -->
     <video class="video-background" id="bgVideo" autoplay loop muted playsinline>
         <source src="video/videoplayback.webm" type="video/webm">
     </video>
     <div class="ambient-glow"></div>
 
-    <!-- Nhạc Nền Loop Vô Tận -->
+    <!-- Nhạc Nền Loop -->
     <audio id="bgMusicAudio" loop preload="auto">
         <source src="video/Imposter-Syndrome.mp4" type="audio/mp4">
         <source src="video/Blue.mp3" type="audio/mp3">
     </audio>
 
-    <!-- MÀN HÌNH MỞ CỬA CLICK TO OPEN CYBER (KHÓA SCROLL HOÀN TOÀN KHI CHƯA MỞ) -->
+    <!-- MÀN HÌNH CLICK TO OPEN -->
     <div class="opening-screen" id="openingScreen" onclick="openProfile()">
         <div class="opening-bg-grid"></div>
         <div class="opening-content">
@@ -33,22 +36,21 @@
             <div class="click-to-open">
                 <i class="fas fa-bolt" style="color: var(--gold-accent);"></i>CLICK TO OPEN
             </div>
-            <div class="opening-subtitle">Nhấp vào bất kỳ đâu để khám phá</div>
         </div>
     </div>
 
-    <!-- WIDGET ĐO HIỆU NĂNG CPU & RAM (GÓC DƯỚI BÊN TRÁI) -->
+    <!-- WIDGET CPU & RAM -->
     <div class="system-monitor-box">
         <div class="sys-item"><i class="fas fa-microchip"></i> CPU: <span id="cpuVal">15%</span></div>
         <div class="sys-item"><i class="fas fa-memory"></i> RAM: <span id="ramVal">42%</span></div>
     </div>
 
-    <!-- THANH HEADER TOP BAR -->
+    <!-- TOP NAV BAR -->
     <div class="top-nav-bar">
         <div class="global-view-counter">
             <i class="fas fa-user-check" style="color: var(--gold-accent);"></i> 
             <span id="viewCountLabel">Khách truy cập</span>: 
-            <strong id="viewCount" style="color: var(--gold-accent);">147</strong>
+            <strong id="viewCount" style="color: var(--gold-accent);">148</strong>
         </div>
 
         <div class="lang-switch-box">
@@ -58,13 +60,14 @@
         </div>
     </div>
 
-    <!-- KHUNG PROFILE CHÍNH -->
+    <!-- PROFILE CONTAINER -->
     <div class="container">
+        
+        <!-- HÀNG 1: PROFILE TRÁI & SKILLS/SOCIALS PHẢI -->
         <div class="profile-grid">
             
-            <!-- CỘT TRÁI -->
             <div class="profile-left">
-                <div class="dynamic-badge" id="dynamicBadge">Cat Profile</div>
+                <div class="dynamic-badge" id="dynamicBadge">CAFE PROFILE</div>
 
                 <div class="avatar-wrap">
                     <img src="images/manhattancafe.gif" onerror="this.src='images/DenManHinh.jpg'" alt="Manhattan Cafe" class="avatar-img" id="profilePic">
@@ -76,7 +79,6 @@
                 <div class="username-container" id="usernameContainer"></div>
                 <div class="bio-text" id="bioText"></div>
 
-                <!-- Hộp Liên Hệ (Căn ngang thẳng hàng, không rớt dòng Email) -->
                 <div class="contact-box-wrap">
                     <div class="contact-item" onclick="copyContact('0898165655', 'Phone')">
                         <span class="lbl"><i class="fas fa-phone-alt"></i> Phone</span>
@@ -88,7 +90,6 @@
                     </div>
                 </div>
 
-                <!-- Hộp Mỗi Ngày Nhớ Một Câu -->
                 <div class="motivation-box">
                     <div class="quote-title" data-i18n="quoteBoxTitle">Mỗi ngày nhớ một câu</div>
                     <div class="quote-content" id="quoteDisplay">
@@ -98,69 +99,10 @@
                         <i class="fas fa-rotate" style="margin-right: 4px;"></i> ĐỔI CÂU MỚI
                     </button>
                 </div>
-
-                <!-- GÓC HẢO TÂM & ĐẦU TƯ / DONATE (Ảnh QR phóng to 220px) -->
-                <div class="donate-card">
-                    <div class="donate-header">
-                        <i class="fas fa-hand-holding-heart"></i>
-                        <span data-i18n="donateTitle">Góc Hảo Tâm & Đầu Tư</span>
-                    </div>
-                    <div class="donate-subtitle" data-i18n="donateSubtitle">
-                        Mọi sự ủng hộ và đồng hành của bạn đều là nguồn động lực quý báu giúp tôi hoàn thiện bản thân mỗi ngày.
-                    </div>
-                    <div class="qr-wrap" onclick="openQrModal()" title="Nhấp để phóng to mã QR">
-                        <img src="images/qrdonate.png" onerror="this.src='images/DenManHinh.jpg'" alt="QR Donate" class="qr-img">
-                        <div class="qr-zoom-hint"><i class="fas fa-search-plus"></i> <span data-i18n="qrZoomHint">Nhấp để phóng to</span></div>
-                    </div>
-                    <div class="bank-info-box">
-                        <div class="bank-row">
-                            <span class="bank-lbl" data-i18n="bankHolderLbl">Chủ TK:</span>
-                            <strong class="bank-val">NGUYEN VIET NAM</strong>
-                        </div>
-                        <div class="bank-row" onclick="copyContact('5801753378', 'STK')">
-                            <span class="bank-lbl" data-i18n="bankNumLbl">STK (Click copy):</span>
-                            <strong class="bank-val highlight">5801753378</strong>
-                        </div>
-                        <div class="bank-row">
-                            <span class="bank-lbl" data-i18n="bankNameLbl">Ngân hàng:</span>
-                            <strong class="bank-val">BIDV - CN Bình Định</strong>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- KHU VỰC ĐÁNH GIÁ -->
-                <div class="review-box">
-                    <div class="review-title" data-i18n="reviewTitle">Mong bạn để lại đánh giá</div>
-                    <div class="review-subtitle" data-i18n="reviewSubtitle">Mỗi 1 bài đánh giá đều giúp tôi tốt lên dù tốt hay xấu</div>
-                    
-                    <form class="review-form" onsubmit="submitReview(event)">
-                        <div class="rating-stars" id="ratingStars">
-                            <i class="fas fa-star active" onclick="setRating(1)"></i>
-                            <i class="fas fa-star active" onclick="setRating(2)"></i>
-                            <i class="fas fa-star active" onclick="setRating(3)"></i>
-                            <i class="fas fa-star active" onclick="setRating(4)"></i>
-                            <i class="fas fa-star active" onclick="setRating(5)"></i>
-                        </div>
-                        <input type="text" id="reviewerName" class="review-input" placeholder="Tên hoặc biệt danh..." required maxlength="25">
-                        <textarea id="reviewComment" class="review-textarea" placeholder="Cảm nghĩ / đóng góp ý kiến của bạn..." required maxlength="250"></textarea>
-                        <button type="submit" class="submit-review-btn" data-i18n="reviewSubmitBtn">GỬI ĐÁNH GIÁ</button>
-                    </form>
-
-                    <!-- Tabs Đánh Giá (Rút gọn còn chữ "Đánh giá" & "Góp ý") -->
-                    <div class="review-tabs">
-                        <button class="review-tab-btn active" id="tab5StarBtn" onclick="switchReviewTab('5star')" data-i18n="tab5Star">Đánh giá</button>
-                        <button class="review-tab-btn" id="tabFeedbackBtn" onclick="switchReviewTab('feedback')" data-i18n="tabFeedback">Góp ý</button>
-                    </div>
-
-                    <div class="reviews-list" id="reviewsList"></div>
-                </div>
-
             </div>
 
-            <!-- CỘT PHẢI -->
             <div class="profile-right">
 
-                <!-- Socials -->
                 <div class="card">
                     <div class="card-header">
                         <i class="fas fa-share-nodes"></i>
@@ -175,7 +117,6 @@
                     </div>
                 </div>
 
-                <!-- Skills -->
                 <div class="card">
                     <div class="card-header">
                         <i class="fas fa-palette"></i>
@@ -208,27 +149,90 @@
                     </div>
                 </div>
 
-                <!-- Spotify Playlists -->
-                <div class="card">
-                    <div class="card-header">
-                        <i class="fas fa-music"></i>
-                        <span data-i18n="playlistHeader">Danh Sách Nhạc Yêu Thích</span>
-                    </div>
-                    <div class="playlist-wrap">
-                        <div class="spotify-iframe-card"><iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/3fl0B5dx35u5LgBXikwhGj?utm_source=generator&si=5ad4597652b44461" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>
-                        <div class="spotify-iframe-card"><iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/7rebqGMp5dyg9Jz8FAsmhx?utm_source=generator&si=831283d2d9314eca" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>
-                        <div class="spotify-iframe-card"><iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/243B8LOk8UWMoU31i1BzDo?utm_source=generator&theme=0&si=a61ffb8e43f048e6" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>
-                        <div class="spotify-iframe-card"><iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/1CojTy05XgLx2ihFRT9txK?utm_source=generator&theme=0&si=976eaffa95fa41d2" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>
-                        <div class="spotify-iframe-card"><iframe src="https://open.spotify.com/embed/playlist/3AFi6LIkP88acuvQDMytQx?utm_source=generator" width="100%" height="152" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>
-                        <div class="spotify-iframe-card"><iframe src="https://open.spotify.com/embed/playlist/3Mp1DOUa7Mfn4Hsq741ayo?utm_source=generator" width="100%" height="152" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>
-                    </div>
-                </div>
-
             </div>
         </div>
+
+        <!-- HÀNG 2: DONATE & SPOTIFY PLAYLIST -->
+        <div class="second-row-grid">
+            
+            <div class="donate-card card">
+                <div class="donate-header">
+                    <i class="fas fa-hand-holding-heart"></i>
+                    <span data-i18n="donateTitle">Góc Hảo Tâm & Đầu Tư</span>
+                </div>
+                <div class="donate-subtitle" data-i18n="donateSubtitle">
+                    Mọi sự ủng hộ và đồng hành của bạn đều là nguồn động lực quý báu giúp tôi hoàn thiện bản thân mỗi ngày.
+                </div>
+                <div class="qr-wrap" onclick="openQrModal()" title="Nhấp để phóng to mã QR">
+                    <img src="images/qrdonate.png" onerror="this.src='images/DenManHinh.jpg'" alt="QR Donate" class="qr-img">
+                    <div class="qr-zoom-hint"><i class="fas fa-search-plus"></i> <span data-i18n="qrZoomHint">Nhấp để phóng to</span></div>
+                </div>
+                <div class="bank-info-box">
+                    <div class="bank-row">
+                        <span class="bank-lbl" data-i18n="bankHolderLbl">Chủ TK:</span>
+                        <strong class="bank-val">NGUYEN VIET NAM</strong>
+                    </div>
+                    <div class="bank-row" onclick="copyContact('5801753378', 'STK')">
+                        <span class="bank-lbl" data-i18n="bankNumLbl">STK (Click copy):</span>
+                        <strong class="bank-val highlight">5801753378</strong>
+                    </div>
+                    <div class="bank-row">
+                        <span class="bank-lbl" data-i18n="bankNameLbl">Ngân hàng:</span>
+                        <strong class="bank-val">BIDV - CN Bình Định</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card spotify-card-container">
+                <div class="card-header">
+                    <i class="fas fa-music"></i>
+                    <span data-i18n="playlistHeader">Danh Sách Nhạc Yêu Thích</span>
+                </div>
+                <div class="playlist-wrap">
+                    <div class="spotify-iframe-card"><iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/3fl0B5dx35u5LgBXikwhGj?utm_source=generator&si=5ad4597652b44461" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>
+                    <div class="spotify-iframe-card"><iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/7rebqGMp5dyg9Jz8FAsmhx?utm_source=generator&si=831283d2d9314eca" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>
+                    <div class="spotify-iframe-card"><iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/243B8LOk8UWMoU31i1BzDo?utm_source=generator&theme=0&si=a61ffb8e43f048e6" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>
+                    <div class="spotify-iframe-card"><iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/1CojTy05XgLx2ihFRT9txK?utm_source=generator&theme=0&si=976eaffa95fa41d2" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>
+                    <div class="spotify-iframe-card"><iframe src="https://open.spotify.com/embed/playlist/3AFi6LIkP88acuvQDMytQx?utm_source=generator" width="100%" height="152" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>
+                    <div class="spotify-iframe-card"><iframe src="https://open.spotify.com/embed/playlist/3Mp1DOUa7Mfn4Hsq741ayo?utm_source=generator" width="100%" height="152" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- HÀNG 3: ĐÁNH GIÁ FULL WIDTH -->
+        <div class="fullwidth-review-container">
+            <div class="review-box card">
+                <div class="review-title" data-i18n="reviewTitle">Mong bạn để lại đánh giá</div>
+                <div class="review-subtitle" data-i18n="reviewSubtitle">Mỗi 1 bài đánh giá đều giúp tôi tốt lên dù tốt hay xấu</div>
+                
+                <form class="review-form" onsubmit="submitReview(event)">
+                    <div class="rating-stars" id="ratingStars">
+                        <i class="fas fa-star active" onclick="setRating(1)"></i>
+                        <i class="fas fa-star active" onclick="setRating(2)"></i>
+                        <i class="fas fa-star active" onclick="setRating(3)"></i>
+                        <i class="fas fa-star active" onclick="setRating(4)"></i>
+                        <i class="fas fa-star active" onclick="setRating(5)"></i>
+                    </div>
+                    <div class="form-inputs-row">
+                        <input type="text" id="reviewerName" class="review-input" placeholder="Tên hoặc biệt danh..." required maxlength="25">
+                        <textarea id="reviewComment" class="review-textarea" placeholder="Cảm nghĩ / đóng góp ý kiến của bạn..." required maxlength="250"></textarea>
+                    </div>
+                    <button type="submit" class="submit-review-btn" data-i18n="reviewSubmitBtn">GỬI ĐÁNH GIÁ</button>
+                </form>
+
+                <div class="review-tabs">
+                    <button class="review-tab-btn active" id="tab5StarBtn" onclick="switchReviewTab('5star')" data-i18n="tab5Star">Đánh giá</button>
+                    <button class="review-tab-btn" id="tabFeedbackBtn" onclick="switchReviewTab('feedback')" data-i18n="tabFeedback">Góp ý</button>
+                </div>
+
+                <div class="reviews-list" id="reviewsList"></div>
+            </div>
+        </div>
+
     </div>
 
-    <!-- MODAL PHÓNG TO QR DONATE (Căn giữa hoàn hảo, không lệch) -->
+    <!-- MODAL PHÓNG TO QR -->
     <div class="qr-modal-overlay" id="qrModalOverlay" onclick="closeQrModal()">
         <div class="qr-modal-content" onclick="event.stopPropagation()">
             <button class="qr-modal-close" onclick="closeQrModal()">&times;</button>
@@ -241,29 +245,47 @@
         </div>
     </div>
 
-    <!-- NGĂN KÉO NHẠC TRƯỢT KÉO RA/VÀO -->
+    <!-- DRAWER NHẠC TRƯỢT HÌNH VUÔNG BO GÓC -->
     <div class="music-slide-drawer" id="musicSlideDrawer">
         <button class="music-drawer-toggle" id="drawerToggleBtn" onclick="toggleMusicDrawer()">
             <i class="fas fa-chevron-left" id="drawerArrowIcon"></i>
-            <img src="konata-konata-happy.gif" onerror="this.src='images/konata-konata-happy.gif'" alt="Konata" class="konata-mini-avatar spinning">
         </button>
 
         <div class="music-drawer-body">
-            <img src="konata-konata-happy.gif" onerror="this.src='images/konata-konata-happy.gif'" alt="Konata" class="konata-main-avatar spinning">
+            <div class="avatar-spin-frame">
+                <img id="musicRandomAvatar" src="images/CafededauTachyon.gif" onerror="this.src='images/konata-konata-happy.gif'" alt="Random Anime GIF" class="konata-main-avatar continuous-spinning">
+            </div>
+
             <div class="track-select-wrap">
                 <select class="track-select" id="trackSelect" onchange="changeTrack(this.value)">
-                    <option value="video/Imposter-Syndrome.mp4">🎵 Imposter Syndrome</option>
-                    <option value="video/Blue.mp3">🎵 Heather x Eyes Blue</option>
-                    <option value="video/cant go.mp4">🎵 Cant Go</option>
-                    <option value="video/doodle normal.mp4">🎵 Doodle Normal</option>
-                    <option value="video/doodle (Slowed).mp4">🎵 Doodle (Slowed)</option>
-                    <option value="video/doodle makeup.mp4">🎵 Doodle Makeup</option>
-                    <option value="video/mathaihondai song.mp4">🎵 Dan Dan Dan</option>
-                    <option value="video/I am in love with you.mp4">🎵 In Love</option>
-                    <option value="video/HOSHI.mp4">🎵 HOSHI</option> 
-                    <option value="video/Helltaker - 헬테이커 브금 OST [Mittsies - Vitality].mp4">🎵 Helltaker</option>
+                    <optgroup label="☕ Nhạc Chill Chill">
+                        <option value="video/Imposter-Syndrome.mp4">🎵 Imposter Syndrome</option>
+                        <option value="video/Blue.mp3">🎵 Heather x Eyes Blue</option>
+                        <option value="video/cant go.mp4">🎵 Cant Go</option>
+                        <option value="video/doodle normal.mp4">🎵 Doodle Normal</option>
+                        <option value="video/doodle (Slowed).mp4">🎵 Doodle (Slowed)</option>
+                        <option value="video/doodle makeup.mp4">🎵 Doodle Makeup</option>
+                        <option value="video/I am in love with you.mp4">🎵 In Love</option>
+                        <option value="video/HOSHI.mp4">🎵 HOSHI</option> 
+                        <option value="video/Helltaker - 헬테이커 브금 OST [Mittsies - Vitality].mp4">🎵 Helltaker</option>
+                    </optgroup>
+
+                    <optgroup label="⚡ Nhạc Hardstyle (Mở Thủ Công)">
+                        <option value="video/MEANT-TO-BE-HARDSTYLE.mp4">🔥 MEANT TO BE (Hardstyle)</option>
+                        <option value="video/Outside-Hardstyle.mp4">🔥 Outside (Hardstyle)</option>
+                        <option value="video/Safe-and-Sound-Hardstyle.mp4">🔥 Safe and Sound (Hardstyle)</option>
+                        <option value="video/PART-OF-ME-HARDSTYLE.mp4">🔥 PART OF ME (Hardstyle)</option>
+                        <option value="video/Misery-Pupsies-Hardstyle.mp4">🔥 Misery Pupsies (Hardstyle)</option>
+                        <option value="video/HOT-GIRL-BUMMER-X-HARDTEKK-Super-Slowed.mp4">🔥 HOT GIRL BUMMER (Hardtekk Slowed)</option>
+                        <option value="video/BEAUTY-AND-THE-BEAT-HARDTEKK-SLOWED.mp4">🔥 BEAUTY AND THE BEAT (Hardtekk Slowed)</option>
+                        <option value="video/DARK-HORSE-HARDSTYLE-ULTRA-SLOWED.mp4">🔥 DARK HORSE (Hardstyle Ultra Slowed)</option>
+                        <option value="video/Dark Horse (Hoodtrap Mylancore).mp4">🔥 Dark Horse (Hoodtrap Mylancore)</option>
+                        <option value="video/Cool-for-the-Summer-Hardstyle-Sped-Up.mp4">🔥 Cool for the Summer (Hardstyle Sped Up)</option>
+                        <option value="video/Montagem-Umbrella.mp4">🔥 Montagem Umbrella</option>
+                    </optgroup>
                 </select>
             </div>
+            
             <div class="music-action-row">
                 <button class="play-toggle-btn" id="playBtn" onclick="toggleMusic()">
                     <i class="fas fa-play" id="playIcon"></i>
@@ -277,12 +299,12 @@
         </div>
     </div>
 
-    <!-- CHÂN TRANG ĐỘC QUYỀN -->
+    <!-- FOOTER -->
     <div class="exclusive-footer" id="exclusiveFooter" data-i18n="footerText">
         © 2025 by Nem. Created with GitHub.
     </div>
 
-    <!-- TOAST THÔNG BÁO (Mờ trong suốt, gọn gàng 1 hàng) -->
+    <!-- TOAST THÔNG BÁO -->
     <div class="custom-toast" id="customToast">
         <i class="fas fa-circle-check" style="color: var(--gold-accent);"></i>
         <span id="toastMsg">Đã sao chép thành công</span>
