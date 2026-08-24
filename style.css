@@ -8,7 +8,9 @@
     --text-grey: #94a3b8;
 }
 
-/* ẨN TOÀN BỘ THANH CUỘN (SCROLLBAR) TOÀN TRANG NHƯNG VẪN CUỘN BÌNH THƯỜNG */
+/* =========================================================
+   1. TOÀN BỘ ẨN THANH CUỘN NHƯNG VẪN CUỘN ĐƯỢC
+   ========================================================= */
 html, body, *, ::-webkit-scrollbar {
     -ms-overflow-style: none !important;
     scrollbar-width: none !important;
@@ -36,7 +38,6 @@ html, body {
     overflow-x: hidden;
 }
 
-/* FIX LỖI 3: Gỡ bỏ transform để Modal QR không bị lệch */
 body {
     position: relative;
     display: flex;
@@ -44,8 +45,10 @@ body {
     justify-content: center;
     align-items: center;
     padding: 70px 15px 140px 15px;
+    /* KHÔNG DÙNG transform ĐỂ CHỐNG LỖI POSITION FIXED CỦA MÃ QR VA WIDGET */
 }
 
+/* HIỆU ỨNG AURA TRẮNG XÁM TOÀN MÀN HÌNH */
 .aura-flash-overlay {
     position: fixed;
     inset: 0;
@@ -71,14 +74,15 @@ html.opening-active, body.opening-active {
     touch-action: none !important;
 }
 
-/* FIX LỖI 4: Background trôi theo khi cuộn chuột (absolute thay vì fixed) */
+/* VIDEO NỀN CỐ ĐỊNH KHI CUỘN TRANG (ẢNH 6 & 7) */
 .video-background {
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100vw !important;
-    height: 100% !important; 
-    z-index: -2 !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    z-index: -2;
     object-fit: cover;
     opacity: 0.55;
     filter: contrast(1.1) brightness(0.85);
@@ -86,17 +90,19 @@ html.opening-active, body.opening-active {
 }
 
 .ambient-glow {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
-    height: 100%;
+    height: 100vh;
+    height: 100dvh;
     z-index: -1;
     background: radial-gradient(circle at 50% 30%, rgba(255, 215, 0, 0.08), transparent 70%),
                 radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.05), transparent 60%);
     pointer-events: none;
 }
 
+/* CLICK TO OPEN */
 .opening-screen {
     position: fixed;
     top: 0;
@@ -198,10 +204,10 @@ html.opening-active, body.opening-active {
     pointer-events: none;
 }
 
-/* FIX LỖI 4: Widget CPU kéo thanh cuộn sẽ trôi lên theo trang */
+/* WIDGET CPU & RAM CỐ ĐỊNH GÓC TRÁI */
 .system-monitor-box {
-    position: absolute;
-    top: calc(100vh - 60px);
+    position: fixed;
+    bottom: 20px;
     left: 20px;
     z-index: 1000;
     background: rgba(18, 18, 24, 0.8);
@@ -228,9 +234,9 @@ html.opening-active, body.opening-active {
     font-family: 'Space Grotesk', sans-serif;
 }
 
-/* FIX LỖI 4: Nav bar phía trên cũng trôi đi khi kéo chuột */
+/* TOP NAV BAR CỐ ĐỊNH PHÍA TRÊN */
 .top-nav-bar {
-    position: absolute;
+    position: fixed;
     top: 15px;
     left: 0;
     width: 100%;
@@ -285,6 +291,7 @@ html.opening-active, body.opening-active {
     box-shadow: 0 0 10px var(--gold-glow);
 }
 
+/* CONTAINER PROFILE */
 .container {
     max-width: 990px;
     width: 100%;
@@ -604,6 +611,7 @@ html.opening-active, body.opening-active {
     line-height: 1.5;
 }
 
+/* HÀNG 2: DONATE CARD & SPOTIFY PLAYLIST (ẢNH 1 & 2) */
 .second-row-grid {
     display: grid;
     grid-template-columns: 330px 1fr;
@@ -700,24 +708,22 @@ html.opening-active, body.opening-active {
 .bank-val { color: #ffffff; }
 .bank-val.highlight { color: var(--gold-accent); cursor: pointer; font-weight: 700; }
 
-/* FIX LỖI 1: Gỡ bỏ ép chiều cao để Playlist ôm sát, không bị trống dưới */
+/* BỎ HOÀN TOÀN MAX-HEIGHT VÀ SCROLL LỖI Ở PLAYLIST (ẢNH 1) */
 .spotify-card-container {
+    height: 100%;
     display: flex;
     flex-direction: column;
 }
 
 .playlist-card-header {
-    margin-bottom: 10px !important; 
+    margin-bottom: 15px !important;
 }
 
 .playlist-wrap {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 12px;
-    max-height: 380px;
-    overflow-y: auto;
-    margin-top: 0 !important;
-    padding-top: 0 !important;
+    width: 100%;
 }
 
 .spotify-iframe-card {
@@ -727,6 +733,7 @@ html.opening-active, body.opening-active {
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+/* HÀNG 3: ĐÁNH GIÁ FULL WIDTH */
 .fullwidth-review-container {
     width: 100%;
 }
@@ -880,13 +887,15 @@ html.opening-active, body.opening-active {
     line-height: 1.5;
 }
 
-/* FIX LỖI 3: Chỉnh Modal QR hiển thị hoàn hảo, không bị khuất */
+/* =========================================================
+   2. MODAL PHÓNG TO QR CHUẨN CỐ ĐỊNH GIỮA MÀN HÌNH (ẢNH 4 & 5)
+   ========================================================= */
 .qr-modal-overlay {
     position: fixed;
     inset: 0;
     width: 100vw;
     height: 100dvh;
-    background: rgba(0, 0, 0, 0.9);
+    background: rgba(0, 0, 0, 0.88);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     z-index: 9999999;
@@ -912,16 +921,14 @@ html.opening-active, body.opening-active {
     border-radius: 24px;
     text-align: center;
     position: relative;
-    max-width: 520px;
-    width: 92vw;
-    max-height: 88vh;
+    max-width: 480px;
+    width: 90vw;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     transform: scale(0.95);
     transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    overflow-y: auto;
 }
 
 .qr-modal-overlay.show .qr-modal-content {
@@ -949,13 +956,13 @@ html.opening-active, body.opening-active {
 }
 
 .qr-modal-img {
-    width: 320px;
-    height: 320px;
-    max-width: 80vw;
-    max-height: 48vh;
+    width: 280px;
+    height: 280px;
+    max-width: 75vw;
+    max-height: 45vh;
     border-radius: 16px;
     background: #fff;
-    padding: 10px;
+    padding: 8px;
     margin: 12px 0 16px 0;
     object-fit: contain;
     box-shadow: 0 0 25px rgba(255, 215, 0, 0.25);
@@ -973,10 +980,12 @@ html.opening-active, body.opening-active {
     font-weight: 700;
 }
 
-/* FIX LỖI 4: Trình Phát Nhạc trôi theo trang, không bám dính vào màn hình nữa */
+/* =========================================================
+   3. TRÌNH PHÁT NHẠC CỐ ĐỊNH: KHUNG NGOÀI VUÔNG BO GÓC, KHUNG TRONG TRÒN XOAY (ẢNH 2 & 3 & 7)
+   ========================================================= */
 .music-slide-drawer {
-    position: absolute;
-    top: calc(100vh - 150px);
+    position: fixed;
+    bottom: 25px;
     right: 0;
     z-index: 10000;
     display: flex;
@@ -1018,11 +1027,11 @@ html.opening-active, body.opening-active {
     width: 290px;
 }
 
-/* FIX LỖI 2: TOÀN BỘ khung phát nhạc biến thành hình đĩa tròn 100% (Border-radius 50%) */
+/* KHUNG BÊN NGOÀI: HÌNH VUÔNG BO GÓC (RECTANGLE ROUNDED CORNERS) */
 .avatar-spin-frame {
-    width: 100px;
-    height: 100px;
-    border-radius: 50% !important; /* Toàn bộ thành vòng tròn hoàn hảo */
+    width: 110px;
+    height: 110px;
+    border-radius: 20px; /* Khung ngoài vuông bo góc */
     overflow: hidden;
     border: 2px solid var(--gold-accent);
     box-shadow: 0 0 25px var(--gold-glow);
@@ -1030,16 +1039,18 @@ html.opening-active, body.opening-active {
     justify-content: center;
     align-items: center;
     background: #09090d;
-    padding: 4px;
+    padding: 6px;
     position: relative;
 }
 
+/* KHUNG BÊN TRONG: GIF ANIME TRÒN XOAY LIÊN TỤC */
 .konata-main-avatar {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center;
-    border-radius: 50%;
+    object-position: center; 
+    border-radius: 50%; /* Hình tròn bên trong xoe */
+    will-change: transform;
 }
 
 .continuous-spinning {
@@ -1051,6 +1062,7 @@ html.opening-active, body.opening-active {
     100% { transform: rotate(360deg); }
 }
 
+/* DROPDOWN CHỌN NHẠC CỰC ĐẸP */
 .track-select-wrap {
     width: 100%;
     position: relative;
@@ -1223,7 +1235,7 @@ html.opening-active, body.opening-active {
     .second-row-grid { grid-template-columns: 1fr; gap: 20px; }
     .playlist-wrap { grid-template-columns: 1fr; }
     .system-monitor-box {
-        top: calc(100vh - 55px);
+        bottom: 15px;
         left: 12px;
         padding: 6px 10px;
         font-size: 0.7rem;
