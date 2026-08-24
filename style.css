@@ -1,11 +1,25 @@
 :root {
     --bg-black: #08080c;
-    --card-bg: rgba(18, 18, 24, 0.58);
+    --card-bg: rgba(18, 18, 24, 0.65);
     --card-border: rgba(255, 215, 0, 0.28);
     --gold-accent: #ffd700;
     --gold-glow: rgba(255, 215, 0, 0.35);
     --text-white: #ffffff;
     --text-grey: #94a3b8;
+}
+
+/* =========================================================
+   1. TOÀN BỘ ẨN THANH CUỘN (SCROLLBAR) NHƯNG VẪN CUỘN ĐƯỢC
+   ========================================================= */
+html, body, *, ::-webkit-scrollbar {
+    -ms-overflow-style: none !important;  /* IE và Edge */
+    scrollbar-width: none !important;     /* Firefox */
+}
+
+::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
 }
 
 * {
@@ -31,6 +45,7 @@ body {
     justify-content: center;
     align-items: center;
     padding: 70px 15px 140px 15px;
+    transform: translateZ(0); /* Tối ưu GPU tăng tốc mượt mà */
 }
 
 /* HIỆU ỨNG AURA TRẮNG XÁM TOÀN MÀN HÌNH */
@@ -59,7 +74,7 @@ html.opening-active, body.opening-active {
     touch-action: none !important;
 }
 
-/* Video Nền Mờ Ảo */
+/* VIDEO NỀN NẰM CHUẨN PHÍA SAU PROFILE CHỐNG LAG */
 .video-background {
     position: fixed;
     top: 0;
@@ -69,9 +84,10 @@ html.opening-active, body.opening-active {
     height: 100dvh;
     z-index: -2;
     object-fit: cover;
-    opacity: 0.48;
+    opacity: 0.55;
     filter: contrast(1.1) brightness(0.85);
     pointer-events: none;
+    will-change: transform;
 }
 
 .ambient-glow {
@@ -123,7 +139,6 @@ html.opening-active, body.opening-active {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    transition: all 0.5s ease;
 }
 
 .cyber-circle {
@@ -171,7 +186,7 @@ html.opening-active, body.opening-active {
     padding: 16px 38px;
     border-radius: 40px;
     background: rgba(18, 18, 24, 0.92);
-    backdrop-filter: blur(12px);
+    backdrop-filter: blur(8px);
     box-shadow: 0 0 30px rgba(255, 215, 0, 0.35), inset 0 0 15px rgba(255, 215, 0, 0.15);
     animation: pulseBtn 2s infinite alternate;
     display: flex;
@@ -190,16 +205,16 @@ html.opening-active, body.opening-active {
     pointer-events: none;
 }
 
-/* WIDGET HIỆU NĂNG CPU & RAM */
+/* WIDGET CPU & RAM */
 .system-monitor-box {
     position: fixed;
     bottom: 20px;
     left: 20px;
     z-index: 1000;
-    background: rgba(18, 18, 24, 0.75);
+    background: rgba(18, 18, 24, 0.8);
     border: 1px solid var(--card-border);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     padding: 8px 14px;
     border-radius: 20px;
     display: flex;
@@ -238,7 +253,7 @@ html.opening-active, body.opening-active {
     pointer-events: auto;
     background: rgba(18, 18, 24, 0.9);
     border: 1px solid var(--card-border);
-    backdrop-filter: blur(12px);
+    backdrop-filter: blur(8px);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
     border-radius: 30px;
 }
@@ -277,13 +292,13 @@ html.opening-active, body.opening-active {
     box-shadow: 0 0 10px var(--gold-glow);
 }
 
-/* CONTAINER PROFILE GLASSMORPHISM MỜ MỜ */
+/* CONTAINER PROFILE GLASSMORPHISM TỐI ƯU MƯỢT MÀ */
 .container {
     max-width: 990px;
     width: 100%;
-    background: rgba(18, 18, 24, 0.52);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
+    background: rgba(18, 18, 24, 0.65);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border-radius: 24px;
     border: 1px solid var(--card-border);
     box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85);
@@ -501,9 +516,9 @@ html.opening-active, body.opening-active {
 }
 
 .card {
-    background: rgba(14, 14, 20, 0.55);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background: rgba(14, 14, 20, 0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     border-radius: 18px;
     padding: 20px;
     border: 1px solid rgba(255, 255, 255, 0.08);
@@ -597,7 +612,7 @@ html.opening-active, body.opening-active {
     line-height: 1.5;
 }
 
-/* HÀNG 2: DONATE CARD & SPOTIFY PLAYLIST CANH ĐỀU VỚI PROFILE GRID */
+/* HÀNG 2: DONATE CARD & SPOTIFY PLAYLIST */
 .second-row-grid {
     display: grid;
     grid-template-columns: 330px 1fr;
@@ -694,10 +709,15 @@ html.opening-active, body.opening-active {
 .bank-val { color: #ffffff; }
 .bank-val.highlight { color: var(--gold-accent); cursor: pointer; font-weight: 700; }
 
+/* FIX SỬA LỖI DƯ KHÚC TRÊN SPOTIFY PLAYLIST (ẢNH 2) */
 .spotify-card-container {
     height: 100%;
     display: flex;
     flex-direction: column;
+}
+
+.playlist-card-header {
+    margin-bottom: 10px !important; /* Kéo playlist lên vừa khít không còn khoảng trống */
 }
 
 .playlist-wrap {
@@ -706,11 +726,9 @@ html.opening-active, body.opening-active {
     gap: 12px;
     max-height: 380px;
     overflow-y: auto;
-    padding-right: 4px;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
 }
-
-.playlist-wrap::-webkit-scrollbar { width: 4px; }
-.playlist-wrap::-webkit-scrollbar-thumb { background: var(--gold-accent); border-radius: 10px; }
 
 .spotify-iframe-card {
     border-radius: 12px;
@@ -719,7 +737,7 @@ html.opening-active, body.opening-active {
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* HÀNG 3: ĐÁNH GIÁ FULL WIDTH NHƯ BÌNH LUẬN */
+/* HÀNG 3: ĐÁNH GIÁ FULL WIDTH */
 .fullwidth-review-container {
     width: 100%;
 }
@@ -843,9 +861,6 @@ html.opening-active, body.opening-active {
     gap: 10px;
 }
 
-.reviews-list::-webkit-scrollbar { width: 4px; }
-.reviews-list::-webkit-scrollbar-thumb { background: var(--gold-accent); border-radius: 10px; }
-
 .empty-reviews-text {
     font-size: 0.8rem;
     color: var(--text-grey);
@@ -876,15 +891,17 @@ html.opening-active, body.opening-active {
     line-height: 1.5;
 }
 
-/* MODAL PHÓNG TO QR */
+/* =========================================================
+   2. MODAL PHÓNG TO QR TO GẦN HẾT MÀN HÌNH (ẢNH 4)
+   ========================================================= */
 .qr-modal-overlay {
     position: fixed;
     inset: 0;
     width: 100vw;
     height: 100dvh;
-    background: rgba(0, 0, 0, 0.88);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     z-index: 9999999;
     display: flex;
     justify-content: center;
@@ -901,22 +918,23 @@ html.opening-active, body.opening-active {
 }
 
 .qr-modal-content {
-    background: #121218;
+    background: rgba(18, 18, 24, 0.96);
     border: 2px solid var(--gold-accent);
     box-shadow: 0 0 50px var(--gold-glow);
-    padding: 22px;
-    border-radius: 20px;
+    padding: 28px 24px;
+    border-radius: 24px;
     text-align: center;
     position: relative;
-    max-width: 330px;
-    width: 100%;
-    margin: auto;
+    max-width: 520px; /* To gần hết màn hình website */
+    width: 92vw;
+    max-height: 88vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    transform: scale(0.9);
-    transition: transform 0.3s ease;
+    transform: scale(0.95);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    overflow-y: auto;
 }
 
 .qr-modal-overlay.show .qr-modal-content {
@@ -925,39 +943,41 @@ html.opening-active, body.opening-active {
 
 .qr-modal-close {
     position: absolute;
-    top: 10px;
-    right: 15px;
+    top: 12px;
+    right: 18px;
     background: none;
     border: none;
     color: var(--gold-accent);
-    font-size: 1.6rem;
+    font-size: 1.8rem;
     cursor: pointer;
 }
 
 .qr-modal-header {
     font-weight: 800;
     color: var(--gold-accent);
-    font-size: 1rem;
-    margin-bottom: 10px;
+    font-size: 1.25rem;
+    margin-bottom: 12px;
     text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .qr-modal-img {
-    width: 230px;
-    height: 230px;
-    max-width: 100%;
+    width: 320px;
+    height: 320px;
+    max-width: 80vw;
     max-height: 48vh;
-    border-radius: 12px;
+    border-radius: 16px;
     background: #fff;
-    padding: 6px;
-    margin: 8px 0 12px 0;
+    padding: 10px;
+    margin: 12px 0 16px 0;
     object-fit: contain;
+    box-shadow: 0 0 25px rgba(255, 215, 0, 0.25);
 }
 
 .qr-modal-info {
-    font-size: 0.8rem;
+    font-size: 0.95rem;
     color: #cbd5e1;
-    line-height: 1.5;
+    line-height: 1.6;
 }
 
 .qr-modal-info .highlight {
@@ -966,7 +986,9 @@ html.opening-active, body.opening-active {
     font-weight: 700;
 }
 
-/* DRAWER NHẠC TRƯỢT HÌNH VUÔNG BO GÓC */
+/* =========================================================
+   3. KHUNG NHẠC VUÔNG BO GÓC BÊN NGOÀI, KHUNG TRÒN BÊN TRONG (ẢNH 1 & 3)
+   ========================================================= */
 .music-slide-drawer {
     position: fixed;
     bottom: 25px;
@@ -994,44 +1016,50 @@ html.opening-active, body.opening-active {
     align-items: center;
     justify-content: center;
     box-shadow: -5px 0 20px rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(12px);
+    backdrop-filter: blur(8px);
 }
 
 .music-drawer-body {
     background: rgba(18, 18, 24, 0.95);
     border: 1.5px solid var(--gold-accent);
-    padding: 18px 22px;
-    border-radius: 20px 0 0 20px;
+    padding: 20px;
+    border-radius: 22px 0 0 22px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 12px;
+    gap: 14px;
     box-shadow: 0 10px 35px rgba(0, 0, 0, 0.9);
-    backdrop-filter: blur(16px);
-    width: 280px;
+    backdrop-filter: blur(12px);
+    width: 290px;
 }
 
+/* KHUNG VUÔNG BO GÓC BÊN NGOÀI */
 .avatar-spin-frame {
-    width: 72px;
-    height: 72px;
-    border-radius: 18px;
+    width: 110px;
+    height: 110px;
+    border-radius: 22px; /* Vuông bo góc sang trọng */
     overflow: hidden;
     border: 2px solid var(--gold-accent);
-    box-shadow: 0 0 20px var(--gold-glow);
+    box-shadow: 0 0 25px var(--gold-glow);
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #000;
+    background: #09090d;
+    padding: 5px;
+    position: relative;
 }
 
+/* HÌNH TRÒN CỦA GIF XOAY TRÒN LIÊN TỤC BÊN TRONG */
 .konata-main-avatar {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center;
-    border-radius: 50%;
+    object-position: center; /* Tự động cúp hình vuông có khuôn mặt ở giữa (như anime-blob.gif) */
+    border-radius: 50%; /* Tròn xoe bên trong */
+    will-change: transform;
 }
 
+/* ANIMATION LIÊN TỤC XOAY TRÒN */
 .continuous-spinning {
     animation: spinContinuous 6s linear infinite !important;
 }
@@ -1041,31 +1069,46 @@ html.opening-active, body.opening-active {
     100% { transform: rotate(360deg); }
 }
 
+/* =========================================================
+   4. TỐI ƯU DROPDOWN CHỌN NHẠC ĐẸP MẮT & XÓA KHUÔN KÉO LỖI (ẢNH 3 & 5)
+   ========================================================= */
 .track-select-wrap {
     width: 100%;
+    position: relative;
 }
 
 .track-select {
     width: 100%;
-    background: #09090d;
+    background-color: #0a0a0f;
     border: 1.5px solid var(--gold-accent);
-    color: #fff;
-    padding: 8px 10px;
-    border-radius: 10px;
-    font-size: 0.78rem;
+    color: #ffffff;
+    padding: 10px 12px;
+    border-radius: 12px;
+    font-size: 0.82rem;
+    font-weight: 700;
     outline: none;
     cursor: pointer;
-    font-weight: 600;
+    appearance: none; /* Xóa biểu tượng và thanh cuộn kéo xô lệch của trình duyệt */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23FFD700%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 10px;
+    padding-right: 30px;
 }
 
 .track-select optgroup {
     color: var(--gold-accent);
-    background: #121218;
+    background-color: #121218;
+    font-weight: 800;
 }
 
 .track-select option {
-    color: #fff;
-    background: #09090d;
+    color: #ffffff;
+    background-color: #09090d;
+    padding: 8px;
 }
 
 .music-action-row {
@@ -1160,10 +1203,10 @@ html.opening-active, body.opening-active {
     top: 20px;
     left: 50%;
     transform: translate3d(-50%, -100px, 0);
-    background: rgba(18, 18, 24, 0.65);
+    background: rgba(18, 18, 24, 0.85);
     border: 1px solid rgba(255, 215, 0, 0.5);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
     color: #ffffff;
     padding: 8px 16px;
