@@ -4,18 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Not Nem</title>
-    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="opening-active">
 
-    <!-- Hiệu ứng Hào Quang Aura Trắng Màn Hình -->
+    <!-- Video Nền & Glow Cố Định Màn Hình -->
     <div class="aura-flash-overlay" id="auraFlash"></div>
-
-    <!-- Video Nền Mờ Ảo CHUẨN BACKGROUND PROFILE -->
     <video class="video-background" id="bgVideo" autoplay loop muted playsinline>
         <source src="video/videoplayback.webm" type="video/webm">
     </video>
@@ -27,7 +23,7 @@
         <source src="video/Blue.mp3" type="audio/mp3">
     </audio>
 
-    <!-- MÀN HÌNH CLICK TO OPEN -->
+    <!-- Màn Hình Click To Open -->
     <div class="opening-screen" id="openingScreen" onclick="openProfile()">
         <div class="opening-bg-grid"></div>
         <div class="opening-content">
@@ -39,13 +35,12 @@
         </div>
     </div>
 
-    <!-- WIDGET CPU & RAM -->
+    <!-- Top Bar & Widget CPU/RAM Cố Định Trên Màn Hình -->
     <div class="system-monitor-box">
         <div class="sys-item"><i class="fas fa-microchip"></i> CPU: <span id="cpuVal">12%</span></div>
         <div class="sys-item"><i class="fas fa-memory"></i> RAM: <span id="ramVal">38%</span></div>
     </div>
 
-    <!-- TOP NAV BAR -->
     <div class="top-nav-bar">
         <div class="global-view-counter">
             <i class="fas fa-user-check" style="color: var(--gold-accent);"></i> 
@@ -60,20 +55,15 @@
         </div>
     </div>
 
-    <!-- PROFILE CONTAINER -->
+    <!-- Main Container -->
     <div class="container">
-        
-        <!-- HÀNG 1: PROFILE TRÁI & SKILLS/SOCIALS PHẢI -->
         <div class="profile-grid">
-            
             <div class="profile-left">
                 <div class="dynamic-badge" id="dynamicBadge">CAFE PROFILE</div>
 
                 <div class="avatar-wrap">
-                    <img src="images/manhattancafe.gif" onerror="this.src='images/DenManHinh.jpg'" alt="Manhattan Cafe" class="avatar-img" id="profilePic">
-                    <div class="status-badge" title="Focus Mode">
-                        <i class="fas fa-moon"></i>
-                    </div>
+                    <img src="images/manhattancafe.gif" onerror="this.src='https://i.postimg.cc/0jX43vrm/anime-blob.gif'" alt="Manhattan Cafe" class="avatar-img" id="profilePic">
+                    <div class="status-badge" title="Focus Mode"><i class="fas fa-moon"></i></div>
                 </div>
 
                 <div class="username-container" id="usernameContainer"></div>
@@ -102,7 +92,6 @@
             </div>
 
             <div class="profile-right">
-
                 <div class="card">
                     <div class="card-header">
                         <i class="fas fa-share-nodes"></i>
@@ -148,13 +137,11 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
 
-        <!-- HÀNG 2: DONATE & SPOTIFY PLAYLIST -->
+        <!-- Hàng 2: Donate & Spotify Playlists -->
         <div class="second-row-grid">
-            
             <div class="donate-card card">
                 <div class="donate-header">
                     <i class="fas fa-hand-holding-heart"></i>
@@ -164,7 +151,7 @@
                     Mọi sự ủng hộ và đồng hành của bạn đều là nguồn động lực quý báu giúp tôi hoàn thiện bản thân mỗi ngày.
                 </div>
                 <div class="qr-wrap" onclick="openQrModal()" title="Nhấp để phóng to mã QR">
-                    <img src="images/qrdonate.png" onerror="this.src='images/DenManHinh.jpg'" alt="QR Donate" class="qr-img">
+                    <img src="images/qrdonate.png" onerror="this.src='https://i.postimg.cc/0jX43vrm/anime-blob.gif'" alt="QR Donate" class="qr-img">
                     <div class="qr-zoom-hint"><i class="fas fa-search-plus"></i> <span data-i18n="qrZoomHint">Nhấp để phóng to</span></div>
                 </div>
                 <div class="bank-info-box">
@@ -197,10 +184,9 @@
                     <div class="spotify-iframe-card"><iframe src="https://open.spotify.com/embed/playlist/3Mp1DOUa7Mfn4Hsq741ayo?utm_source=generator" width="100%" height="152" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>
                 </div>
             </div>
-
         </div>
 
-        <!-- HÀNG 3: ĐÁNH GIÁ FULL WIDTH -->
+        <!-- Hàng 3: Đánh Giá Full Width -->
         <div class="fullwidth-review-container">
             <div class="review-box card">
                 <div class="review-title" data-i18n="reviewTitle">Mong bạn để lại đánh giá</div>
@@ -229,15 +215,14 @@
                 <div class="reviews-list" id="reviewsList"></div>
             </div>
         </div>
-
     </div>
 
-    <!-- MODAL PHÓNG TO QR TO GẦN HẾT MÀN HÌNH -->
+    <!-- Modal Phóng To QR -->
     <div class="qr-modal-overlay" id="qrModalOverlay" onclick="closeQrModal()">
         <div class="qr-modal-content" onclick="event.stopPropagation()">
             <button class="qr-modal-close" onclick="closeQrModal()">&times;</button>
             <div class="qr-modal-header" data-i18n="qrModalTitle">Quét Mã QR Ủng Hộ</div>
-            <img src="images/qrdonate.png" onerror="this.src='images/DenManHinh.jpg'" alt="QR Donate Big" class="qr-modal-img">
+            <img src="images/qrdonate.png" onerror="this.src='https://i.postimg.cc/0jX43vrm/anime-blob.gif'" alt="QR Donate Big" class="qr-modal-img">
             <div class="qr-modal-info">
                 <strong>NGUYEN VIET NAM</strong><br>
                 STK: <span class="highlight" onclick="copyContact('5801753378', 'STK')">5801753378</span> (BIDV - CN Bình Định)
@@ -245,16 +230,16 @@
         </div>
     </div>
 
-    <!-- DRAWER NHẠC TRƯỢT HÌNH VUÔNG BO GÓC SANG TRỌNG -->
+    <!-- Drawer Phát Nhạc (Cố Định Màn Hình Góc Phải) -->
     <div class="music-slide-drawer" id="musicSlideDrawer">
         <button class="music-drawer-toggle" id="drawerToggleBtn" onclick="toggleMusicDrawer()">
             <i class="fas fa-chevron-left" id="drawerArrowIcon"></i>
         </button>
 
         <div class="music-drawer-body">
-            <!-- KHUNG VUÔNG BO GÓC BÊN NGOÀI, KHUNG TRÒN XOAY BÊN TRONG -->
+            <!-- Khung Ngoài Vuông Bo Góc, Khung Trong Đĩa Tròn Xoay -->
             <div class="avatar-spin-frame">
-                <img id="musicRandomAvatar" src="images/CafededauTachyon.gif" onerror="this.src='images/anime-blob.gif'" alt="Random Anime GIF" class="konata-main-avatar continuous-spinning">
+                <img id="musicRandomAvatar" src="images/CafededauTachyon.gif" onerror="this.src='https://i.postimg.cc/0jX43vrm/anime-blob.gif'" alt="Random Anime GIF" class="konata-main-avatar continuous-spinning">
             </div>
 
             <div class="track-select-wrap">
@@ -298,12 +283,11 @@
         </div>
     </div>
 
-    <!-- FOOTER -->
+    <!-- Footer & Toast -->
     <div class="exclusive-footer" id="exclusiveFooter" data-i18n="footerText">
         © 2025 by Nem. Created with GitHub.
     </div>
 
-    <!-- TOAST THÔNG BÁO -->
     <div class="custom-toast" id="customToast">
         <i class="fas fa-circle-check" style="color: var(--gold-accent);"></i>
         <span id="toastMsg">Đã sao chép thành công</span>
