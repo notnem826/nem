@@ -1,6 +1,6 @@
 :root {
     --bg-black: #08080c;
-    --card-bg: rgba(18, 18, 24, 0.84);
+    --card-bg: rgba(18, 18, 24, 0.85);
     --card-border: rgba(255, 215, 0, 0.28);
     --gold-accent: #ffd700;
     --gold-glow: rgba(255, 215, 0, 0.35);
@@ -15,7 +15,6 @@
     font-family: 'Plus Jakarta Sans', sans-serif;
     user-select: none;
     -webkit-user-select: none;
-    cursor: default;
 }
 
 body {
@@ -31,6 +30,13 @@ body {
     padding: 70px 15px 140px 15px;
 }
 
+/* Khóa cuộn trang khi đang ở màn hình Click to Open */
+body.opening-active {
+    overflow: hidden !important;
+    height: 100vh !important;
+    touch-action: none !important;
+}
+
 /* Video Nền */
 .video-background {
     position: fixed;
@@ -43,7 +49,6 @@ body {
     opacity: 0.35;
     filter: contrast(1.1) brightness(0.8);
     pointer-events: none;
-    will-change: transform;
 }
 
 .ambient-glow {
@@ -58,43 +63,20 @@ body {
     pointer-events: none;
 }
 
-/* Con trỏ chuột ảo mượt mà (Tắt trên Spotify & Mobile để không bị kẹt) */
-.custom-cursor {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: var(--gold-accent);
-    box-shadow: 0 0 10px var(--gold-accent), 0 0 20px #ffffff;
-    pointer-events: none;
-    z-index: 9999999;
-    transform: translate3d(-50%, -50%, 0);
-    mix-blend-mode: screen;
-    will-change: transform;
-}
-
-.custom-cursor.active {
-    width: 24px;
-    height: 24px;
-    background: rgba(255, 215, 0, 0.25);
-    border: 1.5px solid var(--gold-accent);
-}
-
-/* MÀN HÌNH CLICK TO OPEN: HIỆU ỨNG CHIẾU SÁNG TOÀN DIỆN */
+/* MÀN HÌNH CLICK TO OPEN CYBER SANG TRỌNG (KHÔNG TRÀN / KHÔNG RÒ NỘI DUNG) */
 .opening-screen {
     position: fixed;
-    top: 0;
-    left: 0;
+    inset: 0;
     width: 100vw;
     height: 100vh;
-    z-index: 99999;
+    z-index: 999999;
     display: flex;
     justify-content: center;
     align-items: center;
-    cursor: pointer !important;
+    cursor: pointer;
     overflow: hidden;
+    background: #08080c;
+    touch-action: none;
 }
 
 .door-left, .door-right {
@@ -102,14 +84,14 @@ body {
     top: 0;
     width: 100%;
     height: 100%;
-    transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+    transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1);
     z-index: 2;
 }
 
 .door-left {
     left: 0;
     clip-path: polygon(0 0, 100% 0, 0 100%);
-    background: linear-gradient(135deg, #12121a, #050508);
+    background: linear-gradient(135deg, #12121a, #030305);
 }
 
 .door-right {
@@ -122,48 +104,76 @@ body {
     position: relative;
     z-index: 3;
     text-align: center;
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition: all 0.5s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cyber-circle {
+    position: absolute;
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    border: 2px dashed rgba(255, 215, 0, 0.4);
+    animation: rotateCyber 12s linear infinite;
+}
+
+@keyframes rotateCyber {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 .click-to-open {
     font-family: 'Space Grotesk', sans-serif;
-    font-size: 2.2rem;
+    font-size: 1.6rem;
     font-weight: 800;
-    letter-spacing: 3px;
+    letter-spacing: 2px;
     color: #ffffff;
     text-transform: uppercase;
-    text-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
     border: 2px solid var(--gold-accent);
-    padding: 15px 40px;
+    padding: 16px 36px;
     border-radius: 40px;
-    background: rgba(18, 18, 24, 0.9);
+    background: rgba(18, 18, 24, 0.95);
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.4);
     animation: pulseBtn 2s infinite alternate;
 }
 
 @keyframes pulseBtn {
     0% { transform: scale(1); box-shadow: 0 0 15px rgba(255, 215, 0, 0.3); }
-    100% { transform: scale(1.05); box-shadow: 0 0 35px rgba(255, 215, 0, 0.8); }
-}
-
-.screen-flash {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: #ffffff;
-    opacity: 0;
-    z-index: 10;
-    pointer-events: none;
-    transition: opacity 0.6s ease-out;
+    100% { transform: scale(1.06); box-shadow: 0 0 35px rgba(255, 215, 0, 0.8); }
 }
 
 .opening-screen.opened .door-left { transform: translate3d(-100%, -100%, 0); }
 .opening-screen.opened .door-right { transform: translate3d(100%, 100%, 0); }
-.opening-screen.opened .opening-content { opacity: 0; transform: scale(0.6); }
-.opening-screen.opened .screen-flash { opacity: 1; }
+.opening-screen.opened .opening-content { opacity: 0; transform: scale(0.5); }
 
-/* THANH HEADER TOP BAR RESPONSIVE */
+/* WIDGET ĐO HIỆU NĂNG CPU & RAM (GÓC DƯỚI BÊN TRÁI) */
+.system-monitor-box {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 1000;
+    background: rgba(18, 18, 24, 0.85);
+    border: 1px solid var(--card-border);
+    backdrop-filter: blur(10px);
+    padding: 8px 14px;
+    border-radius: 20px;
+    display: flex;
+    gap: 12px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #e2e8f0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+}
+
+.sys-item i {
+    color: var(--gold-accent);
+    margin-right: 4px;
+}
+
+/* THANH HEADER TOP BAR */
 .top-nav-bar {
     position: fixed;
     top: 15px;
@@ -238,7 +248,6 @@ body {
     gap: 30px;
 }
 
-/* Cột Trái */
 .profile-left {
     display: flex;
     flex-direction: column;
@@ -296,7 +305,7 @@ body {
     box-shadow: 0 0 15px var(--gold-glow);
 }
 
-/* Bouncy Floating Name */
+/* Bouncy Name */
 .username-container {
     display: flex;
     justify-content: center;
@@ -335,7 +344,7 @@ body {
     font-style: italic;
 }
 
-/* Hộp Liên Hệ Co Giãn Tự Động */
+/* HỘP LIÊN HỆ CÂN BẰNG TỐI ĐA TRÊN MOBILE (KHÔNG TRÀN / KHÔNG TÁCH DÒNG CẮT MẮT) */
 .contact-box-wrap {
     width: 100%;
     display: flex;
@@ -347,15 +356,16 @@ body {
 .contact-item {
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.08);
-    padding: 11px 15px;
+    padding: 11px 14px;
     border-radius: 14px;
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
     transition: all 0.25s ease;
     width: 100%;
+    overflow: hidden;
 }
 
 .contact-item:hover {
@@ -369,24 +379,26 @@ body {
     align-items: center;
     gap: 6px;
     white-space: nowrap;
+    flex-shrink: 0;
 }
 
-.contact-item .lbl i {
-    color: var(--gold-accent);
-}
+.contact-item .lbl i { color: var(--gold-accent); }
 
 .contact-item .val {
     color: var(--gold-accent);
     font-weight: 600;
     text-align: right;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .contact-item .email-val {
-    font-size: 0.8rem;
-    word-break: break-all;
+    font-size: 0.72rem;
+    letter-spacing: -0.3px;
 }
 
-/* Hộp Mỗi Ngày Nhớ Một Câu */
+/* Hộp Quotes */
 .motivation-box {
     text-align: center;
     padding: 18px;
@@ -431,7 +443,7 @@ body {
     box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
 }
 
-/* GÓC HẢO TÂM & ĐẦU TƯ / DONATE */
+/* DONATE CARD (ẢNH QR MẶC ĐỊNH MỞ RỘNG TO HƠN THEO Ý BẠN) */
 .donate-card {
     width: 100%;
     background: rgba(255, 215, 0, 0.03);
@@ -462,15 +474,15 @@ body {
 }
 
 .qr-wrap {
-    width: 150px;
-    height: 150px;
+    width: 180px; /* Phóng to nhẹ khung QR */
+    height: 180px;
     margin: 0 auto 12px auto;
     border-radius: 14px;
     overflow: hidden;
     border: 2px solid var(--gold-accent);
     background: #fff;
-    padding: 5px;
-    box-shadow: 0 0 15px var(--gold-glow);
+    padding: 6px;
+    box-shadow: 0 0 20px var(--gold-glow);
     cursor: pointer;
     position: relative;
 }
@@ -490,7 +502,7 @@ body {
     background: rgba(0, 0, 0, 0.75);
     color: #fff;
     font-size: 0.65rem;
-    padding: 2px;
+    padding: 3px;
     border-radius: 4px;
 }
 
@@ -514,22 +526,22 @@ body {
 .bank-val { color: #ffffff; }
 .bank-val.highlight { color: var(--gold-accent); cursor: pointer; }
 
-/* MODAL PHÓNG TO QR DONATE */
+/* MODAL PHÓNG TO QR DONATE (CĂN GIỮA HOÀN HẢO CẢ CHIỀU NGANG & DỌC) */
 .qr-modal-overlay {
     position: fixed;
-    top: 0;
-    left: 0;
+    inset: 0;
     width: 100vw;
     height: 100vh;
     background: rgba(0, 0, 0, 0.88);
     backdrop-filter: blur(14px);
-    z-index: 999999;
+    z-index: 9999999;
     display: flex;
     justify-content: center;
     align-items: center;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease;
+    padding: 20px;
 }
 
 .qr-modal-overlay.show {
@@ -541,11 +553,13 @@ body {
     background: #121218;
     border: 2px solid var(--gold-accent);
     box-shadow: 0 0 40px var(--gold-glow);
-    padding: 25px;
+    padding: 24px;
     border-radius: 20px;
     text-align: center;
     position: relative;
-    max-width: 90vw;
+    max-width: 320px;
+    width: 100%;
+    margin: auto;
 }
 
 .qr-modal-close {
@@ -562,22 +576,23 @@ body {
 .qr-modal-header {
     font-weight: 800;
     color: var(--gold-accent);
-    font-size: 1.1rem;
-    margin-bottom: 15px;
+    font-size: 1rem;
+    margin-bottom: 12px;
     text-transform: uppercase;
 }
 
 .qr-modal-img {
-    width: 260px;
-    height: 260px;
+    width: 220px;
+    height: 220px;
     border-radius: 12px;
     background: #fff;
     padding: 6px;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
+    object-fit: cover;
 }
 
 .qr-modal-info {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     color: #cbd5e1;
     line-height: 1.5;
 }
@@ -588,7 +603,7 @@ body {
     font-weight: 700;
 }
 
-/* KHU VỰC ĐÁNH GIÁ (REVIEW BOX & 2 TABS) */
+/* KHU VỰC ĐÁNH GIÁ (TABS NGẮN GỌN) */
 .review-box {
     width: 100%;
     background: rgba(255, 255, 255, 0.02);
@@ -662,7 +677,6 @@ body {
     margin-bottom: 12px;
 }
 
-/* Tabs Đánh Giá */
 .review-tabs {
     display: flex;
     gap: 6px;
@@ -677,7 +691,7 @@ body {
     background: none;
     border: none;
     color: var(--text-grey);
-    font-size: 0.72rem;
+    font-size: 0.8rem;
     font-weight: 700;
     padding: 6px 4px;
     border-radius: 8px;
@@ -753,7 +767,7 @@ body {
 
 .card-header i { color: var(--gold-accent); }
 
-/* Social Buttons */
+/* Socials */
 .social-bar {
     display: flex;
     justify-content: space-between;
@@ -851,7 +865,7 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* WIDGET NHẠC TRƯỢT KÉO RA/VÀO (SLIDE-OUT DRAWER) */
+/* DRAWER NHẠC TRƯỢT */
 .music-slide-drawer {
     position: fixed;
     bottom: 25px;
@@ -980,7 +994,7 @@ body {
     font-weight: 700;
 }
 
-/* Chân Trang Độc Quyền (Thon Gọn Ngang & Nháy Sáng Vàng Mờ) */
+/* Exclusive Footer */
 .exclusive-footer {
     position: fixed;
     bottom: 20px;
@@ -1005,39 +1019,37 @@ body {
     opacity: 1;
 }
 
-.exclusive-footer:hover {
-    border-color: var(--gold-accent);
-    color: #ffffff;
-    box-shadow: 0 0 20px var(--gold-glow);
-    animation: goldBlink 1.5s infinite alternate;
-}
-
-@keyframes goldBlink {
-    0% { box-shadow: 0 0 8px rgba(255, 215, 0, 0.3); }
-    100% { box-shadow: 0 0 22px rgba(255, 215, 0, 0.8); }
-}
-
-/* Toast Thông Báo */
+/* TOAST THÔNG BÁO GLASSMORPHISM TRONG SUỐT (NHỎ NẰM NGANG CÂN BẰNG MOBILE) */
 .custom-toast {
     position: fixed;
-    bottom: 30px;
+    top: 20px;
     left: 50%;
-    transform: translate3d(-50%, 100px, 0);
-    background: rgba(18, 18, 24, 0.95);
+    transform: translate3d(-50%, -100px, 0);
+    background: rgba(18, 18, 24, 0.75);
     border: 1px solid var(--gold-accent);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 15px var(--gold-glow);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
     color: #ffffff;
-    padding: 12px 24px;
-    border-radius: 30px;
-    font-size: 0.88rem;
+    padding: 8px 18px;
+    border-radius: 25px;
+    font-size: 0.78rem;
     font-weight: 600;
-    z-index: 999999;
+    z-index: 9999999;
     opacity: 0;
     pointer-events: none;
     transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     display: flex;
     align-items: center;
     gap: 8px;
+    max-width: 90vw;
+    white-space: nowrap;
+}
+
+.custom-toast #toastMsg {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .custom-toast.show {
@@ -1045,16 +1057,18 @@ body {
     opacity: 1;
 }
 
-/* TỐI ƯU GIAO DIỆN MOBILE (KHÔNG TRÀN, KHÔNG BÉO PHÌ, KHÔNG ĐÈ NHAU) */
+/* Mobile Responsiveness */
 @media (max-width: 820px) {
     body { padding-top: 65px; }
-    .top-nav-bar { padding: 0 10px; top: 10px; }
-    .global-view-counter { padding: 6px 12px; font-size: 0.75rem; }
-    .lang-btn { padding: 5px 8px; font-size: 0.72rem; }
-    .profile-grid { grid-template-columns: 1fr; }
-    .playlist-wrap { grid-template-columns: 1fr; max-height: 400px; }
-    .container { padding: 18px; }
-    .click-to-open { font-size: 1.4rem; padding: 12px 24px; }
-    .custom-cursor { display: none !important; }
-    * { cursor: auto !important; }
+    .top-nav-bar { padding: 0 10px**1. Sửa phóng to ảnh QR (Ảnh 1)**
+
+Thêm CSS chỉnh `width` lớn hơn cho thẻ chứa ảnh QR trên mobile:
+
+```css
+@media (max-width: 768px) {
+  .qr-card img, .qr-container img {
+    width: 100% !important;
+    max-width: 260px !important; /* Tăng kích thước khung QR */
+    height: auto !important;
+  }
 }
