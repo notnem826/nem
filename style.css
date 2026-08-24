@@ -1,3 +1,7 @@
+/* =========================================================
+   WEBSITE PROFILE - OPTIMIZED & REFINED
+   ========================================================= */
+
 :root {
     --bg-black: #08080c;
     --card-bg: rgba(18, 18, 24, 0.85);
@@ -17,11 +21,14 @@
     -webkit-user-select: none;
 }
 
-body {
+html, body {
     background-color: var(--bg-black);
     color: var(--text-white);
     min-height: 100vh;
     overflow-x: hidden;
+}
+
+body {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -30,10 +37,13 @@ body {
     padding: 70px 15px 140px 15px;
 }
 
-/* Khóa cuộn trang khi đang ở màn hình Click to Open */
-body.opening-active {
+/* KHÓA CUỘN HOÀN TOÀN TRÊN MOBILE & PC KHI MÀN HÌNH MỞ CỬA ĐANG HOẠT ĐỘNG */
+html.opening-active, body.opening-active {
     overflow: hidden !important;
     height: 100vh !important;
+    height: 100dvh !important;
+    position: fixed;
+    width: 100%;
     touch-action: none !important;
 }
 
@@ -44,6 +54,7 @@ body.opening-active {
     left: 0;
     width: 100vw;
     height: 100vh;
+    height: 100dvh;
     z-index: -2;
     object-fit: cover;
     opacity: 0.35;
@@ -57,66 +68,73 @@ body.opening-active {
     left: 0;
     width: 100vw;
     height: 100vh;
+    height: 100dvh;
     z-index: -1;
     background: radial-gradient(circle at 50% 30%, rgba(255, 215, 0, 0.05), transparent 70%),
                 radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.03), transparent 60%);
     pointer-events: none;
 }
 
-/* MÀN HÌNH CLICK TO OPEN CYBER SANG TRỌNG (KHÔNG TRÀN / KHÔNG RÒ NỘI DUNG) */
+/* MÀN HÌNH CLICK TO OPEN CYBER NGẦU & SANG TRỌNG (KHÔNG LỖI SCROLL) */
 .opening-screen {
     position: fixed;
-    inset: 0;
+    top: 0;
+    left: 0;
     width: 100vw;
     height: 100vh;
+    height: 100dvh;
     z-index: 999999;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
     overflow: hidden;
-    background: #08080c;
+    background: radial-gradient(circle at center, #12121a 0%, #08080c 100%);
     touch-action: none;
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.door-left, .door-right {
+.opening-bg-grid {
     position: absolute;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1);
-    z-index: 2;
-}
-
-.door-left {
-    left: 0;
-    clip-path: polygon(0 0, 100% 0, 0 100%);
-    background: linear-gradient(135deg, #12121a, #030305);
-}
-
-.door-right {
-    right: 0;
-    clip-path: polygon(100% 0, 100% 100%, 0 100%);
-    background: linear-gradient(135deg, #181824, #08080c);
+    inset: 0;
+    background-image: linear-gradient(rgba(255, 215, 0, 0.04) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(255, 215, 0, 0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
 }
 
 .opening-content {
     position: relative;
     z-index: 3;
     text-align: center;
-    transition: all 0.5s ease;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    transition: all 0.5s ease;
 }
 
 .cyber-circle {
     position: absolute;
-    width: 280px;
-    height: 280px;
+    width: 290px;
+    height: 290px;
     border-radius: 50%;
-    border: 2px dashed rgba(255, 215, 0, 0.4);
-    animation: rotateCyber 12s linear infinite;
+    border: 1px dashed rgba(255, 215, 0, 0.35);
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.15);
+    animation: rotateCyber 14s linear infinite;
+    pointer-events: none;
+}
+
+.cyber-circle-inner {
+    position: absolute;
+    width: 240px;
+    height: 240px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255, 215, 0, 0.2);
+    border-top-color: var(--gold-accent);
+    border-bottom-color: var(--gold-accent);
+    animation: rotateCyberReverse 8s linear infinite;
+    pointer-events: none;
 }
 
 @keyframes rotateCyber {
@@ -124,30 +142,50 @@ body.opening-active {
     100% { transform: rotate(360deg); }
 }
 
+@keyframes rotateCyberReverse {
+    0% { transform: rotate(360deg); }
+    100% { transform: rotate(0deg); }
+}
+
 .click-to-open {
     font-family: 'Space Grotesk', sans-serif;
-    font-size: 1.6rem;
+    font-size: 1.35rem;
     font-weight: 800;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
     color: #ffffff;
     text-transform: uppercase;
     text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
-    border: 2px solid var(--gold-accent);
-    padding: 16px 36px;
+    border: 1.5px solid var(--gold-accent);
+    padding: 16px 38px;
     border-radius: 40px;
-    background: rgba(18, 18, 24, 0.95);
-    box-shadow: 0 0 30px rgba(255, 215, 0, 0.4);
+    background: rgba(18, 18, 24, 0.92);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.35), inset 0 0 15px rgba(255, 215, 0, 0.15);
     animation: pulseBtn 2s infinite alternate;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: transform 0.2s ease;
 }
 
 @keyframes pulseBtn {
     0% { transform: scale(1); box-shadow: 0 0 15px rgba(255, 215, 0, 0.3); }
-    100% { transform: scale(1.06); box-shadow: 0 0 35px rgba(255, 215, 0, 0.8); }
+    100% { transform: scale(1.05); box-shadow: 0 0 40px rgba(255, 215, 0, 0.8); }
 }
 
-.opening-screen.opened .door-left { transform: translate3d(-100%, -100%, 0); }
-.opening-screen.opened .door-right { transform: translate3d(100%, 100%, 0); }
-.opening-screen.opened .opening-content { opacity: 0; transform: scale(0.5); }
+.opening-subtitle {
+    margin-top: 25px;
+    font-size: 0.78rem;
+    letter-spacing: 2px;
+    color: var(--text-grey);
+    text-transform: uppercase;
+}
+
+.opening-screen.opened {
+    opacity: 0;
+    transform: scale(1.12);
+    pointer-events: none;
+}
 
 /* WIDGET ĐO HIỆU NĂNG CPU & RAM (GÓC DƯỚI BÊN TRÁI) */
 .system-monitor-box {
@@ -155,13 +193,14 @@ body.opening-active {
     bottom: 20px;
     left: 20px;
     z-index: 1000;
-    background: rgba(18, 18, 24, 0.85);
+    background: rgba(18, 18, 24, 0.75);
     border: 1px solid var(--card-border);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     padding: 8px 14px;
     border-radius: 20px;
     display: flex;
-    gap: 12px;
+    gap: 14px;
     font-size: 0.75rem;
     font-weight: 700;
     color: #e2e8f0;
@@ -170,7 +209,12 @@ body.opening-active {
 
 .sys-item i {
     color: var(--gold-accent);
-    margin-right: 4px;
+    margin-right: 5px;
+}
+
+.sys-item span {
+    color: var(--gold-accent);
+    font-family: 'Space Grotesk', sans-serif;
 }
 
 /* THANH HEADER TOP BAR */
@@ -230,7 +274,7 @@ body.opening-active {
     box-shadow: 0 0 10px var(--gold-glow);
 }
 
-/* Container Profile */
+/* CONTAINER PROFILE CHÍNH */
 .container {
     max-width: 990px;
     width: 100%;
@@ -344,7 +388,7 @@ body.opening-active {
     font-style: italic;
 }
 
-/* HỘP LIÊN HỆ CÂN BẰNG TỐI ĐA TRÊN MOBILE (KHÔNG TRÀN / KHÔNG TÁCH DÒNG CẮT MẮT) */
+/* HỘP LIÊN HỆ (ẢNH 5 FIX: CĂN NGANG THẲNG HÀNG, KHÔNG RỚT DÒNG) */
 .contact-box-wrap {
     width: 100%;
     display: flex;
@@ -356,7 +400,7 @@ body.opening-active {
 .contact-item {
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.08);
-    padding: 11px 14px;
+    padding: 10px 14px;
     border-radius: 14px;
     font-size: 0.82rem;
     display: flex;
@@ -366,6 +410,7 @@ body.opening-active {
     transition: all 0.25s ease;
     width: 100%;
     overflow: hidden;
+    gap: 10px;
 }
 
 .contact-item:hover {
@@ -394,8 +439,10 @@ body.opening-active {
 }
 
 .contact-item .email-val {
-    font-size: 0.72rem;
-    letter-spacing: -0.3px;
+    font-size: 0.68rem;
+    letter-spacing: -0.4px;
+    white-space: nowrap;
+    word-break: normal;
 }
 
 /* Hộp Quotes */
@@ -443,13 +490,13 @@ body.opening-active {
     box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
 }
 
-/* DONATE CARD (ẢNH QR MẶC ĐỊNH MỞ RỘNG TO HƠN THEO Ý BẠN) */
+/* DONATE CARD (ẢNH 1 FIX: PHÓNG TO KHUNG VÀ MÃ QR) */
 .donate-card {
     width: 100%;
     background: rgba(255, 215, 0, 0.03);
     border: 1px solid rgba(255, 215, 0, 0.3);
     border-radius: 18px;
-    padding: 16px;
+    padding: 18px;
     text-align: center;
     margin-bottom: 18px;
 }
@@ -470,40 +517,45 @@ body.opening-active {
     font-size: 0.74rem;
     color: var(--text-grey);
     line-height: 1.45;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
 }
 
 .qr-wrap {
-    width: 180px; /* Phóng to nhẹ khung QR */
-    height: 180px;
-    margin: 0 auto 12px auto;
-    border-radius: 14px;
+    width: 220px;
+    height: 220px;
+    margin: 0 auto 14px auto;
+    border-radius: 16px;
     overflow: hidden;
     border: 2px solid var(--gold-accent);
     background: #fff;
     padding: 6px;
-    box-shadow: 0 0 20px var(--gold-glow);
+    box-shadow: 0 0 25px var(--gold-glow);
     cursor: pointer;
     position: relative;
+    transition: transform 0.3s ease;
+}
+
+.qr-wrap:hover {
+    transform: scale(1.03);
 }
 
 .qr-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 8px;
+    border-radius: 10px;
 }
 
 .qr-zoom-hint {
     position: absolute;
-    bottom: 5px;
-    left: 5px;
-    right: 5px;
-    background: rgba(0, 0, 0, 0.75);
+    bottom: 6px;
+    left: 6px;
+    right: 6px;
+    background: rgba(0, 0, 0, 0.78);
     color: #fff;
-    font-size: 0.65rem;
-    padding: 3px;
-    border-radius: 4px;
+    font-size: 0.68rem;
+    padding: 4px;
+    border-radius: 6px;
 }
 
 .bank-info-box {
@@ -512,8 +564,8 @@ body.opening-active {
     gap: 6px;
     font-size: 0.78rem;
     background: rgba(0, 0, 0, 0.4);
-    padding: 10px;
-    border-radius: 10px;
+    padding: 10px 12px;
+    border-radius: 12px;
 }
 
 .bank-row {
@@ -524,16 +576,17 @@ body.opening-active {
 
 .bank-lbl { color: var(--text-grey); }
 .bank-val { color: #ffffff; }
-.bank-val.highlight { color: var(--gold-accent); cursor: pointer; }
+.bank-val.highlight { color: var(--gold-accent); cursor: pointer; font-weight: 700; }
 
-/* MODAL PHÓNG TO QR DONATE (CĂN GIỮA HOÀN HẢO CẢ CHIỀU NGANG & DỌC) */
+/* MODAL PHÓNG TO QR DONATE (ẢNH 4 FIX: CĂN GIỮA HOÀN HẢO) */
 .qr-modal-overlay {
     position: fixed;
     inset: 0;
     width: 100vw;
-    height: 100vh;
+    height: 100dvh;
     background: rgba(0, 0, 0, 0.88);
-    backdrop-filter: blur(14px);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     z-index: 9999999;
     display: flex;
     justify-content: center;
@@ -541,7 +594,7 @@ body.opening-active {
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease;
-    padding: 20px;
+    padding: 15px;
 }
 
 .qr-modal-overlay.show {
@@ -552,14 +605,24 @@ body.opening-active {
 .qr-modal-content {
     background: #121218;
     border: 2px solid var(--gold-accent);
-    box-shadow: 0 0 40px var(--gold-glow);
-    padding: 24px;
+    box-shadow: 0 0 50px var(--gold-glow);
+    padding: 22px;
     border-radius: 20px;
     text-align: center;
     position: relative;
-    max-width: 320px;
+    max-width: 330px;
     width: 100%;
     margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+.qr-modal-overlay.show .qr-modal-content {
+    transform: scale(1);
 }
 
 .qr-modal-close {
@@ -577,18 +640,20 @@ body.opening-active {
     font-weight: 800;
     color: var(--gold-accent);
     font-size: 1rem;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     text-transform: uppercase;
 }
 
 .qr-modal-img {
-    width: 220px;
-    height: 220px;
+    width: 230px;
+    height: 230px;
+    max-width: 100%;
+    max-height: 48vh;
     border-radius: 12px;
     background: #fff;
     padding: 6px;
-    margin-bottom: 12px;
-    object-fit: cover;
+    margin: 8px 0 12px 0;
+    object-fit: contain;
 }
 
 .qr-modal-info {
@@ -603,7 +668,7 @@ body.opening-active {
     font-weight: 700;
 }
 
-/* KHU VỰC ĐÁNH GIÁ (TABS NGẮN GỌN) */
+/* KHU VỰC ĐÁNH GIÁ (ẢNH 2 FIX: TABS NGẮN GỌN "Đánh giá" & "Góp ý") */
 .review-box {
     width: 100%;
     background: rgba(255, 255, 255, 0.02);
@@ -693,7 +758,7 @@ body.opening-active {
     color: var(--text-grey);
     font-size: 0.8rem;
     font-weight: 700;
-    padding: 6px 4px;
+    padding: 7px 4px;
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.2s ease;
@@ -741,7 +806,7 @@ body.opening-active {
     word-break: break-word;
 }
 
-/* Cột Phải */
+/* CỘT PHẢI */
 .profile-right {
     display: flex;
     flex-direction: column;
@@ -1019,21 +1084,21 @@ body.opening-active {
     opacity: 1;
 }
 
-/* TOAST THÔNG BÁO GLASSMORPHISM TRONG SUỐT (NHỎ NẰM NGANG CÂN BẰNG MOBILE) */
+/* TOAST THÔNG BÁO (ẢNH 3 FIX: MỜ TRONG SUỐT, NHỎ GỌN NGANG THẲNG) */
 .custom-toast {
     position: fixed;
     top: 20px;
     left: 50%;
     transform: translate3d(-50%, -100px, 0);
-    background: rgba(18, 18, 24, 0.75);
-    border: 1px solid var(--gold-accent);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+    background: rgba(18, 18, 24, 0.65);
+    border: 1px solid rgba(255, 215, 0, 0.5);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
     color: #ffffff;
-    padding: 8px 18px;
-    border-radius: 25px;
-    font-size: 0.78rem;
+    padding: 8px 16px;
+    border-radius: 30px;
+    font-size: 0.72rem;
     font-weight: 600;
     z-index: 9999999;
     opacity: 0;
@@ -1042,7 +1107,7 @@ body.opening-active {
     display: flex;
     align-items: center;
     gap: 8px;
-    max-width: 90vw;
+    max-width: 85vw;
     white-space: nowrap;
 }
 
@@ -1057,18 +1122,22 @@ body.opening-active {
     opacity: 1;
 }
 
-/* Mobile Responsiveness */
+/* RESPONSIVE CHO ĐIỆN THOẠI & TABLET */
 @media (max-width: 820px) {
-    body { padding-top: 65px; }
-    .top-nav-bar { padding: 0 10px**1. Sửa phóng to ảnh QR (Ảnh 1)**
-
-Thêm CSS chỉnh `width` lớn hơn cho thẻ chứa ảnh QR trên mobile:
-
-```css
-@media (max-width: 768px) {
-  .qr-card img, .qr-container img {
-    width: 100% !important;
-    max-width: 260px !important; /* Tăng kích thước khung QR */
-    height: auto !important;
-  }
+    body { padding-top: 65px; padding-bottom: 120px; }
+    .top-nav-bar { padding: 0 10px; }
+    .container { padding: 20px 16px; border-radius: 18px; }
+    .profile-grid { grid-template-columns: 1fr; gap: 20px; }
+    .playlist-wrap { grid-template-columns: 1fr; }
+    .system-monitor-box {
+        bottom: 15px;
+        left: 12px;
+        padding: 6px 10px;
+        font-size: 0.7rem;
+        gap: 10px;
+    }
+    .qr-wrap {
+        width: 210px;
+        height: 210px;
+    }
 }
