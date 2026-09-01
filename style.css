@@ -709,7 +709,6 @@ html.opening-active, body.opening-active {
 .bank-val { color: #ffffff; }
 .bank-val.highlight { color: var(--gold-accent); cursor: pointer; font-weight: 700; }
 
-/* FIX SỬA LỖI DƯ KHÚC TRÊN SPOTIFY PLAYLIST (ẢNH 2) */
 .spotify-card-container {
     height: 100%;
     display: flex;
@@ -717,7 +716,7 @@ html.opening-active, body.opening-active {
 }
 
 .playlist-card-header {
-    margin-bottom: 10px !important; /* Kéo playlist lên vừa khít không còn khoảng trống */
+    margin-bottom: 10px !important;
 }
 
 .playlist-wrap {
@@ -892,7 +891,7 @@ html.opening-active, body.opening-active {
 }
 
 /* =========================================================
-   2. MODAL PHÓNG TO QR TO GẦN HẾT MÀN HÌNH (ẢNH 4)
+   2. MODAL PHÓNG TO QR TO GẦN HẾT MÀN HÌNH
    ========================================================= */
 .qr-modal-overlay {
     position: fixed;
@@ -925,7 +924,7 @@ html.opening-active, body.opening-active {
     border-radius: 24px;
     text-align: center;
     position: relative;
-    max-width: 520px; /* To gần hết màn hình website */
+    max-width: 520px;
     width: 92vw;
     max-height: 88vh;
     display: flex;
@@ -987,7 +986,7 @@ html.opening-active, body.opening-active {
 }
 
 /* =========================================================
-   3. KHUNG NHẠC VUÔNG BO GÓC BÊN NGOÀI, KHUNG TRÒN BÊN TRONG (ẢNH 1 & 3)
+   3. KHUNG NHẠC VUÔNG BO GÓC BÊN NGOÀI, KHUNG TRÒN BÊN TRONG
    ========================================================= */
 .music-slide-drawer {
     position: fixed;
@@ -1033,11 +1032,10 @@ html.opening-active, body.opening-active {
     width: 290px;
 }
 
-/* KHUNG VUÔNG BO GÓC BÊN NGOÀI */
 .avatar-spin-frame {
     width: 110px;
     height: 110px;
-    border-radius: 22px; /* Vuông bo góc sang trọng */
+    border-radius: 22px;
     overflow: hidden;
     border: 2px solid var(--gold-accent);
     box-shadow: 0 0 25px var(--gold-glow);
@@ -1049,17 +1047,15 @@ html.opening-active, body.opening-active {
     position: relative;
 }
 
-/* HÌNH TRÒN CỦA GIF XOAY TRÒN LIÊN TỤC BÊN TRONG */
 .konata-main-avatar {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center; /* Tự động cúp hình vuông có khuôn mặt ở giữa (như anime-blob.gif) */
-    border-radius: 50%; /* Tròn xoe bên trong */
+    object-position: center;
+    border-radius: 50%;
     will-change: transform;
 }
 
-/* ANIMATION LIÊN TỤC XOAY TRÒN */
 .continuous-spinning {
     animation: spinContinuous 6s linear infinite !important;
 }
@@ -1070,7 +1066,7 @@ html.opening-active, body.opening-active {
 }
 
 /* =========================================================
-   4. TỐI ƯU DROPDOWN CHỌN NHẠC ĐẸP MẮT & XÓA KHUÔN KÉO LỖI (ẢNH 3 & 5)
+   4. TỐI ƯU DROPDOWN CHỌN NHẠC
    ========================================================= */
 .track-select-wrap {
     width: 100%;
@@ -1088,7 +1084,7 @@ html.opening-active, body.opening-active {
     font-weight: 700;
     outline: none;
     cursor: pointer;
-    appearance: none; /* Xóa biểu tượng và thanh cuộn kéo xô lệch của trình duyệt */
+    appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
