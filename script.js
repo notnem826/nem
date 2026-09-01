@@ -19,7 +19,7 @@ const quoteDatabase = [
     { en: "“Strength does not come from physical capacity. It comes from an indomitable will.” -Mahatma Gandhi", vi: "“Sức mạnh không đến từ năng lực thể chất. Nó đến từ ý chí bất khuất.” -Mahatma Gandhi", ja: "「強さは身体的な能力から生まれるのではない。不屈の意志から生まれるのだ。」 -Mahatma Gandhi" },
     { en: "“If something stands between you and your success, move it. Never be denied.” -Dwayne ‘The Rock’ Johnson", vi: "“Nếu có điều gì cản trở bạn và thành công, hãy dẹp nó đi. Đừng bao giờ chịu khuất phục.” -Dwayne ‘The Rock’ Johnson", ja: "「あなたと成功の間に何かが立ち塞がるなら、それをどかせ。決して拒まれるな。」 -Dwayne ‘The Rock’ Johnson" },
     { en: "“In training, you listen to your body. In competition, you tell your body to shut up.” -Rich Froning Jr.", vi: "“Khi luyện tập, hãy lắng nghe cơ thể. Trong thi đấu, hãy bảo cơ thể bạn im lặng.” -Rich Froning Jr.", ja: "「練習では自分の体に耳を傾けよ。勝負では体に黙れと言い聞かせよ。」 -Rich Froning Jr." },
-    { en: "“Motivation is what gets you started. Habit is what keeps you going.” -Jim Ryun", vi: "“Động lực là thứ giúp bạn bắt đầu. Thói quen là thứ giúp bạn tiếp tục.” -Jim Ryun", ja: "「動機が始まりを与え、習慣が継続を生む。」 -Jim Ryun" },
+    { en: "“Motivation is what gets you started. Habit is what keeps you going.” -Jim Ryun", vi: "“Động lực là thứ giúp bạn bắt đầu. Thói quen là thứ giúp bạn tiếp tục.” -Jim Ryun", ja: "「動機が始まりを与え、習慣 wrought 継続を生む。」 -Jim Ryun" },
     { en: "“The last three or four reps is what makes the muscle grow. This area of pain divides the champion from someone else who is not a champion.” -Arnold Schwarzenegger", vi: "“Ba hoặc bốn hiệp cuối cùng là thứ giúp cơ bắp phát triển. Vùng đau đớn này phân định nhà vô địch với những người bình thường.” -Arnold Schwarzenegger", ja: "「最後の3〜4回の反復こそが筋肉を成長させる。この痛みの領域が、王者とそうでない者を分けるのだ。」 -Arnold Schwarzenegger" },
     { en: "“Every champion was once a contender that refused to give up.” -Sylvester Stallone", vi: "“Mỗi nhà vô địch đều từng là một kẻ thách đấu không chịu bỏ cuộc.” -Sylvester Stallone", ja: "「すべてのチャンピオンは、かつて諦めることを拒んだ挑戦者だった。」 -Sylvester Stallone" },
     { en: "“Our greatest glory is not in never failing, but in rising every time we fall.” -Confucius", vi: "“Vinh quang lớn nhất không phải là không bao giờ vấp ngã, mà là đứng dậy sau mỗi lần ngã.” -Confucius", ja: "「最大の栄光とは一度も失敗しないことではなく、倒れるたびに起き上がることにある。」 -Confucius" },
@@ -48,7 +48,7 @@ const quoteDatabase = [
     { en: "“If you run, you are a runner. It doesn’t matter how fast or how far. It doesn’t matter if today is your first day or if you’ve been running for twenty years. There is no test to pass, no license to earn, no membership card to get. You just run.” -John Bingham", vi: "“Nếu bạn chạy, bạn là một người chạy bộ. Không quan trọng nhanh hay xa bao nhiêu. Không quan trọng hôm nay là ngày đầu hay bạn đã chạy hai mươi năm. Không cần vượt qua kỳ thi nào, không cần bằng cấp, không cần thẻ thành viên. Bạn chỉ cần chạy.” -John Bingham", ja: "「走るなら、あなたはランナーだ。速さや距離は関係ない。今日が初日でも20年走っていても関係ない。合格すべきテストも免許も会員証もいらない。ただ走るだけだ。」 -John Bingham" },
     { en: "“Go fast enough to get there, but slow enough to see.” -Jimmy Buffett", vi: "“Hãy đi đủ nhanh để đến đích, nhưng hãy đi đủ chậm để ngắm nhìn xung quanh.” -Jimmy Buffett", ja: "「たどり着くのに十分な速さで進み、見渡すのに十分な遅さで行け。」 -Jimmy Buffett" },
     { en: "“Runners don’t quit. We fade; we “hit the wall”; we’re sometimes reduced to a walk. But we keep on.” -Amby Burfoot", vi: "“Người chạy bộ không bỏ cuộc. Chúng ta có thể mệt lử; chúng ta có thể 'chạm đáy kiệt sức'; đôi khi phải đi bộ. Nhưng chúng ta vẫn tiếp tục.” -Amby Burfoot", ja: "「ランナーは諦めない。失速し、壁にぶつかり、時には歩いてしまうこともある。頼むから前へ進み続ける。」 -Amby Burfoot" },
-    { en: "“It never gets easier, you just get better.” -Jordan Burroughs", vi: "“Mọi thứ không bao giờ dễ dàng hơn, chỉ là bạn đã trở nên giỏi hơn.” -Jordan Burroughs", ja: "「決して楽にはならない、ただ自分が強くなるだけだ。」 -Jordan Burroughs" },
+    { en: "“It never gets easier, you just get better.” -Jordan Burroughs", vi: "“Mọi thứ không bao giờ dễ dàng hơn, chỉ là bạn đã trở nên giỏi hơn.” -Jordan Burroughs", ja: "「決して楽에는ならない、ただ自分が強くなるだけだ。」 -Jordan Burroughs" },
     { en: "“The road to success runs uphill.” -Willie Davis", vi: "“Con đường dẫn đến thành công luôn là đường dốc ngược.” -Willie Davis", ja: "「成功への道は常に上り坂である。」 -Willie Davis" },
     { en: "“I’m either completely committed to what I am doing or have a few screws loose, who knows.” -Courtney Dauwalter", vi: "“Hoặc là tôi hoàn toàn tận hiến cho những gì mình đang làm, hoặc là đầu óc tôi có chút điên rồ, ai mà biết được.” -Courtney Dauwalter", ja: "「自分がやっていることに全力を尽くしているか、ネジが数本外れているか、誰にも分からない。」 -Courtney Dauwalter" },
     { en: "“Running allows me to set my mind free. Nothing seems impossible. Nothing unattainable.” -Kara Goucher", vi: "“Chạy bộ cho phép tâm trí tôi được tự do. Không có gì dường như là bất khả thi. Không có gì là không thể với tới.” -Kara Goucher", ja: "「走ることは私の心を解放してくれる。不可能なことなどなく、手の届かないものなどない。」 -Kara Goucher" },
@@ -172,14 +172,20 @@ const langData = {
 let currentLang = 'vi';
 let currentQuoteIndex = 0;
 
-function setLanguage(lang) {
+function setLanguage(lang, btnEl) {
     currentLang = lang;
     document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-    if (event && event.target) {
-        event.target.classList.add('active');
+    
+    if (btnEl) {
+        btnEl.classList.add('active');
+    } else {
+        const activeBtn = document.querySelector(`.lang-btn[onclick*="'${lang}'"]`);
+        if (activeBtn) activeBtn.classList.add('active');
     }
 
     const data = langData[lang];
+    if (!data) return;
+
     renderFloatingName(data.name);
     document.getElementById('bioText').innerHTML = data.bio;
     document.getElementById('viewCountLabel').textContent = data.visitorsText;
@@ -189,9 +195,7 @@ function setLanguage(lang) {
 
     document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
-        if (data[key]) {
-            el.innerHTML = data[key];
-        }
+        if (data[key]) el.innerHTML = data[key];
     });
 
     displayCurrentQuote();
@@ -271,7 +275,7 @@ const openingScreen = document.getElementById('openingScreen');
 const playIcon = document.getElementById('playIcon');
 let isPlaying = false;
 
-// DANH SÁCH TẤT CẢ FILE GIF ANIME NỔI BẬT THEO YÊU CẦU
+// DANH SÁCH TẤT CẢ FILE GIF ANIME NỔI BẬT
 const avatarGifs = [
     "images/CafededauTachyon.gif",
     "images/Cafedudua.gif",
@@ -281,7 +285,7 @@ const avatarGifs = [
     "images/shikimori.gif"
 ];
 
-// DANH SÁCH BÀI NHẠC CHILL PHÁT NGỦ CÔNG / CHUYỂN BÀI TỰ ĐỘNG
+// DANH SÁCH BÀI NHẠC CHILL PHÁT NGẪU NHIÊN / CHUYỂN BÀI TỰ ĐỘNG
 const chillTracks = [
     "video/Imposter-Syndrome.mp4",
     "video/Blue.mp3",
@@ -318,7 +322,6 @@ function openProfile() {
         }, 850);
     }
 
-    // Đổi GIF ngẫu nhiên khi mở website
     changeRandomAvatar();
 
     if (audio) {
@@ -348,7 +351,7 @@ function resetAvatarRotation() {
     if (avatarImg) {
         avatarImg.style.animation = 'none';
         void avatarImg.offsetWidth;
-        avatarImg.style.animation = 'spinContinuous 6s linear infinite !important';
+        avatarImg.style.setProperty('animation', 'spinContinuous 6s linear infinite', 'important');
     }
 }
 
@@ -360,7 +363,7 @@ function toggleMusic() {
     } else {
         audio.play();
         if (playIcon) playIcon.className = 'fas fa-pause';
-        resetAvatarRotation(); // Bắt đầu quay lại từ đầu góc 0deg khi nhấn play
+        resetAvatarRotation();
     }
     isPlaying = !isPlaying;
 }
@@ -382,7 +385,6 @@ function changeTrack(src) {
     const selectEl = document.getElementById('trackSelect');
     const selectedText = selectEl ? selectEl.options[selectEl.selectedIndex].text.replace(/^[🎵🔥]\s*/, '') : 'Bài hát';
 
-    // Đổi GIF ngẫu nhiên mỗi khi đổi bài hát
     changeRandomAvatar();
     resetAvatarRotation();
 
@@ -542,13 +544,7 @@ function submitReview(e) {
     commentEl.value = '';
     setRating(5);
     
-    currentTab = currentRating === 5 ? '5star' : 'feedback';
-    const btn5 = document.getElementById('tab5StarBtn');
-    const btnFb = document.getElementById('tabFeedbackBtn');
-    if (btn5) btn5.classList.toggle('active', currentTab === '5star');
-    if (btnFb) btnFb.classList.toggle('active', currentTab === 'feedback');
-    
-    loadReviews();
+    switchReviewTab(currentRating === 5 ? '5star' : 'feedback');
     showToast("✨ Cảm ơn bạn rất nhiều vì đã để lại đánh giá!");
 }
 
